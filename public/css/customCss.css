@@ -1,0 +1,41 @@
+:root {
+    --primaryBlue: ##160b53;
+    --secondaryRed: #9c0101;
+    --white: #fff;
+  }
+
+#features ul {
+    list-style-type: none;
+    color: var(--white);
+  }
+  #features ul li:before {
+    content: '\2013';
+    position: absolute;
+    color: var(--white);
+  }
+
+  .redLoginBtn {
+    background-color: var(--secondaryRed);
+    color: var(--white);
+  }
+
+  .welcomeProfile {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .lastLogin {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--secondaryRed)
+  }
+
+  .welcomeTxt {
+    color: var(--primaryBlue);
+  }
+
+  .descTxthdr {
+    color: var(--secondaryRed)
+  }
