@@ -1,18 +1,18 @@
 <?php
 
-class Funds extends Controller {
+class Scheme extends Controller {
 
     public function __construct(){
 
         error_reporting(E_ALL);
         ini_set('display_errors', 'On');
 
-        $this->userModel = $this->model('FundManagement');
+        $this->userModel = $this->model('SchemeManagement');
     }
 
 
     // ******* New Funds ***************** //
-    public function newFund () {
+    public function newScheme () {
 
         if(isLoggedIn()){
             
@@ -74,7 +74,7 @@ class Funds extends Controller {
                                 'status' => 'true'
                             ];
 
-                            $this->view('funds/newFund', $data);
+                            $this->view('scheme/newScheme', $data);
                         }
 
                 }else {
@@ -86,7 +86,7 @@ class Funds extends Controller {
                         'notFound' => 'exist'
                     ];
 
-                    $this->view('funds/newFund', $data);
+                    $this->view('scheme/newScheme', $data);
 
                 }
 
@@ -94,7 +94,7 @@ class Funds extends Controller {
 
             }else {
 
-                $this->view('funds/newFund', $data);
+                $this->view('scheme/newScheme', $data);
                 exit();
             }
 
@@ -106,7 +106,7 @@ class Funds extends Controller {
             'parent' => 'funds'
         ];
 
-        $this->view('funds/newFund', $data);
+        $this->view('scheme/newScheme', $data);
     }
 
     // ******* Manage Funds ***************** //
@@ -134,7 +134,7 @@ class Funds extends Controller {
  }  
 
     // ******* Manage Funds ***************** //
-    public function manageFund () {
+    public function manageScheme () {
 
         if(isLoggedIn()){
             
@@ -145,17 +145,17 @@ class Funds extends Controller {
             header("Location: " . URLROOT . "?isLogged=0");
         }
 
-        $funds = $this->userModel->loadManagedFund();
+        $schemes = $this->userModel->loadManagedFund();
     
          $data = [
          'event' => '',
          'title' => 'Manage Funds',
          'active' => 'managefund',
          'parent' => 'funds',
-         'funds' => $funds
+         'schemes' => $schemes
          ];
 
-        $this->view('funds/manageFund', $data);
+        $this->view('scheme/manageScheme', $data);
  }  
 
  // ******* Get IP Address ***************** //

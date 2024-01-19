@@ -9,7 +9,7 @@
     define('APPROOT', dirname(dirname(__FILE__)));
 
     //URLROOT (Dynamic links)
-    define('URLROOT', 'http://localhost:8080/lamsuite');
+    define('URLROOT', 'http://localhost/lamsuite');
 
     //Sitename
     define('SITENAME', 'Finserve LAM Suite 1.0');

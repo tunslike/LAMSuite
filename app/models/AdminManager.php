@@ -11,6 +11,25 @@
         } 
 
 
+        // function to fetch states
+        public function fetchStates() {
+
+                    try {
+        
+                        //Prepared statement
+                        $this->db->query("SELECT * FROM LAM_STATES WHERE STATUS = 0");
+                    
+                        $results = $this->db->resultSet();
+                    
+                        return $results;
+        
+                    }catch(PDOException $e) {
+                        echo 'ERROR!';
+                        print_r( $e );
+                    }
+        }
+         // end of function
+
         // function to load super users
         public function loadWorkflowSetups() {
             
@@ -56,6 +75,49 @@
             }
         }
         // end of function
+
+        //function to create company profile
+        public function createCompanyProfile () {
+                try{
+                    
+                $this->db->query("INSERT INTO LAM_COMPANY_PROFILE (PROFILE_ID, COMPANY_NAME, ADDRESS, PHONE_NUMBER, 
+                                                                EMAIL_ADDRESS, AREA_LOCALITY, STATE, CONTACT_PERSON, 
+                                                                CONTACT_PHONE_NUMBER, CONTACT_EMAIL, DATE_CREATED, CREATED_BY, 
+                                                                IP_ADDRESS) 
+                                 VALUES(:profileid, :companyName, :address, :phoneNumber, :emailAdd, :areaLoc, :state, :contactPerson,
+                                 :contactPhone, :contactEmail, :dateCreated, :createdBy, :ipaddress)");
+        
+                $date =  date('Y-m-d H:i:s');
+                $hashid = $this->getUniqueID();
+            
+                //Bind values
+                $this->db->bind(':profileid', $hashid);
+                $this->db->bind(':companyName', $data['companyName']);
+                $this->db->bind(':address', $data['address']);
+                $this->db->bind(':phoneNumber', $data['phoneNumber']);
+                $this->db->bind(':emailAdd', $data['emailAdd']);
+                $this->db->bind(':areaLoc', $data['areaLoc']);
+                $this->db->bind(':state', $data['state']);
+                $this->db->bind(':contactPerson', $data['contactPerson']);
+                $this->db->bind(':contactPhone', $data['contactPhone']);
+                $this->db->bind(':contactEmail', $data['contactEmail']);
+                $this->db->bind(':createdBy', $data['userid']);
+                $this->db->bind(':ipaddress', $data['remoteIP']);
+                $this->db->bind(':dateCreated', $date);
+        
+                //Execute function
+                if ($this->db->execute()) {
+                    return true;
+                } else {
+                    return false;
+                }
+        
+                }catch(PDOException $e){
+                    echo 'ERROR!';
+                    print_r( $e );
+                }
+        }
+        //end of function
 
         // function to update approval workflow setup 
         public function updateWorkflowApproval($data) {

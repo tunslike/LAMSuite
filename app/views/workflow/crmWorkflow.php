@@ -6,6 +6,15 @@
 
 	<!--begin::Body-->
 	<body id="kt_body" class="aside-enabled">
+
+    <!--begin::Page loading(append to body)-->
+<!--begin::Page loading(append to body)-->
+<div class="page-loader flex-column bg-dark bg-opacity-25">
+    <span class="spinner-border text-primary" role="status"></span>
+    <span class="text-gray-800 fs-6 fw-semibold mt-5">Loading...</span>
+</div>
+<!--end::Page loading-->
+
 		<!--begin::Theme mode setup on page load-->
 		<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
 		<!--end::Theme mode setup on page load-->
@@ -994,7 +1003,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-muted">Customer CRM</li>
+										<li class="breadcrumb-item text-muted">Workflow</li>
 										<!--end::Item-->
 										<!--begin::Item-->
 										<li class="breadcrumb-item">
@@ -1002,7 +1011,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-gray-900">New Customer</li>
+										<li class="breadcrumb-item text-gray-900">CRM Approval</li>
 										<!--end::Item-->
 									</ul>
 									<!--end::Breadcrumb-->
@@ -1173,231 +1182,153 @@
 							<!--begin::Container-->
 							<div id="kt_content_container" class="container-xxl">
 							<div class="welcomeProfile">
-					<h3 class="fw-bold my-2 welcomeTxt">Create New Customer</h3>
+					<h3 class="fw-bold my-2 welcomeTxt">Approval Customer Records</h3>
 					
 					</div>
 							
 								
 
-<!-- ****************************** Create New Fund Form starts here ********************************* -->
-							
-								<div class="card">
-   
+<!-- ****************************** Manage Funds starts here ********************************* -->
+<div class="card">
+  
+   <!--begin::Card body-->
    <div class="card-body p-lg-17">
 
-   <form action="<?php echo URLROOT ?>/customer/newCustomer" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
+   <div style="width:60%;">
    
+   <form action="<?php echo URLROOT ?>/dashboard/workflowSetup" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
+    
 
-   <div style="width:65%;">
-
-   <?php if(isset($data['status']) && $data['status'] == 'true') : ?>
-    <!--begin::Alert-->
-<div class="alert alert-success d-flex align-items-center p-5">
-    <!--begin::Icon-->
-    <i class="ki-duotone ki-shield-tick fs-2hx text-success me-4"><span class="path1"></span><span class="path2"></span></i>
-    <!--end::Icon-->
-
-    <!--begin::Wrapper-->
-    <div class="d-flex flex-column">
-        <!--begin::Title-->
-        <h4 class="mb-1 text-success">Request was successfully!</h4>
-        <!--end::Title-->
-
-        <!--begin::Content-->
-        <span>Customer has been created successfully and submitted for review.</span>
-        <!--end::Content-->
+   <div class="mb-10">
+        <label for="exampleFormControlInput1" class="required form-label">Customer Name</label>
+        <select class="form-select" id="customer_id" name="apprv1" data-control="select2" data-placeholder="Select or search customer name here">
+                <option value=""></option>
+                <?php foreach($data['customers'] as $customer): ?>
+                        <option value="<?php echo $customer->CUSTOMER_ID; ?>"><?php echo $customer->LAST_NAME.' '.$customer->FIRST_NAME.' | '.$customer->EMPLOYER_NAME; ?></option>
+            <?php endforeach; ?>
+        </select>
     </div>
-    <!--end::Wrapper-->
-</div>
-<!--end::Alert-->
-<br><br>
-   <?php endif; ?>
-
-   <?php if(isset($data['notFound']) && $data['notFound'] == 'exist') : ?>
-        <!--begin::Alert-->
-        <div class="alert alert-dismissible bg-light-danger d-flex flex-column flex-sm-row p-5 mb-10">
-            <!--begin::Icon-->
-            <i class="ki-duotone ki-cross-square fs-2hx text-danger me-4 mb-5 mb-sm-0">
-            <span class="path1"></span>
-            <span class="path2"></span>
-            </i>
-            <!--end::Icon-->
-
-            <!--begin::Wrapper-->
-    <div class="d-flex flex-column">
-        <!--begin::Title-->
-        <h4 class="mb-1 text-danger">Unable to process your request!</h4>
-        <!--end::Title-->
-
-        <!--begin::Content-->
-        <span>A duplicate Fund name and type found!.</span>
-        <!--end::Content-->
-    </div>
-    <!--end::Wrapper-->
-        </div>
-        <!--end::Alert-->  
-        <br><br>
-    <?php endif; ?>
-
-   <?php if(!empty($data['fieldError']) && $data['fieldError'] != '') : ?>
-        <!--begin::Alert-->
-        <div class="alert alert-dismissible bg-light-danger d-flex flex-column flex-sm-row p-5 mb-10">
-            <!--begin::Icon-->
-            <i class="ki-duotone ki-notification-bing fs-2hx text-danger me-4 mb-5 mb-sm-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
-            <!--end::Icon-->
-
-            <!--begin::Wrapper-->
-            <div class="d-flex flex-column pe-0 pe-sm-10">
-                <!--begin::Title-->
-                <h6 style="padding-top:8px;"><?php echo $data['fieldError']; ?></h6>
-                <!--end::Title-->
-            </div>
-            <!--end::Wrapper-->
-        </div>
-        <!--end::Alert-->  
-        <br><br>
-    <?php endif; ?>
-
-
+    <button type="button" class="btn btn-primary" id="loadSearchCustomer">
+        
+        <!--begin::Indicator label-->
+        <span class="indicator-label">
+            Search</span>
+        <!--end::Indicator label-->
+        
+        <i class="ki-duotone ki-search-list fs-2">
+         <span class="path1"></span>
+         <span class="path2"></span>
+         <span class="path3"></span>
+        </i>
+        <span class="indicator-progress">
+        Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+    </span>
+        
+        </button>
+<br>
+<br>
+<br>
+<br>
     <div style="margin-bottom:20px;">
     <span class="badge badge-light-danger">Account Setup</span>
     </div>
 
     <div class="row mb-10">
     <div class="col-md-6 fv-row fv-plugins-icon-container">
-    <label for="exampleFormControlInput1" class="form-label">Account Type</label>
-        <select name="accttype" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="Investment">Investment Account</option>
-            <option value="Loan">Loan Account</option>
-            <option value="Savings">Savings Account</option>
-        </select>
+        <label for="exampleFormControlInput1" class="form-label">Account Type</label>
+        <input type="text" id="acctType" readonly class="form-control"/>
     </div>
     <div class="col-md-6 fv-row fv-plugins-icon-container">
-    <label for="exampleFormControlInput1" class="form-label">KYC Status</label>
-        <select name="kycStatus" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="Completed">Completed</option>
-            <option value="Partial">Partial</option>
-            <option value="Pending">Pending</option>
-        </select>
+  <label for="exampleFormControlInput1" class="form-label">KYC Status</label>
+        <input type="text" id="kycStatus" readonly class="form-control"/>
     </div>
     </div>
-	<div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-    <label for="exampleFormControlInput1" class="form-label">Scheme</label>
-        <select name="accttype" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="Investment">Investment Account</option>
-            <option value="Loan">Loan Account</option>
-            <option value="Savings">Savings Account</option>
-        </select>
-    </div>
-    </div>
-    
+
+<br>
     <div style="margin-bottom:20px;">
     <span class="badge badge-light-danger">Personal Details</span>
     </div>
 
     <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Last Name</label>
-        <input type="text" name="lastname" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">First Name</label>
-        <input type="text" name="firstname" class="form-control"/>
-     </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Last Name</label>
+        <input type="text" id="lastname" readonly class="form-control"/>
+    </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+  <label for="exampleFormControlInput1" class="form-label">First Name</label>
+        <input type="text" id="firstname" readonly class="form-control"/>
+    </div>
     </div>
 
     <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
         <label for="exampleFormControlInput1" class="form-label">Other Name</label>
-        <input type="text" name="othernamme" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Gender</label>
-        <select name="gender" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-        </select>
-     </div>
+        <input type="text" id="othername" class="form-control" readonly/>
+    </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+  <label for="exampleFormControlInput1" class="form-label">Gender</label>
+        <input type="text" id="gender" class="form-control" readonly/>
+    </div>
     </div>
 
     <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Date of birth</label>
-        <input type="text" name="dob" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">Place of Birth</label>
-        <input type="text" name="placebirth" class="form-control"/>
-     </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Date of Birth</label>
+        <input type="text" id="dob" class="form-control" readonly/>
+    </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+  <label for="exampleFormControlInput1" class="form-label">Place of Birth</label>
+        <input type="text" id="placeBirth" class="form-control" readonly/>
+    </div>
     </div>
 
     <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Phone Number</label>
-        <input type="text" name="phonenumber" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Email Address</label>
-        <input type="text" name="emailaddress" class="form-control"/>
-     </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
+        <input type="text" id="phoneNumber" class="form-control" readonly/>
     </div>
-
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+  <label for="exampleFormControlInput1" class="form-label">Email Address</label>
+        <input type="text" id="email" class="form-control" readonly/>
+    </div>
+    </div>
 
     <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">State of Origin</label>
-        <select name="stateorigin" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <?php foreach($data['states'] as $state): ?>
-                        <option value="<?php echo $state->STATE_NAME; ?>"><?php echo $state->STATE_NAME; ?></option>
-            <?php endforeach; ?>
-        </select>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Nationality</label>
-        <select name="nationality" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="M">Nigeria</option>
-            <option value="F">Others</option>
-        </select>
-     </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">State of Origin</label>
+        <input type="text" id="stateOrigin" class="form-control" read/>
+    </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+  <label for="exampleFormControlInput1" class="form-label">Nationality</label>
+        <input type="text" id="nationality" class="form-control" readonly/>
+    </div>
     </div>
 
-    
-    <div class="separator my-10"></div>
-    
+    <br>
     <div style="margin-bottom:20px;">
     <span class="badge badge-light-danger">Correspondence</span>
     </div>
 
+
     <div class="mb-10">
         <label for="exampleFormControlInput1" class="form-label">House Address / Street</label>
-        <input type="text" name="houseAddress" class="form-control"/>
+        <input type="text" id="address" class="form-control" readonly/>
     </div>
 
-    <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Area/Locality</label>
-        <input type="text" name="areaLocality" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">State</label>
-        <select name="state" class="form-select" aria-label="Select example">
-                    <option default value="">Select here</option>
-                    <?php foreach($data['states'] as $state): ?>
-                        <option value="<?php echo $state->STATE_NAME; ?>"><?php echo $state->STATE_NAME; ?></option>
-                    <?php endforeach; ?>
-        </select>
-     </div>
+
+      <div class="row mb-10">
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Area/Locality</label>
+        <input type="text" id="areaLoc" class="form-control" readonly/>
+    </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+  <label for="exampleFormControlInput1" class="form-label">State</label>
+        <input type="text" id="cusState" class="form-control" readonly/>
+    </div>
     </div>
 
-    
-    <div class="separator my-10"></div>
+ 
+    <br>
     
     <div style="margin-bottom:20px;">
     <span class="badge badge-light-danger">Employer Details</span>
@@ -1405,148 +1336,144 @@
 
     <div class="mb-10">
         <label for="exampleFormControlInput1" class="form-label">Employer Name</label>
-        <input type="text" name="employerName" class="form-control"/>
+        <input type="text" id="employerName" class="form-control" readonly/>
     </div>
 
     <div class="mb-10">
         <label for="exampleFormControlInput1" class="form-label">Office Address</label>
-        <input type="text" name="officeAddress" class="form-control"/>
+        <input type="text" id="officeAddress" class="form-control" readonly/>
     </div>
 
 
     <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Area / Locality</label>
-        <input type="text" name="employerArea" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">State</label>
-        <select name="employerState" class="form-select" aria-label="Select example">
-        <option default value="">Select here</option>
-                    <?php foreach($data['states'] as $state): ?>
-                        <option value="<?php echo $state->STATE_NAME; ?>"><?php echo $state->STATE_NAME; ?></option>
-                    <?php endforeach; ?>
-        </select>
-     </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Area/Locality</label>
+        <input type="text" id="empLoc" class="form-control" readonly/>
+    </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+  <label for="exampleFormControlInput1" class="form-label">State</label>
+        <input type="text" id="employerState" class="form-control" readonly/>
+    </div>
     </div>
 
 
-    <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Sector</label>
-        <select name="sector" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="Private">Private</option>
-            <option value="Public">Public</option>
-            <option value="Informal">Informal</option>
-            <option value="Government">Government Parastatals</option>
-        </select>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Grade Level</label>
-        <select name="gradeLevel" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-        </select>
-     </div>
+       <div class="row mb-10">
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Sector</label>
+        <input type="text" id="empSector" class="form-control" readonly/>
+    </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+  <label for="exampleFormControlInput1" class="form-label">Grade Level</label>
+        <input type="text" id="empGradeLevel" class="form-control" readonly/>
+    </div>
     </div>
 
-    <div class="separator my-10"></div>
-    
-    <div style="margin-bottom:20px;">
+<br>
+<div style="margin-bottom:20px;">
     <span class="badge badge-light-danger">Next of kin Details</span>
+</div>
+
+
+<div class="row mb-10">
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Last Name</label>
+        <input type="text" id="nokLastname" class="form-control" readonly/>
+    </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+  <label for="exampleFormControlInput1" class="form-label">First Name</label>
+        <input type="text" id="nokFirstname" class="form-control" readonly/>
+    </div>
     </div>
 
     <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Last Name</label>
-        <input type="text" name="nokLastName" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">First Name</label>
-        <input type="text" name="nokfirstName" class="form-control"/>
-     </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Relationship</label>
+        <input type="text" id="nokRel" class="form-control" readonly/>
+    </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+  <label for="exampleFormControlInput1" class="form-label">Gender</label>
+        <input type="text" id="nokGender" class="form-control" readonly/>
+    </div>
     </div>
 
     <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Relationship</label>
-        <select name="nok_Rel" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="Father">Father</option>
-            <option value="Mother">Mother</option>
-            <option value="Brother">Brother</option>
-            <option value="Sister">Sister</option>
-            <option value="Child">Child</option>
-            <option value="Friend">Friend</option>
-        </select>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Gender</label>
-        <select name="nok_gender" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-        </select>
-     </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
+        <input type="text" id="nokPhone" class="form-control" readonly/>
     </div>
-
-    <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Phone Number</label>
-        <input type="text" name="nok_phone" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Email Address</label>
-        <input type="text" name="nok_email" class="form-control"/>
-     </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+  <label for="exampleFormControlInput1" class="form-label">Email Address</label>
+        <input type="text" id="nokEmail" class="form-control" readonly/>
+    </div>
     </div>
 
     <div class="mb-10">
         <label for="exampleFormControlInput1" class="form-label">House Address / Street</label>
-        <input type="text" name="nok_address" class="form-control"/>
+        <input type="text" id="nok_address" class="form-control" readonly/>
     </div>
 
+
     <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Area / Locality</label>
-        <input type="text" name="nokArea" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">State</label>
-        <select name="nok_state" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <?php foreach($data['states'] as $state): ?>
-                        <option value="<?php echo $state->STATE_NAME; ?>"><?php echo $state->STATE_NAME; ?></option>
-            <?php endforeach; ?>
-        </select>
-     </div>
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Area / Locality</label>
+        <input type="text" id="nokAreaLoc" class="form-control" readonly/>
     </div>
-   
+    <div class="col-md-6 fv-row fv-plugins-icon-container">
+  <label for="exampleFormControlInput1" class="form-label">State</label>
+        <input type="text" id="nokState" class="form-control" readonly/>
+    </div>
+    </div>
+
+
+    <div class="mb-10">
+        <label for="exampleFormControlInput1" style="color:#1d76cf;" class="form-label">Approval or Rejection Comment</label>
+        <textarea id="txtComment" class="form-control mb-8" rows="3"></textarea>
+    </div>
+
+    <br>
 <br>
-<br>
-    <button type="submit" class="btn btn-primary" id="kt_careers_submit_button">
+<p>
+
+<button type="button" class="btn btn-primary" id="btnApprove">
         
 <!--begin::Indicator label-->
 <span class="indicator-label">
-    Create Customer</span>
+    Approve</span>
 <!--end::Indicator label-->
 
-<i class="ki-duotone ki-send fs-2">
+<i class="ki-duotone ki-send fs-1">
  <span class="path1"></span>
  <span class="path2"></span>
 </i>
 
 </button>
 
-   </div>
+
+<button style="margin-left:20px;" type="button" class="btn btn-danger" id="btnRejected">
+        
+<!--begin::Indicator label-->
+<span class="indicator-label">
+ Reject</span>
+<!--end::Indicator label-->
+
+<i class="ki-duotone ki-cross-square fs-1">
+ <span class="path1"></span>
+ <span class="path2"></span>
+</i>
+
+</button>
+
+</p>
 
    </form>
-   
+
    </div>
-</div>										
-<!-- ****************************** Create New Fund Form ends here *********************************** -->
+
+   </div>
+   <!--end::Card body-->
+</div>	
+															
+<!-- ****************************** Manage Funds ends here *********************************** -->
 								
 							</div>
 							<!--end::Container-->

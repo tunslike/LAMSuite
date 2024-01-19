@@ -13,7 +13,42 @@ class CustomerManager {
         function generateCustomerNo($value){
             return str_pad($value, '6', '0', STR_PAD_LEFT);
         }
+
+        function generateAccountNo($value){
+            return str_pad($value, '6', '0', STR_PAD_LEFT);
+        }
     
+        //public funnction to create states
+        public function createState($state, $user) {
+
+            try {
+
+                 // Prepared Statement
+            $this->db->query("INSERT INTO LAM_STATES (STATE_ID, STATE_NAME, DATE_CREATED, CREATED_BY) VALUES  
+            (:stateid, :stateName, :dateCreated, :createdBy)");
+    
+            $date =  date('Y-m-d H:i:s');
+            $hashid = $this->getUniqueID();
+            
+            //Bind values
+            $this->db->bind(':stateid', $hashid);
+            $this->db->bind(':stateName', $state);
+            $this->db->bind(':createdBy', $user);
+            $this->db->bind(':dateCreated', $date);
+        
+            //Execute function
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+
+            }catch(PDOException $e) {
+                echo 'ERROR!';
+                print_r( $e );
+            }
+        }
+        //end of function
 
         // function to fetch states
         public function fetchStates() {
@@ -21,7 +56,7 @@ class CustomerManager {
             try {
 
                 //Prepared statement
-                $this->db->query("SELECT * FROM LAM_STATE WHERE STATUS = 0");
+                $this->db->query("SELECT * FROM LAM_STATES WHERE STATUS = 0");
             
                 $results = $this->db->resultSet();
             
@@ -41,9 +76,9 @@ class CustomerManager {
             try{
 
             // Prepared Statement
-            $this->db->query("INSERT INTO LAM_NEXT_OF_KIN (CUSTOMER_ID, LAST_NAME, 
-            FIRST_NAME, RELATIONSHIP, GENDER, PHONE, EMAIL_ADDRESS, ADDRESS, 
-            AREA_LOCALITY, STATE, DATE_CREATED, CREATED_BY, IP_ADDRESS) VALUES  
+            $this->db->query("INSERT INTO LAM_NEXT_OF_KIN (CUSTOMER_ID, NOK_LAST_NAME, 
+            NOK_FIRST_NAME, NOK_RELATIONSHIP, NOK_GENDER, NOK_PHONE, NOK_EMAIL_ADDRESS, NOK_ADDRESS, 
+            NOK_AREA_LOCALITY, NOK_STATE, NOK_DATE_CREATED, NOK_CREATED_BY, NOK_IP_ADDRESS) VALUES  
             (:custid, :nok_lastname, :nok_firstname, :nok_rel, :nok_gender, :nok_phone,
             :nok_email, :nok_addr, :nok_area, :nok_state, :dateCreated, :createdBy, :ipaddress)");
     
@@ -85,7 +120,7 @@ class CustomerManager {
 
             // Prepared Statement
             $this->db->query("INSERT INTO LAM_CUSTOMER_EMPLOYERS (CUSTOMER_ID, EMPLOYER_NAME, 
-            OFFICE_ADDRESS, AREA_LOCALITY, STATE, SECTOR, GRADE_LEVEL, DATE_CREATED, 
+            OFFICE_ADDRESS, AREA_LOCALITY, EMPLOYER_STATE, SECTOR, GRADE_LEVEL, DATE_CREATED, 
             CREATED_BY, IP_ADDRESS) VALUES  (:custid, :empName, :offAddr, :areaLoc, 
             :state, :sector, :gradeLevel, :dateCreated, :createdBy, :ipaddress)");
     
@@ -128,7 +163,7 @@ class CustomerManager {
 
             $count = $row->COUNT;            
                 
-            $this->db->query("INSERT INTO LAM_CUSTOMER (CUSTOMER_ID, CUSTOMER_NO, ACCOUNT_TYPE, KYC_STATUS, LAST_NAME, 
+            $this->db->query("INSERT INTO LAM_CUSTOMER (CUSTOMER_ID, CUSTOMER_NO, SCHEME_TYPE, ACCOUNT_NO, KYC_STATUS, LAST_NAME, 
             FIRST_NAME, OTHER_NAME, DATE_OF_BIRTH, GENDER, PLACE_OF_BIRTH, PHONE_NUMBER, EMAIL_ADDRESS, 
             STATE_OF_ORIGIN, NATIONALITY, ADDRESS, AREA_LOCALITY, STATE, DATE_CREATED, CREATED_BY, 
             IP_ADDRESS) VALUES (:custid, :custNo, :acctType, :kycStatus, :lastName, :firstName, :otherName,
@@ -179,8 +214,99 @@ class CustomerManager {
                 echo 'ERROR!';
                 print_r( $e );
             }
-        }
+        }// end of function
 
+        // function to approve customer record
+        public function approveCustomerRecord($data) {
+
+            try {
+
+                 // Prepared Statement
+                $this->db->query("SELECT COUNT(*)COUNT FROM LAM_CUSTOMER WHERE ACCOUNT_NO 
+                IS NOT NULL AND STATUS = 0");
+
+                $row = $this->db->single();
+
+                $count = $row->COUNT;   
+                
+                $this->db->query("UPDATE LAM_CUSTOMER SET ACCOUNT_NO = :acctNo, 
+                DATE_APPORVED = :dateApproved, APPROVED_BY = :approvedBy, 
+                COMMENT = :comment, STATUS = 1 
+                WHERE CUSTOMER_ID = :customerid;");
+
+                $date =  date('Y-m-d H:i:s');
+                $acctNo = '31'.date('y').$this->generateAccountNo($count + 1);
+
+                //Bind values
+                $this->db->bind(':acctNo', $acctNo);
+                $this->db->bind(':customerid', $data['customerid']);
+                $this->db->bind(':comment', $data['comment']);
+                $this->db->bind(':dateApproved', $date);
+                $this->db->bind(':approvedBy', $data['userid']);
+            
+                //Execute function
+                if ($this->db->execute()) { 
+                    return true;
+                } else {
+                    return false;
+                }
+    
+            }catch (PDOException $e) {
+                echo 'ERROR!';
+                print_r( $e );
+            }
+
+        }
+        // end of function
+
+            // function to load manager CRM preview data
+            public function fetchCustomerDataApproval($customerid) {
+
+                try {
+        
+                    //prepered statement
+                    $this->db->query("SELECT C.*, E.*, N.* FROM LAM_CUSTOMER C 
+                    LEFT JOIN LAM_CUSTOMER_EMPLOYERS E ON C.CUSTOMER_ID = E.CUSTOMER_ID
+                    LEFT JOIN LAM_NEXT_OF_KIN N ON C.CUSTOMER_ID = N.CUSTOMER_ID
+                    WHERE C.CUSTOMER_ID = :customerid;");
+
+                    //Bind values
+                    $this->db->bind(':customerid', $customerid);
+                
+                    $results = $this->db->resultSet();
+                            
+                    return $results;
+        
+                }catch (PDOException $e) {
+                    echo 'ERROR!';
+                    print_r( $e );
+                }
+            }
+            // end of function
+
+
+            // function to load manager CRM preview data
+            public function loadCRMDataForApproval() {
+
+                try {
+        
+                    //prepered statement
+                    $this->db->query("SELECT C.STATUS, C.CUSTOMER_ID, C.ACCOUNT_NO,
+                    C.CUSTOMER_NO, C.ACCOUNT_TYPE, C.LAST_NAME, C.FIRST_NAME, C.KYC_STATUS, 
+                    C.PHONE_NUMBER, C.GENDER,C.DATE_OF_BIRTH, E.EMPLOYER_NAME, C.DATE_CREATED FROM LAM_CUSTOMER C 
+                    LEFT JOIN LAM_CUSTOMER_EMPLOYERS E ON C.CUSTOMER_ID = E.CUSTOMER_ID WHERE 
+                    C.STATUS = 0;");
+                
+                    $results = $this->db->resultSet();
+                            
+                    return $results;
+        
+                }catch (PDOException $e) {
+                    echo 'ERROR!';
+                    print_r( $e );
+                }
+        }
+                // end of function
 
         // function to load manager CRM preview data
         public function loadManageCRMData() {

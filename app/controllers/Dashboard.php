@@ -11,7 +11,58 @@ class Dashboard extends Controller {
     }
 
 
+//function to show company profile
+public function companyProfile () {
 
+    if(isLoggedIn()){
+            
+        $userid = $_SESSION['user_id'];
+        
+    }else{
+
+        header("Location: " . URLROOT . "?isLogged=0");
+    }
+
+    //fetch states
+    $states = $this->userModel->fetchStates();
+
+
+      //Check for post
+      if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            //Sanitize post data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            //data
+            $data = [
+
+                'fundtype' => trim($_POST['fundtype']),
+                'apprv1' => trim($_POST['apprv1']),
+                'apprv2' => trim($_POST['apprv2']),
+                'userid' => $userid,
+                'fieldError' => '',
+                'remoteIP' => $this->getRealIPAddr(),
+                'active' => 'home',
+            ];
+
+            //validate error and post 
+            if ($data['fieldError'] == '') {
+
+            }
+
+     }
+
+        // page data
+        $data = [
+            'title' => 'Company Profile',
+            'active' => 'companyprofile',
+            'parent' => 'admin'
+        ];
+
+    $this->view('setup/companyProfile', $data);
+
+}
+//end of function
      // ************** HOME DASHBOARD ******************* //
      public function workflowSetup() {
 

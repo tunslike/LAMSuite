@@ -16,8 +16,8 @@ class Account extends Controller {
 
 
         $data = [
-            'roleName' => 'Supervisor',
-            'roleDesc' => "Super User Operation and features functionalities",
+            'roleName' => 'Administrator',
+            'roleDesc' => "Administrative functionalities and features",
             'userid' => "System",
             'remoteIP' => $this->getRealIPAddr(),
             'status' => 'false'
@@ -52,16 +52,17 @@ class Account extends Controller {
             ]; */
 
             $data = [
-                'username' => 'dele@finserve.com',
-                'firstname' => "Dele",
-                'lastname' => "Balogun",
-                'email' => "dele@finserve.com",
-                'mobile' => "0910330093",
+                'username' => 'tunde@finserve.com',
+                'firstname' => "Babatunde",
+                'lastname' => "Francis",
+                'email' => "tunde@finserve.com",
+                'mobile' => "09053100351",
                 'password' => '',
                 'roleid' => '6d4f062779be27f4d75e1fc421067b7d',
                 'errorMessage' => '',
                 'remoteIP' => $this->getRealIPAddr(),
-                'status' => 'false'
+                'status' => 'false',
+                'userid' => 'System'
             ];
 
       
@@ -74,7 +75,10 @@ class Account extends Controller {
                $data['status'] = 'true';
 
                //Redirect to the login page
-               $this->view('account/register', $data);
+               //$this->view('account/register', $data);
+
+               echo 'User was created successfully!';
+               exit();
 
            } else {
 

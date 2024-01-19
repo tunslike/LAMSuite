@@ -994,7 +994,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-muted">Customer CRM</li>
+										<li class="breadcrumb-item text-muted">System</li>
 										<!--end::Item-->
 										<!--begin::Item-->
 										<li class="breadcrumb-item">
@@ -1002,7 +1002,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-gray-900">New Customer</li>
+										<li class="breadcrumb-item text-gray-900">Company Profile</li>
 										<!--end::Item-->
 									</ul>
 									<!--end::Breadcrumb-->
@@ -1173,7 +1173,7 @@
 							<!--begin::Container-->
 							<div id="kt_content_container" class="container-xxl">
 							<div class="welcomeProfile">
-					<h3 class="fw-bold my-2 welcomeTxt">Create New Customer</h3>
+					<h3 class="fw-bold my-2 welcomeTxt">New Company Profile</h3>
 					
 					</div>
 							
@@ -1185,10 +1185,10 @@
    
    <div class="card-body p-lg-17">
 
-   <form action="<?php echo URLROOT ?>/customer/newCustomer" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
+   <form action="<?php echo URLROOT ?>/scheme/newScheme" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
    
 
-   <div style="width:65%;">
+   <div style="width:60%;">
 
    <?php if(isset($data['status']) && $data['status'] == 'true') : ?>
     <!--begin::Alert-->
@@ -1204,7 +1204,7 @@
         <!--end::Title-->
 
         <!--begin::Content-->
-        <span>Customer has been created successfully and submitted for review.</span>
+        <span>Scheme has been created successfully and submitted for review.</span>
         <!--end::Content-->
     </div>
     <!--end::Wrapper-->
@@ -1258,159 +1258,20 @@
         <br><br>
     <?php endif; ?>
 
-
-    <div style="margin-bottom:20px;">
-    <span class="badge badge-light-danger">Account Setup</span>
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-danger">Employer/Company Details</span>
     </div>
 
-    <div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-    <label for="exampleFormControlInput1" class="form-label">Account Type</label>
-        <select name="accttype" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="Investment">Investment Account</option>
-            <option value="Loan">Loan Account</option>
-            <option value="Savings">Savings Account</option>
-        </select>
-    </div>
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-    <label for="exampleFormControlInput1" class="form-label">KYC Status</label>
-        <select name="kycStatus" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="Completed">Completed</option>
-            <option value="Partial">Partial</option>
-            <option value="Pending">Pending</option>
-        </select>
-    </div>
-    </div>
-	<div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-    <label for="exampleFormControlInput1" class="form-label">Scheme</label>
-        <select name="accttype" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="Investment">Investment Account</option>
-            <option value="Loan">Loan Account</option>
-            <option value="Savings">Savings Account</option>
-        </select>
-    </div>
-    </div>
-    
-    <div style="margin-bottom:20px;">
-    <span class="badge badge-light-danger">Personal Details</span>
-    </div>
-
-    <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Last Name</label>
-        <input type="text" name="lastname" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">First Name</label>
-        <input type="text" name="firstname" class="form-control"/>
-     </div>
-    </div>
-
-    <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">Other Name</label>
-        <input type="text" name="othernamme" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Gender</label>
-        <select name="gender" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-        </select>
-     </div>
-    </div>
-
-    <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Date of birth</label>
-        <input type="text" name="dob" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">Place of Birth</label>
-        <input type="text" name="placebirth" class="form-control"/>
-     </div>
-    </div>
-
-    <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Phone Number</label>
-        <input type="text" name="phonenumber" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Email Address</label>
-        <input type="text" name="emailaddress" class="form-control"/>
-     </div>
-    </div>
-
-
-    <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">State of Origin</label>
-        <select name="stateorigin" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <?php foreach($data['states'] as $state): ?>
-                        <option value="<?php echo $state->STATE_NAME; ?>"><?php echo $state->STATE_NAME; ?></option>
-            <?php endforeach; ?>
-        </select>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Nationality</label>
-        <select name="nationality" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="M">Nigeria</option>
-            <option value="F">Others</option>
-        </select>
-     </div>
-    </div>
-
-    
-    <div class="separator my-10"></div>
-    
-    <div style="margin-bottom:20px;">
-    <span class="badge badge-light-danger">Correspondence</span>
-    </div>
 
     <div class="mb-10">
-        <label for="exampleFormControlInput1" class="form-label">House Address / Street</label>
-        <input type="text" name="houseAddress" class="form-control"/>
+        <label for="exampleFormControlInput1" class="required form-label">Employer/Company Name</label>
+        <input type="text" name="fundname" class="form-control"/>
     </div>
 
-    <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Area/Locality</label>
-        <input type="text" name="areaLocality" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">State</label>
-        <select name="state" class="form-select" aria-label="Select example">
-                    <option default value="">Select here</option>
-                    <?php foreach($data['states'] as $state): ?>
-                        <option value="<?php echo $state->STATE_NAME; ?>"><?php echo $state->STATE_NAME; ?></option>
-                    <?php endforeach; ?>
-        </select>
-     </div>
-    </div>
-
-    
-    <div class="separator my-10"></div>
-    
-    <div style="margin-bottom:20px;">
-    <span class="badge badge-light-danger">Employer Details</span>
-    </div>
 
     <div class="mb-10">
-        <label for="exampleFormControlInput1" class="form-label">Employer Name</label>
-        <input type="text" name="employerName" class="form-control"/>
-    </div>
-
-    <div class="mb-10">
-        <label for="exampleFormControlInput1" class="form-label">Office Address</label>
-        <input type="text" name="officeAddress" class="form-control"/>
+        <label for="exampleFormControlInput1" class="required form-label">Address</label>
+        <input type="text" name="fundname" class="form-control"/>
     </div>
 
 
@@ -1430,107 +1291,32 @@
      </div>
     </div>
 
-
-    <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Sector</label>
-        <select name="sector" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="Private">Private</option>
-            <option value="Public">Public</option>
-            <option value="Informal">Informal</option>
-            <option value="Government">Government Parastatals</option>
-        </select>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Grade Level</label>
-        <select name="gradeLevel" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-        </select>
-     </div>
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-danger">Contact Details</span>
     </div>
 
-    <div class="separator my-10"></div>
-    
-    <div style="margin-bottom:20px;">
-    <span class="badge badge-light-danger">Next of kin Details</span>
+	<div class="mb-10">
+        <label for="exampleFormControlInput1" class="required form-label">Contact's Full Name</label>
+        <input type="text" name="fundname" class="form-control"/>
     </div>
 
-    <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Last Name</label>
-        <input type="text" name="nokLastName" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">First Name</label>
-        <input type="text" name="nokfirstName" class="form-control"/>
-     </div>
-    </div>
-
-    <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Relationship</label>
-        <select name="nok_Rel" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="Father">Father</option>
-            <option value="Mother">Mother</option>
-            <option value="Brother">Brother</option>
-            <option value="Sister">Sister</option>
-            <option value="Child">Child</option>
-            <option value="Friend">Friend</option>
-        </select>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Gender</label>
-        <select name="nok_gender" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-        </select>
-     </div>
-    </div>
-
-    <div class="row mb-10">
+	<div class="row mb-10">
      <div class="col-md-6 fv-row fv-plugins-icon-container">
         <label for="exampleFormControlInput1" class="required form-label">Phone Number</label>
-        <input type="text" name="nok_phone" class="form-control"/>
+        <input type="text" name="phonenumber" class="form-control"/>
      </div>
      <div class="col-md-6 fv-row fv-plugins-icon-container">
         <label for="exampleFormControlInput1" class="required form-label">Email Address</label>
-        <input type="text" name="nok_email" class="form-control"/>
-     </div>
-    </div>
-
-    <div class="mb-10">
-        <label for="exampleFormControlInput1" class="form-label">House Address / Street</label>
-        <input type="text" name="nok_address" class="form-control"/>
-    </div>
-
-    <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Area / Locality</label>
-        <input type="text" name="nokArea" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">State</label>
-        <select name="nok_state" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <?php foreach($data['states'] as $state): ?>
-                        <option value="<?php echo $state->STATE_NAME; ?>"><?php echo $state->STATE_NAME; ?></option>
-            <?php endforeach; ?>
-        </select>
+        <input type="text" name="emailaddress" class="form-control"/>
      </div>
     </div>
    
-<br>
-<br>
-    <button type="submit" class="btn btn-primary" id="kt_careers_submit_button">
+	<br>
+    <button type="button" onClick="createEmployerProfile(); return false;" class="btn btn-primary" id="kt_careers_submit_button">
         
 <!--begin::Indicator label-->
 <span class="indicator-label">
-    Create Customer</span>
+    Create Company Profile</span>
 <!--end::Indicator label-->
 
 <i class="ki-duotone ki-send fs-2">

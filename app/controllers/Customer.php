@@ -34,6 +34,21 @@ class Customer extends Controller {
         
     }
 
+
+    // function to create an account type
+    public function createState () {
+
+        $state = trim($_GET['state']);
+
+        $create = $this->userModel->createState($state,'System');
+
+        if($create) {
+            echo 'State created successfully!';
+        }else{
+            echo 'State failed creating state';
+        }
+  }
+
     //function to create new customer
     public function newCustomer() {
 
@@ -50,6 +65,7 @@ class Customer extends Controller {
         //fetch states
         $states = $this->userModel->fetchStates();
 
+
         //Check for post
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -58,7 +74,6 @@ class Customer extends Controller {
 
             //data
             $data = [
-
                 'accttype' => trim($_POST['accttype']),
                 'kycStatus' => trim($_POST['kycStatus']),
                 'lastname' => trim($_POST['lastname']),
@@ -180,7 +195,7 @@ class Customer extends Controller {
             header("Location: " . URLROOT . "?isLogged=0");
         }
 
-        //
+        //fetch customers
         $customers = $this->userModel->loadManageCRMData();
 
                 // data
@@ -195,6 +210,100 @@ class Customer extends Controller {
 
     }
     //end of function
+
+    // function to approve customer record
+    public function approveCustomerRecord() {
+
+         // check isLogged
+         if(isLoggedIn()){
+           
+            $userid = $_SESSION['user_id'];
+            
+        }else{
+ 
+            header("Location: " . URLROOT . "?isLogged=0");
+        }
+
+         //check post
+         if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        
+            
+            $data = [
+                'customerid' => trim($_POST['customerid']),
+                'comment' => trim($_POST['comment']),
+                'userid' => $userid
+            ];
+
+            // approve record
+            $approve = $this->userModel->approveCustomerRecord($data);
+
+            if($approve) {
+                echo '1';
+            }else{ 
+                echo '0';
+            }
+
+        }
+
+    }
+    // end of function 
+
+
+    //function to fetch customer data for approval
+    public function fetchCustomerDataForApproval() {
+
+        // check isLogged
+        if(isLoggedIn()){
+           
+            $userid = $_SESSION['user_id'];
+            
+        }else{
+ 
+            header("Location: " . URLROOT . "?isLogged=0");
+        }
+
+        //check post
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        
+            $customerid = trim($_POST['customerid']);
+            
+            $result = $this->userModel->fetchCustomerDataApproval($customerid);
+        }
+
+        //response*********************************************
+        echo json_encode($result);
+
+    }
+    //end of function
+
+     //function to workflow crm
+     public function crmWorkflow () {
+
+        // check isLogged
+        if(isLoggedIn()){
+           
+           $userid = $_SESSION['user_id'];
+           
+       }else{
+
+           header("Location: " . URLROOT . "?isLogged=0");
+       }
+
+          //fetch customers
+          $customers = $this->userModel->loadCRMDataForApproval();
+
+               // data
+               $data = [
+                   'title' => 'Manage CRM Customer',
+                   'active' => 'crmWorkflow',
+                   'parent' => 'workflow',
+                   'customers' => $customers,
+               ];
+       
+               $this->view('workflow/crmWorkflow', $data);
+
+   }
+   //end of function
 
 
      // ******* Get IP Address ***************** //

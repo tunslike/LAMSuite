@@ -32,7 +32,7 @@
 												<span class="path3"></span>
 											</i>
 										</span>
-										<span class="menu-title">Funds</span>
+										<span class="menu-title">Schemes</span>
 										<span class="menu-arrow"></span>
 									</span>
 									<!--end:Menu link-->
@@ -41,11 +41,11 @@
 										<!--begin:Menu item-->
 										<div class="menu-item">
 											<!--begin:Menu link-->
-											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'newfund') { echo 'active';} ?>" href="<?php echo URLROOT ?>/funds/newFund">
+											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'scheme') { echo 'active';} ?>" href="<?php echo URLROOT ?>/scheme/newScheme">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">New Fund</span>
+												<span class="menu-title">New Scheme</span>
 											</a>
 											<!--end:Menu link-->
 										</div>
@@ -53,11 +53,11 @@
 										<!--begin:Menu item-->
 										<div class="menu-item">
 											<!--begin:Menu link-->
-											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'managefund') { echo 'active';} ?>" href="<?php echo URLROOT ?>/funds/manageFund">
+											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'manageScheme') { echo 'active';} ?>" href="<?php echo URLROOT ?>/scheme/manageScheme">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">Manage Funds</span>
+												<span class="menu-title">Manage Scheme</span>
 											</a>
 											<!--end:Menu link-->
 										</div>
@@ -232,7 +232,7 @@
 								</div>
 								<!--end:Menu item-->
 								<!--begin:Menu item-->
-								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+								<div data-kt-menu-trigger="click" class="menu-item <?php if(isset($data['parent']) && $data['parent'] == 'workflow') {echo 'here show';} ?> menu-accordion">
 									<!--begin:Menu link-->
 									<span class="menu-link">
 										<span class="menu-icon">
@@ -262,7 +262,7 @@
                                         <!--begin:Menu item-->
 										<div class="menu-item">
 											<!--begin:Menu link-->
-											<a class="menu-link" href="widgets/lists.html">
+											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'crmWorkflow') { echo 'active';} ?>" href="<?php echo URLROOT ?>/customer/crmWorkflow">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
@@ -389,6 +389,18 @@
 													<span class="bullet bullet-dot"></span>
 												</span>
 												<span class="menu-title">Workflow Setup</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
+										   	<!--begin:Menu item-->
+											   <div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'companyprofile') { echo 'active';} ?>" href="<?php echo URLROOT ?>/dashboard/companyProfile">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Company Profile</span>
 											</a>
 											<!--end:Menu link-->
 										</div>

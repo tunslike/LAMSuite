@@ -1,5 +1,5 @@
 <?php
-    class FundManagement {
+    class SchemeManagement {
         private $db;
 
         public function __construct() {
@@ -14,7 +14,7 @@
 
             try {
 
-                $this->db->query("SELECT COUNT(*)COUNT FROM LAM_FUNDS WHERE FUND_TYPE = :fundType;");
+                $this->db->query("SELECT COUNT(*)COUNT FROM LAM_SCHEMES WHERE SCHEME_TYPE = :fundType;");
 
                 //Bind values
                 $this->db->bind(':fundType', $type);
@@ -33,7 +33,7 @@
 
             try {
 
-                $this->db->query("SELECT COUNT(*)COUNT FROM LAM_FUNDS WHERE FUND_NAME = :fundname AND FUND_TYPE = :fundType;");
+                $this->db->query("SELECT COUNT(*)COUNT FROM LAM_SCHEMES WHERE SCHEME_NAME = :fundname AND SCHEME_TYPE = :fundType;");
 
                 //Bind values
                 $this->db->bind(':fundname', $fundname);
@@ -57,7 +57,7 @@
         public function loadManagedFund() {
 
                 //Prepared statement
-                $this->db->query("SELECT * FROM LAM_FUNDS WHERE STATUS IN (0,1,2) ORDER BY DATE_CREATED DESC");
+                $this->db->query("SELECT * FROM LAM_SCHEMES WHERE STATUS IN (0,1,2) ORDER BY DATE_CREATED DESC");
         
                 $results = $this->db->resultSet();
         
@@ -67,7 +67,7 @@
         public function loadPendingFundsApproval($userid) {
 
              //Prepared statement
-             $this->db->query("SELECT * FROM LAM_FUNDS WHERE STATUS IN (0,1,2) ORDER BY DATE_CREATED DESC");
+             $this->db->query("SELECT * FROM LAM_SCHEMES WHERE STATUS IN (0,1,2) ORDER BY DATE_CREATED DESC");
         
              $results = $this->db->resultSet();
      
@@ -79,7 +79,7 @@
 
             try{
                 
-            $this->db->query("INSERT INTO LAM_FUNDS (FUND_ID, FUND_NUMBER, FUND_NAME, FUND_TYPE, FUND_BUDGET, SUBSCRIBER_COUNT, DATE_CREATED, CREATED_BY, IP_ADDRESS) 
+            $this->db->query("INSERT INTO LAM_SCHEMES (SCHEME_ID, SCHEME_NUMBER, SCHEME_NAME, SCHEME_TYPE, SCHEME_BUDGET, SUBSCRIBER_COUNT, DATE_CREATED, CREATED_BY, IP_ADDRESS) 
                                                VALUES(:fundid, :fundNumber, :fundname, :fundtype, :fundBudget, :subscriberNo, :dateCreated, :createdBy, :ipaddress)");
     
             $date =  date('Y-m-d H:i:s');

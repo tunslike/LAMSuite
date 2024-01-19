@@ -1272,7 +1272,7 @@
                         ?>
                      </td>
                      <td>
-                        <div class="badge badge-light"><?php echo $customer->ACCOUNT_NO; ?></div>
+                        <div class="badge badge-primary"><?php echo $customer->ACCOUNT_NO; ?></div>
                      </td>
                      <td>
                         <div class="badge badge-light"><?php echo $customer->CUSTOMER_NO; ?></div>

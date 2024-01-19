@@ -50,8 +50,8 @@ class UserAccount {
 
         try{
             
-        $this->db->query("INSERT INTO LAM_ENTRY (ENTRY_ID, USERNAME, FIRST_NAME, LAST_NAME, MOBILE_PHONE, EMAIL_ADDRESS, ROLE_ID, CREATED_BY, IP_ADDRESS) 
-                        VALUES (:accountid, :username, :fname, :lname, :mobile, :email, :roleid, :dateCreated, :ipaddress) ");
+        $this->db->query("INSERT INTO LAM_ENTRY (ENTRY_ID, USERNAME, FIRST_NAME, LAST_NAME, MOBILE_PHONE, EMAIL_ADDRESS, ROLE_ID, DATE_CREATED, CREATED_BY, IP_ADDRESS) 
+                        VALUES (:accountid, :username, :fname, :lname, :mobile, :email, :roleid, :dateCreated, :createdBy, :ipaddress) ");
 
         $date =  date('Y-m-d H:i:s');
         $accountid = $this->getCustomerID();
@@ -64,6 +64,7 @@ class UserAccount {
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':roleid', $data['roleid']);
         $this->db->bind(':ipaddress', $data['remoteIP']);
+        $this->db->bind(':createdBy', $data['userid']);
         $this->db->bind(':dateCreated', $date);
         $this->db->bind(':accountid', $accountid);
         
@@ -98,7 +99,7 @@ class UserAccount {
         try{
             
         $this->db->query("INSERT INTO LAM_ACCESS (ACCESS_ID, ENTRY_ID, ACCESS_CODE, DATE_CREATED) 
-                        VALUES(:accessid, :customerid, :accessid, :dateCreated)");
+                        VALUES(:accessid, :customerid, :accesscode, :dateCreated)");
 
         $date =  date('Y-m-d H:i:s');
         $accessid = $this->getCustomerID();
@@ -106,7 +107,7 @@ class UserAccount {
         //Bind values
         $this->db->bind(':accessid', $accessid);
         $this->db->bind(':customerid', $customerid);
-        $this->db->bind(':accessid', $password);
+        $this->db->bind(':accesscode', $password);
         $this->db->bind(':dateCreated', $date);
 
         //Execute function
