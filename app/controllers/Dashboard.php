@@ -11,6 +11,60 @@ class Dashboard extends Controller {
     }
 
 
+    //public function to show company profile list
+    public function systemWorkflow() {
+
+        if(isLoggedIn()){
+                
+            $userid = $_SESSION['user_id'];
+            
+        }else{
+
+            header("Location: " . URLROOT . "?isLogged=0");
+        }
+
+        // company profile
+        $profiles = $this->userModel->loadCompanyProfile('approval');
+
+        // page data
+        $data = [
+                'title' => 'Company Profile',
+                'active' => 'systemWorkflow',
+                'parent' => 'workflow',
+                'profiles' => $profiles
+        ];
+    
+        $this->view('workflow/systemWorkflow', $data);
+    }
+    //end of function
+
+    //public function to show company profile list
+    public function companyProfileList() {
+
+        if(isLoggedIn()){
+                
+            $userid = $_SESSION['user_id'];
+            
+        }else{
+
+            header("Location: " . URLROOT . "?isLogged=0");
+        }
+
+        // company profile
+        $profiles = $this->userModel->loadCompanyProfile('list');
+
+        // page data
+        $data = [
+                'title' => 'Company Profile',
+                'active' => 'companyprofile',
+                'parent' => 'admin',
+                'profiles' => $profiles
+        ];
+    
+        $this->view('setup/companyProfileList', $data);
+    }
+    //end of function
+
 //function to show company profile
 public function companyProfile () {
 
@@ -26,7 +80,6 @@ public function companyProfile () {
     //fetch states
     $states = $this->userModel->fetchStates();
 
-
       //Check for post
       if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -36,9 +89,13 @@ public function companyProfile () {
             //data
             $data = [
 
-                'fundtype' => trim($_POST['fundtype']),
-                'apprv1' => trim($_POST['apprv1']),
-                'apprv2' => trim($_POST['apprv2']),
+                'employerName' => trim($_POST['employerName']),
+                'empAddress' => trim($_POST['empAddress']),
+                'employerArea' => trim($_POST['employerArea']),
+                'employerState' => trim($_POST['employerState']),
+                'clientFullname' => trim($_POST['clientFullname']),
+                'phonenumber' => trim($_POST['phonenumber']),
+                'emailaddress' => trim($_POST['emailaddress']),
                 'userid' => $userid,
                 'fieldError' => '',
                 'remoteIP' => $this->getRealIPAddr(),
@@ -48,15 +105,45 @@ public function companyProfile () {
             //validate error and post 
             if ($data['fieldError'] == '') {
 
-            }
+                //
+                $create = $this->userModel->createCompanyProfile($data);
 
+                if($create) {
+
+                        // page data
+                        $data = [
+                            'title' => 'Company Profile',
+                            'active' => 'companyprofile',
+                            'parent' => 'admin',
+                            'states' => $states,
+                            'status' => 'true',
+                        ];
+
+                        $this->view('setup/companyProfile', $data);
+
+                }else{
+
+                       // page data
+                       $data = [
+                        'title' => 'Company Profile',
+                        'active' => 'companyprofile',
+                        'parent' => 'admin',
+                        'states' => $states,
+                        'status' => 'true',
+                    ];
+
+                    $this->view('setup/companyProfile', $data);
+
+                }
+            }
      }
 
         // page data
         $data = [
             'title' => 'Company Profile',
             'active' => 'companyprofile',
-            'parent' => 'admin'
+            'parent' => 'admin',
+            'states' => $states
         ];
 
     $this->view('setup/companyProfile', $data);

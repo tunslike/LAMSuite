@@ -76,15 +76,43 @@
         }
         // end of function
 
+        //function to load company profile list
+        public function loadCompanyProfile ($type) {
+
+            try {
+
+                if($type == 'list') {
+
+                    //Prepared statement
+                    $this->db->query("SELECT * FROM LAM_COMPANY_PROFILE;");
+
+                }else if($type == 'approval') {
+
+                    //Prepared statement
+                    $this->db->query("SELECT * FROM LAM_COMPANY_PROFILE WHERE STATUS = 0;");
+                }
+        
+                $results = $this->db->resultSet();
+        
+                return $results;
+
+            }catch (PDOException $e) {
+
+                echo 'ERROR!';
+                print_r( $e );
+            }
+        }
+        //end of function
+
         //function to create company profile
-        public function createCompanyProfile () {
+        public function createCompanyProfile ($data) {
                 try{
                     
-                $this->db->query("INSERT INTO LAM_COMPANY_PROFILE (PROFILE_ID, COMPANY_NAME, ADDRESS, PHONE_NUMBER, 
-                                                                EMAIL_ADDRESS, AREA_LOCALITY, STATE, CONTACT_PERSON, 
+                $this->db->query("INSERT INTO LAM_COMPANY_PROFILE (PROFILE_ID, COMPANY_NAME, ADDRESS, AREA_LOCALITY, 
+                                                                STATE, CONTACT_PERSON, 
                                                                 CONTACT_PHONE_NUMBER, CONTACT_EMAIL, DATE_CREATED, CREATED_BY, 
                                                                 IP_ADDRESS) 
-                                 VALUES(:profileid, :companyName, :address, :phoneNumber, :emailAdd, :areaLoc, :state, :contactPerson,
+                                 VALUES(:profileid, :companyName, :address, :areaLoc, :state, :contactPerson,
                                  :contactPhone, :contactEmail, :dateCreated, :createdBy, :ipaddress)");
         
                 $date =  date('Y-m-d H:i:s');
@@ -92,15 +120,13 @@
             
                 //Bind values
                 $this->db->bind(':profileid', $hashid);
-                $this->db->bind(':companyName', $data['companyName']);
-                $this->db->bind(':address', $data['address']);
-                $this->db->bind(':phoneNumber', $data['phoneNumber']);
-                $this->db->bind(':emailAdd', $data['emailAdd']);
-                $this->db->bind(':areaLoc', $data['areaLoc']);
-                $this->db->bind(':state', $data['state']);
-                $this->db->bind(':contactPerson', $data['contactPerson']);
-                $this->db->bind(':contactPhone', $data['contactPhone']);
-                $this->db->bind(':contactEmail', $data['contactEmail']);
+                $this->db->bind(':companyName', $data['employerName']);
+                $this->db->bind(':address', $data['empAddress']);
+                $this->db->bind(':areaLoc', $data['employerArea']);
+                $this->db->bind(':state', $data['employerState']);
+                $this->db->bind(':contactPerson', $data['clientFullname']);
+                $this->db->bind(':contactPhone', $data['phonenumber']);
+                $this->db->bind(':contactEmail', $data['emailaddress']);
                 $this->db->bind(':createdBy', $data['userid']);
                 $this->db->bind(':ipaddress', $data['remoteIP']);
                 $this->db->bind(':dateCreated', $date);

@@ -1173,7 +1173,7 @@
 							<!--begin::Container-->
 							<div id="kt_content_container" class="container-xxl">
 							<div class="welcomeProfile">
-					<h3 class="fw-bold my-2 welcomeTxt">New Company Profile</h3>
+					<h3 class="fw-bold my-2 welcomeTxt">Company Profile</h3>
 					
 					</div>
 							
@@ -1184,153 +1184,72 @@
 								<div class="card">
    
    <div class="card-body p-lg-17">
-
-   <form id="formCompanyProfile" action="<?php echo URLROOT ?>/dashboard/companyProfile" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
-   
-
-   <div style="width:60%;">
-
-   <?php if(isset($data['status']) && $data['status'] == 'true') : ?>
-    <!--begin::Alert-->
-<div class="alert alert-success d-flex align-items-center p-5">
-    <!--begin::Icon-->
-    <i class="ki-duotone ki-shield-tick fs-2hx text-success me-4"><span class="path1"></span><span class="path2"></span></i>
-    <!--end::Icon-->
-
-    <!--begin::Wrapper-->
-    <div class="d-flex flex-column">
-        <!--begin::Title-->
-        <h4 class="mb-1 text-success">Request was successfully!</h4>
-        <!--end::Title-->
-
-        <!--begin::Content-->
-        <span>Company Profile has been created successfully and submitted for review.</span>
-        <!--end::Content-->
-    </div>
-    <!--end::Wrapper-->
-</div>
-<!--end::Alert-->
-<br><br>
-   <?php endif; ?>
-
-   <?php if(isset($data['notFound']) && $data['notFound'] == 'exist') : ?>
-        <!--begin::Alert-->
-        <div class="alert alert-dismissible bg-light-danger d-flex flex-column flex-sm-row p-5 mb-10">
-            <!--begin::Icon-->
-            <i class="ki-duotone ki-cross-square fs-2hx text-danger me-4 mb-5 mb-sm-0">
-            <span class="path1"></span>
-            <span class="path2"></span>
-            </i>
-            <!--end::Icon-->
-
-            <!--begin::Wrapper-->
-    <div class="d-flex flex-column">
-        <!--begin::Title-->
-        <h4 class="mb-1 text-danger">Unable to process your request!</h4>
-        <!--end::Title-->
-
-        <!--begin::Content-->
-        <span>A duplicate Fund name and type found!.</span>
-        <!--end::Content-->
-    </div>
-    <!--end::Wrapper-->
-        </div>
-        <!--end::Alert-->  
-        <br><br>
-    <?php endif; ?>
-
-   <?php if(!empty($data['fieldError']) && $data['fieldError'] != '') : ?>
-        <!--begin::Alert-->
-        <div class="alert alert-dismissible bg-light-danger d-flex flex-column flex-sm-row p-5 mb-10">
-            <!--begin::Icon-->
-            <i class="ki-duotone ki-notification-bing fs-2hx text-danger me-4 mb-5 mb-sm-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
-            <!--end::Icon-->
-
-            <!--begin::Wrapper-->
-            <div class="d-flex flex-column pe-0 pe-sm-10">
-                <!--begin::Title-->
-                <h6 style="padding-top:8px;"><?php echo $data['fieldError']; ?></h6>
-                <!--end::Title-->
-            </div>
-            <!--end::Wrapper-->
-        </div>
-        <!--end::Alert-->  
-        <br><br>
-    <?php endif; ?>
-
-	<div style="margin-bottom:20px;">
-    <span class="badge badge-light-danger">Employer/Company Details</span>
-    </div>
-
-
-    <div class="mb-10">
-        <label for="exampleFormControlInput1" class="required form-label">Employer/Company Name</label>
-        <input type="text" name="employerName" id="employerName" class="form-control"/>
-    </div>
-
-
-    <div class="mb-10">
-        <label for="exampleFormControlInput1" class="required form-label">Address</label>
-        <input type="text" name="empAddress" id="empAddress" class="form-control"/>
-    </div>
-
-
-    <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Area / Locality</label>
-        <input type="text" name="employerArea" id="employerArea" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">State</label>
-        <select name="employerState" id="employerState" class="form-select" aria-label="Select example">
-        <option default value="">Select here</option>
-                    <?php foreach($data['states'] as $state): ?>
-                        <option value="<?php echo $state->STATE_NAME; ?>"><?php echo $state->STATE_NAME; ?></option>
-                    <?php endforeach; ?>
-        </select>
-     </div>
-    </div>
-
-	<div style="margin-bottom:20px;">
-    <span class="badge badge-light-danger">Contact Details</span>
-    </div>
-
-	<div class="mb-10">
-        <label for="exampleFormControlInput1" class="required form-label">Contact's Full Name</label>
-        <input type="text" name="clientFullname" id="clientFullname" class="form-control"/>
-    </div>
-
-	<div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Phone Number</label>
-        <input type="text" name="phonenumber" id="phonenumber" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Email Address</label>
-        <input type="text" name="emailaddress"  id="emailaddress" class="form-control"/>
-     </div>
-    </div>
-   
-	<br>
-    <button type="button" class="btn btn-primary" id="btnCoyProfile">
-        
-<!--begin::Indicator label-->
+   <a href="<?php echo URLROOT ?>/dashboard/companyProfile" class="btn btn-primary">
+   <!--begin::Indicator label-->
 <span class="indicator-label">
-    Create Company Profile</span>
+    New Company Profile</span>
 <!--end::Indicator label-->
 
 <i class="ki-duotone ki-send fs-2">
  <span class="path1"></span>
  <span class="path2"></span>
 </i>
+   </a>
+   <br>
+   <br>
+   <br>
+	
+    <div class="table-responsive">
+	<table class="table table-bordered">
+		<thead>
+			<tr class="fw-bold fs-6 text-gray-800">
+                <th>#</th>
+				<th>Contact Person</th>
+				<th>Phone Number</th>
+				<th>Email</th>
+				<th>Company</th>
+				<th>Address</th>
+				<th>State</th>
+				<th>Date Created</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php $x = 1; ?>
+		<?php foreach($data['profiles'] as $profile): ?>
+			<tr>
+				<td><?php echo $x; ?></td>
+				<td><?php echo $profile->CONTACT_PERSON; ?></td>
+				<td><?php echo $profile->CONTACT_PHONE_NUMBER; ?></td>
+				<td><?php echo $profile->CONTACT_EMAIL; ?></td>
+				<td><?php echo $profile->COMPANY_NAME; ?></td>
+				<td><?php echo $profile->ADDRESS; ?></td>
+				<td><?php echo $profile->STATE; ?></td>
+				<td><?php echo formatEventDate($profile->DATE_CREATED); ?></td>
+				<td>
+				<?php 
+                            switch($profile->STATUS) {
+                                case 0:
+                                    echo '<div class="badge badge-light-primary">Pending Approval</div>';
+                                break;
+                                case 1:
+                                    echo '<div class="badge badge-light-success">Active</div>';
+                                break;
+                                case 2:
+                                    echo '<div class="badge badge-light-danger">Disabled</div>';
+                                break;
+                            }
+                        ?>
+				</td>
+			</tr>
+			<?php $x++; ?>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+</div>
+<br>
+<br>
 
-</button>
-
-   </div>
-
-   </form>
-   
-   </div>
 </div>										
 <!-- ****************************** Create New Fund Form ends here *********************************** -->
 								

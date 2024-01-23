@@ -254,7 +254,7 @@
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">Funds</span>
+												<span class="menu-title">Schemes</span>
 											</a>
 											<!--end:Menu link-->
 										</div>
@@ -291,6 +291,17 @@
 													<span class="bullet bullet-dot"></span>
 												</span>
 												<span class="menu-title">Loans</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										 <!--begin:Menu item-->
+										 <div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'systemWorkflow') { echo 'active';} ?>" href="<?php echo URLROOT ?>/dashboard/systemWorkflow">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">System</span>
 											</a>
 											<!--end:Menu link-->
 										</div>
@@ -396,7 +407,7 @@
 										   	<!--begin:Menu item-->
 											   <div class="menu-item">
 											<!--begin:Menu link-->
-											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'companyprofile') { echo 'active';} ?>" href="<?php echo URLROOT ?>/dashboard/companyProfile">
+											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'companyprofile') { echo 'active';} ?>" href="<?php echo URLROOT ?>/dashboard/companyProfileList">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>

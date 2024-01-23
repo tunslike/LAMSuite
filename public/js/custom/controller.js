@@ -1,14 +1,7 @@
 //function to show alert
-
-//end of function 
-
-// function to create new employer profile
-function createEmployerProfile() {
-
-
-
+function showErrorAlert(message) {
     Swal.fire({
-        text: "Please select a customer to proceed!",
+        text: message,
         icon: "error",
         buttonsStyling: false,
         confirmButtonText: "Ok, got it!",
@@ -17,7 +10,49 @@ function createEmployerProfile() {
         }
     });
 }
-// end of function
+//end of function 
+
+//form to submit company profile form
+$('#btnCoyProfile').click(function() {
+
+    //get details
+    let employerName = $('#employerName').val()
+    let companyAddr = $('#empAddress').val()
+    let employerArea = $('#employerArea').val()
+    let employerState = $('#employerState').val()
+
+    let clientFullname = $('#clientFullname').val()
+    let phonenumber = $('#phonenumber').val()
+    let emailaddress = $('#emailaddress').val()
+
+    if(employerName == '' || companyAddr == '' || employerArea == '' || employerState == '' || clientFullname == '' || phonenumber == '' || emailaddress == '')  {
+        showErrorAlert('All fields are compulsory!')
+        return false;
+    }
+
+    // show prompt
+    Swal.fire({
+        text: "Do you want to submit company profile?",
+        icon: "question",
+        buttonsStyling: false,
+        showCancelButton: true,
+        confirmButtonText: "Yes, Proceed!",
+        cancelButtonText: 'Nope, cancel it',
+        customClass: {
+            cancelButton: 'btn btn-danger',
+            confirmButton: "btn btn-primary"
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            //submit form
+            $('#formCompanyProfile').submit()
+        }   
+    });
+    
+})
+//end of function
+
 // search customer button
 const btnSearch = document.getElementById('loadSearchCustomer');
 const btnApprove = document.getElementById('btnApprove');
