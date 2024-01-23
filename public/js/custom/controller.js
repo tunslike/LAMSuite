@@ -12,6 +12,124 @@ function showErrorAlert(message) {
 }
 //end of function 
 
+//function to approve customer profile
+$('#btnCompanyProfileApprove').click(function () {
+    
+    //get details
+    let comment = $('#txtComment').val()
+    let profID = $('#proileid').val()
+
+    if(profID == '') {
+        showErrorAlert('Please select company profile to proceed!')
+        return false;
+    }
+
+     // show prompt
+     Swal.fire({
+        text: "Do you want to approve company profile?",
+        icon: "question",
+        buttonsStyling: false,
+        showCancelButton: true,
+        confirmButtonText: "Yes, Proceed!",
+        cancelButtonText: 'Nope, cancel it',
+        customClass: {
+            cancelButton: 'btn btn-danger',
+            confirmButton: "btn btn-primary"
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+        // Show page loading
+        KTApp.showPageLoading();
+
+         //ajax request
+            $.ajax({
+                type: "POST",
+                data: { profileid: profID, comment:comment},
+                url: "http://localhost/lamsuite/dashboard/approveCompanyProfile",
+                success: function (data) {
+
+                    //hide
+                    KTApp.hidePageLoading();
+
+                    //check data
+                    if(data == 1) {
+
+                        Swal.fire({
+                            title: "Company Profile Approved!",
+                            text: "Record has been approved successully!",
+                            icon: "success"
+                          });
+
+                          // refresh
+                          location.reload();
+
+                    }else {
+
+                        Swal.fire({
+                            title: "Unable to approve company profile!",
+                            text: "Unable to process your request, please retry!",
+                            icon: "error"
+                          });
+
+                          // refresh
+                          location.reload();
+
+                    }
+                
+                },
+            });
+        }
+      });
+
+})
+//end of function 
+
+//function to load customer profile
+$('#btnSearchCompanyProfile').click(function () {
+    //get details
+    let profileid = $('#proileid').val()
+
+    //check
+    if(profileid == '') {
+        showErrorAlert('Select Company profile to proceed!')
+        return false;
+    }
+
+     // Show page loading
+     KTApp.showPageLoading();
+
+    //ajax request
+    $.ajax({
+        type: "POST",
+        data: { profileid: profileid},
+        url: "http://localhost/lamsuite/dashboard/companyProfileForApproval",
+        success: function (data) {
+
+            //hide
+            KTApp.hidePageLoading();
+
+            var response = JSON.parse(data);
+
+            //set personal details
+            $('#employerName').val(response[0].COMPANY_NAME)
+            $('#empAddress').val(response[0].ADDRESS)
+            $('#employerArea').val(response[0].AREA_LOCALITY)
+            $('#employerState').val(response[0].STATE)
+
+            $('#clientFullname').val(response[0].CONTACT_PERSON)
+            $('#phonenumber').val(response[0].CONTACT_PHONE_NUMBER)
+            $('#emailaddress').val(response[0].CONTACT_EMAIL)
+
+            $('#dateCreated').val(response[0].PROFILE_DATE_CREATED)
+            $('#createdBy').val(response[0].FIRST_NAME + ' ' + response[0].LAST_NAME)
+            
+        
+        },
+    });
+})
+//end of funcfion 
+
 //form to submit company profile form
 $('#btnCoyProfile').click(function() {
 

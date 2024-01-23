@@ -1196,19 +1196,19 @@
 
    <div style="width:60%;">
    
-   <form action="<?php echo URLROOT ?>/dashboard/workflowSetup" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
+   <form action="<?php echo URLROOT ?>/dashboard/systemWorkflow" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
     
 
    <div class="mb-10">
         <label for="exampleFormControlInput1" class="required form-label">Company Profile</label>
-        <select class="form-select" id="customer_id" name="apprv1" data-control="select2" data-placeholder="Select or search company name here">
+        <select class="form-select" id="proileid" name="apprv1" data-control="select2" data-placeholder="Select or search company name here">
                 <option value=""></option>
                 <?php foreach($data['profiles'] as $profile): ?>
                         <option value="<?php echo $profile->PROFILE_ID; ?>"><?php echo $profile->COMPANY_NAME.' - '.$profile->CONTACT_PERSON; ?></option>
             <?php endforeach; ?>
         </select>
     </div>
-    <button type="button" class="btn btn-primary" id="loadSearchCustomer">
+    <button type="button" class="btn btn-primary" id="btnSearchCompanyProfile">
         
         <!--begin::Indicator label-->
         <span class="indicator-label">
@@ -1229,212 +1229,78 @@
 <br>
 <br>
 <br>
-    <div style="margin-bottom:20px;">
-    <span class="badge badge-light-danger">Account Setup</span>
+  
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-danger">Employer/Company Details</span>
     </div>
 
-    <div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">Account Type</label>
-        <input type="text" id="acctType" readonly class="form-control"/>
-    </div>
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-  <label for="exampleFormControlInput1" class="form-label">KYC Status</label>
-        <input type="text" id="kycStatus" readonly class="form-control"/>
-    </div>
-    </div>
-
-<br>
-    <div style="margin-bottom:20px;">
-    <span class="badge badge-light-danger">Personal Details</span>
-    </div>
-
-    <div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">Last Name</label>
-        <input type="text" id="lastname" readonly class="form-control"/>
-    </div>
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-  <label for="exampleFormControlInput1" class="form-label">First Name</label>
-        <input type="text" id="firstname" readonly class="form-control"/>
-    </div>
-    </div>
-
-    <div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">Other Name</label>
-        <input type="text" id="othername" class="form-control" readonly/>
-    </div>
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-  <label for="exampleFormControlInput1" class="form-label">Gender</label>
-        <input type="text" id="gender" class="form-control" readonly/>
-    </div>
-    </div>
-
-    <div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">Date of Birth</label>
-        <input type="text" id="dob" class="form-control" readonly/>
-    </div>
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-  <label for="exampleFormControlInput1" class="form-label">Place of Birth</label>
-        <input type="text" id="placeBirth" class="form-control" readonly/>
-    </div>
-    </div>
-
-    <div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
-        <input type="text" id="phoneNumber" class="form-control" readonly/>
-    </div>
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-  <label for="exampleFormControlInput1" class="form-label">Email Address</label>
-        <input type="text" id="email" class="form-control" readonly/>
-    </div>
-    </div>
-
-    <div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">State of Origin</label>
-        <input type="text" id="stateOrigin" class="form-control" read/>
-    </div>
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-  <label for="exampleFormControlInput1" class="form-label">Nationality</label>
-        <input type="text" id="nationality" class="form-control" readonly/>
-    </div>
-    </div>
-
-    <br>
-    <div style="margin-bottom:20px;">
-    <span class="badge badge-light-danger">Correspondence</span>
+	<div class="mb-10">
+        <label for="exampleFormControlInput1" class="required form-label">Employer/Company Name</label>
+        <input type="text" name="employerName" id="employerName" readonly class="form-control form-control-solid"/>
     </div>
 
 
     <div class="mb-10">
-        <label for="exampleFormControlInput1" class="form-label">House Address / Street</label>
-        <input type="text" id="address" class="form-control" readonly/>
-    </div>
-
-
-      <div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">Area/Locality</label>
-        <input type="text" id="areaLoc" class="form-control" readonly/>
-    </div>
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-  <label for="exampleFormControlInput1" class="form-label">State</label>
-        <input type="text" id="cusState" class="form-control" readonly/>
-    </div>
-    </div>
-
- 
-    <br>
-    
-    <div style="margin-bottom:20px;">
-    <span class="badge badge-light-danger">Employer Details</span>
-    </div>
-
-    <div class="mb-10">
-        <label for="exampleFormControlInput1" class="form-label">Employer Name</label>
-        <input type="text" id="employerName" class="form-control" readonly/>
-    </div>
-
-    <div class="mb-10">
-        <label for="exampleFormControlInput1" class="form-label">Office Address</label>
-        <input type="text" id="officeAddress" class="form-control" readonly/>
+        <label for="exampleFormControlInput1" class="required form-label">Address</label>
+        <input type="text" name="empAddress" id="empAddress" readonly class="form-control form-control-solid"/>
     </div>
 
 
     <div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">Area/Locality</label>
-        <input type="text" id="empLoc" class="form-control" readonly/>
-    </div>
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-  <label for="exampleFormControlInput1" class="form-label">State</label>
-        <input type="text" id="employerState" class="form-control" readonly/>
-    </div>
-    </div>
-
-
-       <div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">Sector</label>
-        <input type="text" id="empSector" class="form-control" readonly/>
-    </div>
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-  <label for="exampleFormControlInput1" class="form-label">Grade Level</label>
-        <input type="text" id="empGradeLevel" class="form-control" readonly/>
-    </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Area / Locality</label>
+        <input type="text" name="employerArea" id="employerArea" readonly class="form-control form-control-solid"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">State</label>
+        <input type="text" name="employerState" id="employerState" readonly class="form-control form-control-solid"/>
+     </div>
     </div>
 
-<br>
-<div style="margin-bottom:20px;">
-    <span class="badge badge-light-danger">Next of kin Details</span>
-</div>
-
-
-<div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">Last Name</label>
-        <input type="text" id="nokLastname" class="form-control" readonly/>
-    </div>
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-  <label for="exampleFormControlInput1" class="form-label">First Name</label>
-        <input type="text" id="nokFirstname" class="form-control" readonly/>
-    </div>
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-danger">Contact Details</span>
     </div>
 
-    <div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">Relationship</label>
-        <input type="text" id="nokRel" class="form-control" readonly/>
-    </div>
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-  <label for="exampleFormControlInput1" class="form-label">Gender</label>
-        <input type="text" id="nokGender" class="form-control" readonly/>
-    </div>
+	<div class="mb-10">
+        <label for="exampleFormControlInput1" class="required form-label">Contact's Full Name</label>
+        <input type="text" name="clientFullname" readonly id="clientFullname" class="form-control form-control-solid"/>
     </div>
 
-    <div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
-        <input type="text" id="nokPhone" class="form-control" readonly/>
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Phone Number</label>
+        <input type="text" name="phonenumber" readonly id="phonenumber" class="form-control form-control-solid"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Email Address</label>
+        <input type="text" name="emailaddress" readonly id="emailaddress" class="form-control form-control-solid"/>
+     </div>
     </div>
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-  <label for="exampleFormControlInput1" class="form-label">Email Address</label>
-        <input type="text" id="nokEmail" class="form-control" readonly/>
+   <br>
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-primary">Administration</span>
     </div>
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Date Created</label>
+        <input type="text" name="phonenumber" readonly id="dateCreated" class="form-control form-control-solid"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Created By</label>
+        <input type="text" name="emailaddress" readonly id="createdBy" class="form-control form-control-solid"/>
+     </div>
     </div>
-
-    <div class="mb-10">
-        <label for="exampleFormControlInput1" class="form-label">House Address / Street</label>
-        <input type="text" id="nok_address" class="form-control" readonly/>
-    </div>
-
-
-    <div class="row mb-10">
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="form-label">Area / Locality</label>
-        <input type="text" id="nokAreaLoc" class="form-control" readonly/>
-    </div>
-    <div class="col-md-6 fv-row fv-plugins-icon-container">
-  <label for="exampleFormControlInput1" class="form-label">State</label>
-        <input type="text" id="nokState" class="form-control" readonly/>
-    </div>
-    </div>
-
 
     <div class="mb-10">
         <label for="exampleFormControlInput1" style="color:#1d76cf;" class="form-label">Approval or Rejection Comment</label>
-        <textarea id="txtComment" class="form-control mb-8" rows="3"></textarea>
+        <textarea id="txtComment" class="form-control  form-control-solid mb-8" rows="3"></textarea>
     </div>
 
     <br>
 <br>
 <p>
 
-<button type="button" class="btn btn-primary" id="btnApprove">
+<button type="button" class="btn btn-primary" id="btnCompanyProfileApprove">
         
 <!--begin::Indicator label-->
 <span class="indicator-label">

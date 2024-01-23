@@ -1258,6 +1258,22 @@
         <br><br>
     <?php endif; ?>
 
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-danger">Company Profile Details</span>
+    </div>
+	<div class="mb-10">
+        <label for="exampleFormControlInput1" class="required form-label">Company Profile</label>
+            <select name="fundtype" class="form-select" aria-label="Select example">
+            <option selected="selected" value="">Select here</option>
+			<?php foreach($data['profiles'] as $profile): ?>
+                <option value="<?php echo $profile->PROFILE_ID; ?>"><?php echo $profile->COMPANY_NAME.' - '.$profile->CONTACT_PERSON; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-danger">Scheme Details</span>
+    </div>
     <div class="mb-10">
         <label for="exampleFormControlInput1" class="required form-label">Scheme Name</label>
         <input type="text" name="fundname" class="form-control" placeholder="Enter scheme name"/>

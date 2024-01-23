@@ -23,6 +23,9 @@ class Scheme extends Controller {
             header("Location: " . URLROOT . "?isLogged=0");
         }
 
+        //company profiles
+        $profiles = $this->userModel->loadActiveCompanyProfile();
+
          //Check for post
          if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -39,6 +42,7 @@ class Scheme extends Controller {
                 'fieldError' => '',
                 'remoteIP' => $this->getRealIPAddr(),
                 'active' => 'home',
+                'profiles' => $profiles,
             ];
 
             //Validate username
@@ -71,7 +75,8 @@ class Scheme extends Controller {
                                 'title' => 'Funds Management',
                                 'active' => 'newfund',
                                 'parent' => 'funds',
-                                'status' => 'true'
+                                'status' => 'true',
+                                'profiles' => $profiles,
                             ];
 
                             $this->view('scheme/newScheme', $data);
@@ -83,7 +88,8 @@ class Scheme extends Controller {
                         'title' => 'Funds Management',
                         'active' => 'newfund',
                         'parent' => 'funds',
-                        'notFound' => 'exist'
+                        'notFound' => 'exist',
+                        'profiles' => $profiles,
                     ];
 
                     $this->view('scheme/newScheme', $data);
@@ -103,7 +109,8 @@ class Scheme extends Controller {
         $data = [
             'title' => 'Funds Management',
             'active' => 'newfund',
-            'parent' => 'funds'
+            'parent' => 'funds',
+            'profiles' => $profiles,
         ];
 
         $this->view('scheme/newScheme', $data);

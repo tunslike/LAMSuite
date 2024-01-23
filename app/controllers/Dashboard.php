@@ -38,6 +38,70 @@ class Dashboard extends Controller {
     }
     //end of function
 
+       // function to approve customer record
+       public function approveCompanyProfile() {
+
+        // check isLogged
+        if(isLoggedIn()){
+          
+           $userid = $_SESSION['user_id'];
+           
+       }else{
+
+           header("Location: " . URLROOT . "?isLogged=0");
+       }
+
+        //check post
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+       
+           
+           $data = [
+               'profileid' => trim($_POST['profileid']),
+               'comment' => trim($_POST['comment']),
+               'userid' => $userid
+           ];
+
+           // approve record
+           $approve = $this->userModel->approveCompanyProfile($data);
+
+           if($approve) {
+               echo '1';
+           }else{ 
+               echo '0';
+           }
+
+       }
+
+   }
+   // end of function 
+
+    //function to load customer profile data
+    public function companyProfileForApproval () {
+        
+        // check isLogged
+        if(isLoggedIn()){
+           
+            $userid = $_SESSION['user_id'];
+            
+        }else{
+ 
+            header("Location: " . URLROOT . "?isLogged=0");
+        }
+
+        //check post
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        
+            $profileid = trim($_POST['profileid']);
+            
+            $result = $this->userModel->loadCompanyProfileApproval($profileid);
+        }
+
+        //response*********************************************
+        echo json_encode($result);
+
+    }
+    //end of function
+
     //public function to show company profile list
     public function companyProfileList() {
 

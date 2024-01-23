@@ -30,6 +30,39 @@
         }
          // end of function
 
+        // function to approve company profile
+        public function approveCompanyProfile ($data) {
+            
+            try {
+        
+                $this->db->query("UPDATE LAM_COMPANY_PROFILE SET STATUS = 1, DATE_APPROVED = :dateApprove, 
+                                APPROVED_BY = :approveBy, COMMENTS = :comment WHERE PROFILE_ID = :profileid");
+
+                $date =  date('Y-m-d H:i:s');
+            
+                //Bind values
+                $this->db->bind(':comment', $data['comment']);
+                $this->db->bind(':approveBy', $data['userid']);
+                $this->db->bind(':dateApprove', $date);
+                $this->db->bind(':profileid', $data['profileid']);
+                
+            
+                //Execute function
+                if ($this->db->execute()) { 
+                    return true;
+                } else {
+                   return false;
+                }
+
+            }catch(PDOException $e) {
+                echo 'ERROR!';
+                print_r( $e );
+            }
+
+        }
+
+        // end of function 
+
         // function to load super users
         public function loadWorkflowSetups() {
             
@@ -54,6 +87,7 @@
         }
         // end of function
 
+        
 
         // function to load super users
         public function loadSuperUsers() {
@@ -76,6 +110,30 @@
         }
         // end of function
 
+             //function to load company profile list
+             public function loadCompanyProfileApproval ($profileid) {
+
+                try {
+    
+                    $this->db->query("SELECT P.*, (P.DATE_CREATED)PROFILE_DATE_CREATED, E.FIRST_NAME, E.LAST_NAME FROM 
+                    LAM_COMPANY_PROFILE P LEFT JOIN LAM_ENTRY E ON P.CREATED_BY = 
+                    E.ENTRY_ID WHERE P.PROFILE_ID = :profileid AND P.STATUS = 0;");
+    
+                    //Bind values
+                    $this->db->bind(':profileid', $profileid);
+            
+                    $results = $this->db->resultSet();
+            
+                    return $results;
+    
+                }catch (PDOException $e) {
+    
+                    echo 'ERROR!';
+                    print_r( $e );
+                }
+            }
+            //end of function
+
         //function to load company profile list
         public function loadCompanyProfile ($type) {
 
@@ -90,6 +148,12 @@
 
                     //Prepared statement
                     $this->db->query("SELECT * FROM LAM_COMPANY_PROFILE WHERE STATUS = 0;");
+
+                }else if($type== 'workflow') {
+
+                    $this->db->query("SELECT * FROM LAM_COMPANY_PROFILE WHERE 
+                    PROFILE_ID = :profileid AND STATUS = 0;");
+
                 }
         
                 $results = $this->db->resultSet();

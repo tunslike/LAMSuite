@@ -52,8 +52,30 @@
                 print_r( $e );
             }
         }
+        
+          //function to load company profile list
+          public function loadActiveCompanyProfile () {
+
+            try {
+
+                //Prepared statement
+                $this->db->query("SELECT * FROM LAM_COMPANY_PROFILE WHERE STATUS = 1;");
+        
+                $results = $this->db->resultSet();
+        
+                return $results;
+
+            }catch (PDOException $e) {
+
+                echo 'ERROR!';
+                print_r( $e );
+            }
+        }
+        //end of function
 
 
+
+        //function to load managed funds
         public function loadManagedFund() {
 
                 //Prepared statement
