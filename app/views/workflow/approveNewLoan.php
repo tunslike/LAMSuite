@@ -6,6 +6,15 @@
 
 	<!--begin::Body-->
 	<body id="kt_body" class="aside-enabled">
+
+    <!--begin::Page loading(append to body)-->
+<!--begin::Page loading(append to body)-->
+<div class="page-loader flex-column bg-dark bg-opacity-25">
+    <span class="spinner-border text-primary" role="status"></span>
+    <span class="text-gray-800 fs-6 fw-semibold mt-5">Loading...</span>
+</div>
+<!--end::Page loading-->
+
 		<!--begin::Theme mode setup on page load-->
 		<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
 		<!--end::Theme mode setup on page load-->
@@ -994,7 +1003,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-muted">System</li>
+										<li class="breadcrumb-item text-muted">Workflow</li>
 										<!--end::Item-->
 										<!--begin::Item-->
 										<li class="breadcrumb-item">
@@ -1002,7 +1011,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-gray-900">Workflow Setup</li>
+										<li class="breadcrumb-item text-gray-900">Loan Approval</li>
 										<!--end::Item-->
 									</ul>
 									<!--end::Breadcrumb-->
@@ -1173,213 +1182,219 @@
 							<!--begin::Container-->
 							<div id="kt_content_container" class="container-xxl">
 							<div class="welcomeProfile">
-					<h3 class="fw-bold my-2 welcomeTxt">Setup Workflow Approval</h3>
+					<h3 class="fw-bold my-2 welcomeTxt">Approve Customer Loan</h3>
 					
 					</div>
 							
 								
 
-<!-- ****************************** Create New Fund Form starts here ********************************* -->
-							
-								<div class="card">
-   
+<!-- ****************************** Manage Funds starts here ********************************* -->
+<div class="card">
+  
+   <!--begin::Card body-->
    <div class="card-body p-lg-17">
 
-   <?php if(isset($data['status']) && $data['status'] == 'true') : ?>
-    <!--begin::Alert-->
-<div class="alert alert-success d-flex align-items-center p-5">
+
+
+   <div style="width:60%;">
+
+
+   <!--begin::Alert-->
+<div class="alert alert-dismissible bg-light-primary d-flex flex-column flex-sm-row p-5 mb-10">
     <!--begin::Icon-->
-    <i class="ki-duotone ki-shield-tick fs-2hx text-success me-4"><span class="path1"></span><span class="path2"></span></i>
+    <i class="ki-duotone ki-notification-bing fs-2hx text-primary me-4 mb-5 mb-sm-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
     <!--end::Icon-->
 
     <!--begin::Wrapper-->
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column pe-0 pe-sm-10">
         <!--begin::Title-->
-        <h4 class="mb-1 text-success">Request was successful!</h4>
+        <h6 style="padding-top:8px;">You are approving as first Approval</h6>
         <!--end::Title-->
-
-        <!--begin::Content-->
-        <span>A workflow approval has been setup successfully!</span>
-        <!--end::Content-->
     </div>
     <!--end::Wrapper-->
 </div>
 <!--end::Alert-->
-<br><br>
-   <?php endif; ?>
-
-   <?php if(count($data['approvals']) == 0) : ?>
-        <!--begin::Alert-->
-        <div class="alert alert-dismissible bg-light-danger d-flex flex-column flex-sm-row p-5 mb-10">
-            <!--begin::Icon-->
-            <i class="ki-duotone ki-cross-square fs-2hx text-danger me-4 mb-5 mb-sm-0">
-            <span class="path1"></span>
-            <span class="path2"></span>
-            </i>
-            <!--end::Icon-->
-
-            <!--begin::Wrapper-->
-    <div class="d-flex flex-column">
-        <!--begin::Title-->
-        <h4 class="mb-1 text-danger">No workflow approval setup found!</h4>
-        <!--end::Title-->
-
-        <!--begin::Content-->
-        <span>You will be unable to use the workflow engine without workflow approval setup.</span>
-        <!--end::Content-->
-    </div>
-    <!--end::Wrapper-->
-        </div>
-        <!--end::Alert-->  
-        <br><br>
-    <?php endif; ?>
-
-
-	<?php if(count($data['approvals']) > 0) : ?>
-
-    <h5 class="fw-bold my-2 descTxthdr" style="color:#f8285c;">Existing Workflow Approvals</h5>
-    <br>
-	
-    <div class="table-responsive">
-	<table class="table table-bordered">
-		<thead>
-			<tr class="fw-bold fs-6 text-gray-800">
-                <th>#</th>
-				<th>Workflow Type</th>
-				<th>Approval Policy</th>
-				<th>Approval One</th>
-				<th>Approval Two</th>
-				<th>Date Created</th>
-				<th>Status</th>
-			</tr>
-		</thead>
-		<tbody>
-		<?php $x = 1; ?>
-		<?php foreach($data['approvals'] as $approval): ?>
-			<tr>
-				<td><?php echo $x; ?></td>
-				<td><?php 
-					switch ($approval->WORKFLOW_TYPE) {
-						case '01':
-							echo 'Investments';
-						break;
-						case '02':
-							echo 'Loans';
-						break;
-						case '03':
-							echo 'Account Savings';
-						break;
-					}
-				?></td>
-					<td><?php 
-					switch ($approval->WORKFLOW_POLICY) {
-						case 'APPR1':
-							echo 'One Approval';
-						break;
-						case 'APPR1':
-							echo 'Two Approvals';
-						break;
-						case 'SYSM':
-							echo 'System Approval';
-						break;
-					}
-				?></td>
-				<td><?php echo $approval->APPROVAL_ONE; ?></td>
-				<td><?php echo $approval->APPROVAL_TWO; ?></td>
-				<td><?php echo formatEventDate($approval->DATE_CREATED); ?></td>
-				<td>
-				<?php 
-                            switch($approval->STATUS) {
-                                case 0:
-									echo '<div class="badge badge-light-success">Active</div>';
-                                break;
-                                case 1:
-                                    echo '<div class="badge badge-light-success">Active</div>';
-                                break;
-                                case 2:
-                                    echo '<div class="badge badge-light-danger">Disabled</div>';
-                                break;
-                            }
-                        ?>
-				</td>
-			</tr>
-			<?php $x++; ?>
-			<?php endforeach; ?>
-		</tbody>
-	</table>
-</div>
-<br>
-<br>
-<?php endif; ?>
-
-<div style="width:60%;">
-
-<form id="workflowForm" action="<?php echo URLROOT ?>/dashboard/workflowSetup" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
-
-<h5 class="fw-bold my-2 descTxthdr" style="color:#f8285c;">Workflow Approval Setup</h5>
-    <br>
-    <div class="mb-10">
-        <label for="exampleFormControlInput1" class="required form-label">Workflow Type</label>
-            <select name="fundtype" id="fundtype" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="01">Investments</option>
-            <option value="02">Loans</option>
-            <option value="03">Account Savings</option>
-        </select>
-    </div>
-
-    <div class="mb-10">
-        <label for="exampleFormControlInput1" class="required form-label">Approval Policy</label>
-            <select name="policyType" id="policyType" onchange="ValidatePolicy(this.value);" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="APPR1">One Approval</option>
-            <option value="APPR2">Two Approvals</option>
-            <option value="SYSM">System Approval</option>
-        </select>
-    </div>
-
-    <div class="mb-10" id="approval_one">
-        <label for="exampleFormControlInput1" class="required form-label">Approval One</label>
-        <select class="form-select" name="apprv1"  id="apprv1" data-control="select2" data-placeholder="Select staff name here">
-                <option></option>
-					<?php foreach($data['users'] as $user): ?>
-						<option value="<?php echo $user->ENTRY_ID ?>"><?php echo $user->FIRST_NAME.' '.$user->LAST_NAME; ?></option>
-					<?php endforeach; ?>
-            </select>
-    </div>
-
-    <div class="mb-10" id="approval_two">
-        <label for="exampleFormControlInput1" class="required form-label">Approval Two</label>
-        <select class="form-select" name="apprv2" id="apprv2" data-control="select2" data-placeholder="Select staff name here">
-                <option></option>
-				<?php foreach($data['users'] as $user): ?>
-						<option value="<?php echo $user->ENTRY_ID ?>"><?php echo $user->FIRST_NAME.' '.$user->LAST_NAME; ?></option>
-				<?php endforeach; ?>
-            </select>
-    </div>
 
    
-    <button type="button" class="btn btn-primary" id="btnUpdateWorkflowSetup">
+   <form action="<?php echo URLROOT ?>/dashboard/systemWorkflow" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
+    
+
+   <div class="mb-10">
+        <label for="exampleFormControlInput1" class="required form-label">Customer Loan Profile</label>
+        <select class="form-select" id="loanProfileid" name="apprv1" data-control="select2" data-placeholder="Select or search loan profile here">
+                <option value=""></option>
+                <?php foreach($data['loanProfiles'] as $loan): ?>
+                        <option value="<?php echo $loan->LOAN_ID; ?>"><?php echo $loan->LOAN_NUMBER.' - '.$loan->FIRST_NAME.' '.$loan->LAST_NAME; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <button type="button" class="btn btn-primary" id="btnSearchCustomerProfile">
+        
+        <!--begin::Indicator label-->
+        <span class="indicator-label">
+            Search</span>
+        <!--end::Indicator label-->
+        
+        <i class="ki-duotone ki-search-list fs-2">
+         <span class="path1"></span>
+         <span class="path2"></span>
+         <span class="path3"></span>
+        </i>
+        <span class="indicator-progress">
+        Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+    </span>
+        
+        </button>
+<br>
+<br>
+<br>
+<br>
+  
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-danger">Customer Details</span>
+    </div>
+
+	<div class="mb-10">
+        <label for="exampleFormControlInput1" class="required form-label">Customer Full Name</label>
+        <input type="text" name="employerName" id="cust_fullname" readonly class="form-control"/>
+    </div>
+
+
+    <div class="mb-10">
+        <label for="exampleFormControlInput1" class="required form-label">Employer Name</label>
+        <input type="text" name="empAddress" id="cust_emp_name" readonly class="form-control"/>
+    </div>
+
+
+    <div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Phone Number</label>
+        <input type="text" name="employerArea" id="emp_phone" readonly class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Email Address</label>
+        <input type="text" name="employerState" id="emp_email" readonly class="form-control"/>
+     </div>
+    </div>
+
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-danger">Loan Details</span>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Loan Amount</label>
+        <input type="text" name="employerArea" id="cust_loan_amount" readonly class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Loan Tenor</label>
+        <input type="text" name="employerState" id="cust_loan_tenor" readonly class="form-control"/>
+     </div>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Loan Purpose</label>
+        <input type="text" name="employerArea" id="cust_loan_purpose" readonly class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Interest Rate</label>
+        <input type="text" name="employerState" id="cust_loan_interest" readonly class="form-control"/>
+     </div>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Monthly Repayment</label>
+        <input type="text" readonly name="no_staff" id="cust_mon_repay" class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Total Repayment</label>
+        <input type="text" name="loan_percent" readonly  id="cus_total_paymt" class="form-control"/>
+     </div>
+    </div>
+
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-danger">Disbursement Details</span>
+    </div>
+
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Bank Name</label>
+        <input type="text" readonly name="no_staff" id="cus_bank_name" class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Account Number</label>
+        <input type="text" name="loan_percent" readonly  id="cus_acct_num" class="form-control"/>
+     </div>
+    </div>
+
+
+   <br>
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-primary">Administration</span>
+    </div>
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Date Created</label>
+        <input type="text" name="phonenumber" readonly id="dateCreated" class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Created By</label>
+        <input type="text" name="emailaddress" readonly id="createdBy" class="form-control"/>
+     </div>
+    </div>
+
+    <div class="mb-10">
+        <label for="exampleFormControlInput1" style="color:#1d76cf;" class="form-label">Approval or Rejection Comment</label>
+        <textarea id="txtComment" class="form-control  form-control-solid mb-8" rows="3"></textarea>
+    </div>
+
+    <br>
+<br>
+<p>
+
+<button type="button" class="btn btn-primary" id="btnApproveCustomerLoan">
         
 <!--begin::Indicator label-->
 <span class="indicator-label">
-    Save Setup</span>
+    Approve</span>
 <!--end::Indicator label-->
 
-<i class="ki-duotone ki-send fs-2">
+<i class="ki-duotone ki-send fs-1">
  <span class="path1"></span>
  <span class="path2"></span>
 </i>
 
 </button>
 
-   </div>
+
+<button style="margin-left:20px;" type="button" class="btn btn-danger" id="btnRejected">
+        
+<!--begin::Indicator label-->
+<span class="indicator-label">
+ Reject</span>
+<!--end::Indicator label-->
+
+<i class="ki-duotone ki-cross-square fs-1">
+ <span class="path1"></span>
+ <span class="path2"></span>
+</i>
+
+</button>
+
+</p>
 
    </form>
-   
+
    </div>
-</div>										
-<!-- ****************************** Create New Fund Form ends here *********************************** -->
+
+   </div>
+   <!--end::Card body-->
+</div>	
+															
+<!-- ****************************** Manage Funds ends here *********************************** -->
 								
 							</div>
 							<!--end::Container-->
@@ -2710,7 +2725,7 @@
 						</div>
 						<!--end::Separator-->
 						<!--begin::Textarea-->
-						<textarea class="form-control form-control-solid mb-8" rows="3" placeholder="Type or paste emails here"></textarea>
+						<textarea class="form-control mb-8" rows="3" placeholder="Type or paste emails here"></textarea>
 						<!--end::Textarea-->
 						<!--begin::Users-->
 						<div class="mb-10">

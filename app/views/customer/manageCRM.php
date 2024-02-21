@@ -1258,7 +1258,7 @@
                      </td>
                      <td>
                         <?php 
-                            switch($customer->ACCOUNT_TYPE) {
+                            switch($customer->SCHEME_TYPE) {
                                 case 'Investment':
                                     echo '<div class="badge badge-success">Investment</div>';
                                 break;

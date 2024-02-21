@@ -12,6 +12,93 @@ function showErrorAlert(message) {
 }
 //end of function 
 
+//function to validate workflow policy
+function ValidatePolicy(value) {
+    if(value == 'APPR1') {
+        $('#approval_two').hide();
+    }else if(value == 'APPR2') {
+        $('#approval_one').show();
+        $('#approval_two').show();
+    }else if(value == 'SYSM') {
+        $('#approval_one').hide();
+        $('#approval_two').hide();
+    }
+}
+//end of function
+
+//function to approve customer profile
+$('#btnApproveCustomerLoan').click(function () {
+    
+    //get details
+    let comment = $('#txtComment').val()
+    let profID = $('#proileid').val()
+
+    if(profID == '') {
+        showErrorAlert('Please select customer loan profile to proceed!')
+        return false;
+    }
+
+     // show prompt
+     Swal.fire({
+        text: "Do you want to approve customer loan request?",
+        icon: "question",
+        buttonsStyling: false,
+        showCancelButton: true,
+        confirmButtonText: "Yes, Proceed!",
+        cancelButtonText: 'Nope, cancel it',
+        customClass: {
+            cancelButton: 'btn btn-danger',
+            confirmButton: "btn btn-primary"
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+        // Show page loading
+        KTApp.showPageLoading();
+
+         //ajax request
+            $.ajax({
+                type: "POST",
+                data: { profileid: profID, comment:comment},
+                url: "http://localhost/lamsuite/loan/approveCustomerLoanRequest",
+                success: function (data) {
+
+                    //hide
+                    KTApp.hidePageLoading();
+
+                    //check data
+                    if(data == 1) {
+
+                        Swal.fire({
+                            title: "Company Profile Approved!",
+                            text: "Record has been approved successully!",
+                            icon: "success"
+                          });
+
+                          // refresh
+                          location.reload();
+
+                    }else {
+
+                        Swal.fire({
+                            title: "Unable to approve company profile!",
+                            text: "Unable to process your request, please retry!",
+                            icon: "error"
+                          });
+
+                          // refresh
+                          location.reload();
+
+                    }
+                
+                },
+            });
+        }
+      });
+
+})
+//end of function 
+
 //function to approve customer profile
 $('#btnCompanyProfileApprove').click(function () {
     
@@ -121,8 +208,70 @@ $('#btnSearchCompanyProfile').click(function () {
             $('#phonenumber').val(response[0].CONTACT_PHONE_NUMBER)
             $('#emailaddress').val(response[0].CONTACT_EMAIL)
 
+            $('#clientFullname').val(response[0].CONTACT_PERSON)
+            $('#phonenumber').val(response[0].CONTACT_PHONE_NUMBER)
+            $('#emailaddress').val(response[0].CONTACT_EMAIL)
+
+            $('#no_staff').val(response[0].NO_OF_STAFF)
+            $('#loan_percent').val(response[0].LOAN_LIMIT_PERCENT + "%")
+            $('#loanInterest').val(response[0].LOAN_INTEREST_RATE + "%")
+            $('#loanTenor').val(response[0].LOAN_TENOR + " Month(s)")
+            $('#repayment').val(response[0].REPAYMENT_STRUCTURE)
+
             $('#dateCreated').val(response[0].PROFILE_DATE_CREATED)
             $('#createdBy').val(response[0].FIRST_NAME + ' ' + response[0].LAST_NAME)
+            
+        
+        },
+    });
+})
+//end of funcfion 
+
+
+//function to load customer loan profile
+$('#btnSearchCustomerProfile').click(function () {
+    //get details
+    let profileid = $('#loanProfileid').val()
+
+    //check
+    if(profileid == '') {
+        showErrorAlert('Select customer loan profile to proceed!')
+        return false;
+    }
+
+     // Show page loading
+     KTApp.showPageLoading();
+
+    //ajax request
+    $.ajax({
+        type: "POST",
+        data: { profileid: profileid},
+        url: "http://localhost/lamsuite/loan/customerLoanApproval",
+        success: function (data) {
+
+            //hide
+            KTApp.hidePageLoading();
+
+            var response = JSON.parse(data);
+
+            //set personal details
+            $('#cust_fullname').val(response[0].FIRST_NAME + ' ' + response[0].LAST_NAME)
+            $('#cust_emp_name').val(response[0].EMPLOYER_NAME)
+            $('#emp_phone').val(response[0].PHONE_NUMBER)
+            $('#emp_email').val(response[0].EMAIL_ADDRESS)
+
+            $('#cust_loan_amount').val(response[0].LOAN_AMOUNT)
+            $('#cust_loan_tenor').val(response[0].LOAN_TENOR + ' Months')
+            $('#cust_loan_purpose').val(response[0].LOAN_PURPOSE)
+            $('#cust_loan_interest').val(response[0].INTEREST_RATE + "%")
+
+            $('#cust_mon_repay').val(response[0].MONTHLY_REPAYMENT)
+            $('#cus_total_paymt').val(response[0].TOTAL_REPAYMENT)
+            $('#cus_bank_name').val(response[0].BANK_NAME)
+            $('#cus_acct_num').val(response[0].ACCOUNT_NUMBER)
+
+            $('#dateCreated').val(response[0].DATE_CREATED)
+            $('#createdBy').val('SYSTEM')
             
         
         },
@@ -143,8 +292,20 @@ $('#btnCoyProfile').click(function() {
     let phonenumber = $('#phonenumber').val()
     let emailaddress = $('#emailaddress').val()
 
+    // get loan setup
+    let no_staff = $('#no_staff').val()
+    let loan_percent = $('#loan_percent').val()
+    let loanInterest = $('#loanInterest').val()
+    let loanTenor = $('#loanTenor').val()
+    let repayStructure = $('#repayStructure').val()
+
     if(employerName == '' || companyAddr == '' || employerArea == '' || employerState == '' || clientFullname == '' || phonenumber == '' || emailaddress == '')  {
         showErrorAlert('All fields are compulsory!')
+        return false;
+    }
+
+    if(no_staff == '' || loan_percent == '' || loanInterest == '' || loanTenor == '' || repayStructure == '') {
+        showErrorAlert('Please complete loan setup section!')
         return false;
     }
 
@@ -170,6 +331,61 @@ $('#btnCoyProfile').click(function() {
     
 })
 //end of function
+
+$('#btnUpdateWorkflowSetup').click(function() {
+
+    // get loan setup
+    let fundtype = $('#fundtype').val()
+    let policyType = $('#policyType').val()
+    let apprv1 = $('#apprv1').val()
+    let apprv2 = $('#apprv2').val()
+
+    if(fundtype == '') {
+        showErrorAlert('Please select workflow type!')
+        return false;
+    }
+
+    if(policyType == '') {
+        showErrorAlert('Please select approval policy!')
+        return false;
+    }
+
+    if(policyType == 'APPR1') {
+        if(apprv1 == '') {
+            showErrorAlert('Please select approval one!')
+            return false;
+        }
+    }
+    
+    if(policyType == 'APPR2') {
+ 
+        if(apprv1 == '' || apprv2 == '') {
+            showErrorAlert('Please select approval one and two!')
+            return false;
+        }
+    }
+    
+    // show prompt
+    Swal.fire({
+        text: "Do you want to set workflow approvals?",
+        icon: "question",
+        buttonsStyling: false,
+        showCancelButton: true,
+        confirmButtonText: "Yes, Proceed!",
+        cancelButtonText: 'Nope, cancel it',
+        customClass: {
+            cancelButton: 'btn btn-danger',
+            confirmButton: "btn btn-primary"
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            //submit form
+            $('#workflowForm').submit()
+        }   
+    });
+
+})
 
 // search customer button
 const btnSearch = document.getElementById('loadSearchCustomer');

@@ -211,6 +211,36 @@ class Customer extends Controller {
     }
     //end of function
 
+
+     //function to manage customer CRM
+     public function customerChannel () {
+
+        // check isLogged
+        if(isLoggedIn()){
+           
+           $userid = $_SESSION['user_id'];
+           
+       }else{
+
+           header("Location: " . URLROOT . "?isLogged=0");
+       }
+
+       //fetch customers
+       $customersChannel = $this->userModel->loadCustomerChannelData();
+
+               // data
+               $data = [
+                   'title' => 'Manage CRM Customer',
+                   'active' => 'manage_crm',
+                   'parent' => 'crm',
+                   'channelList' => $customersChannel
+               ];
+       
+               $this->view('customer/customerChannel', $data);
+
+   }
+   //end of function
+
     // function to approve customer record
     public function approveCustomerRecord() {
 

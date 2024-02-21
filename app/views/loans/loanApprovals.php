@@ -994,7 +994,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-muted">System</li>
+										<li class="breadcrumb-item text-muted">Loan</li>
 										<!--end::Item-->
 										<!--begin::Item-->
 										<li class="breadcrumb-item">
@@ -1002,7 +1002,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-gray-900">Workflow Setup</li>
+										<li class="breadcrumb-item text-gray-900">Manage Loan Card</li>
 										<!--end::Item-->
 									</ul>
 									<!--end::Breadcrumb-->
@@ -1165,228 +1165,99 @@
 						<!--end::Toolbar-->
 					</div>
 					<!--end::Header-->
-				
-					<!--begin::Content-->
-					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						<!--begin::Post-->
-						<div class="post d-flex flex-column-fluid" id="kt_post">
-							<!--begin::Container-->
-							<div id="kt_content_container" class="container-xxl">
-							<div class="welcomeProfile">
-					<h3 class="fw-bold my-2 welcomeTxt">Setup Workflow Approval</h3>
+
+<!-- ****************************** BEGINNING OF NEW CONTENT STARTS HERE ********************************* -->
+
+<div class="content d-flex flex-column flex-column-fluid " id="kt_content">
+					<!--begin::Post-->
+                    <div class="post d-flex flex-column-fluid" id="kt_post">
+						<!--begin::Container-->
+<div id="kt_content_container" class=" container-xxl ">
+
+<div class="welcomeProfile">
+					<h3 class="fw-bold my-2 welcomeTxt">Manage Loan Card</h3>
 					
 					</div>
-							
-								
+    
 
-<!-- ****************************** Create New Fund Form starts here ********************************* -->
-							
-								<div class="card">
-   
-   <div class="card-body p-lg-17">
+<!--*****************************************************  START OF LOAN CARD HEADER  ******************************************************  -->
 
-   <?php if(isset($data['status']) && $data['status'] == 'true') : ?>
-    <!--begin::Alert-->
-<div class="alert alert-success d-flex align-items-center p-5">
-    <!--begin::Icon-->
-    <i class="ki-duotone ki-shield-tick fs-2hx text-success me-4"><span class="path1"></span><span class="path2"></span></i>
-    <!--end::Icon-->
+<?php
+   require APPROOT . '/views/includes/dashboard/loanCardHeader.php';
+?>
 
-    <!--begin::Wrapper-->
-    <div class="d-flex flex-column">
-        <!--begin::Title-->
-        <h4 class="mb-1 text-success">Request was successful!</h4>
-        <!--end::Title-->
 
-        <!--begin::Content-->
-        <span>A workflow approval has been setup successfully!</span>
-        <!--end::Content-->
-    </div>
-    <!--end::Wrapper-->
-</div>
-<!--end::Alert-->
-<br><br>
-   <?php endif; ?>
+<!--*****************************************************  END OF LOAN CARD HEADER  ****************************************************** -->
 
-   <?php if(count($data['approvals']) == 0) : ?>
-        <!--begin::Alert-->
-        <div class="alert alert-dismissible bg-light-danger d-flex flex-column flex-sm-row p-5 mb-10">
-            <!--begin::Icon-->
-            <i class="ki-duotone ki-cross-square fs-2hx text-danger me-4 mb-5 mb-sm-0">
-            <span class="path1"></span>
-            <span class="path2"></span>
-            </i>
-            <!--end::Icon-->
-
-            <!--begin::Wrapper-->
-    <div class="d-flex flex-column">
-        <!--begin::Title-->
-        <h4 class="mb-1 text-danger">No workflow approval setup found!</h4>
-        <!--end::Title-->
-
-        <!--begin::Content-->
-        <span>You will be unable to use the workflow engine without workflow approval setup.</span>
-        <!--end::Content-->
-    </div>
-    <!--end::Wrapper-->
+<!--begin::details View-->
+<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+    <!--begin::Card header-->
+    <div class="card-header cursor-pointer">
+        <!--begin::Card title-->
+        <div class="card-title m-0">
+            <h3 class="fw-bold m-0">Loan Details</h3>
         </div>
-        <!--end::Alert-->  
-        <br><br>
-    <?php endif; ?>
+        <!--end::Card title--> 
+    </div>
+    <!--begin::Card header-->
+
+    <!--begin::Card body-->
+    <div class="card-body p-9">
+
+	<div style="width:60%;">
 
 
-	<?php if(count($data['approvals']) > 0) : ?>
+	<form action="#" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
 
-    <h5 class="fw-bold my-2 descTxthdr" style="color:#f8285c;">Existing Workflow Approvals</h5>
-    <br>
-	
-    <div class="table-responsive">
-	<table class="table table-bordered">
-		<thead>
-			<tr class="fw-bold fs-6 text-gray-800">
-                <th>#</th>
-				<th>Workflow Type</th>
-				<th>Approval Policy</th>
-				<th>Approval One</th>
-				<th>Approval Two</th>
-				<th>Date Created</th>
-				<th>Status</th>
-			</tr>
-		</thead>
-		<tbody>
-		<?php $x = 1; ?>
-		<?php foreach($data['approvals'] as $approval): ?>
-			<tr>
-				<td><?php echo $x; ?></td>
-				<td><?php 
-					switch ($approval->WORKFLOW_TYPE) {
-						case '01':
-							echo 'Investments';
-						break;
-						case '02':
-							echo 'Loans';
-						break;
-						case '03':
-							echo 'Account Savings';
-						break;
-					}
-				?></td>
-					<td><?php 
-					switch ($approval->WORKFLOW_POLICY) {
-						case 'APPR1':
-							echo 'One Approval';
-						break;
-						case 'APPR1':
-							echo 'Two Approvals';
-						break;
-						case 'SYSM':
-							echo 'System Approval';
-						break;
-					}
-				?></td>
-				<td><?php echo $approval->APPROVAL_ONE; ?></td>
-				<td><?php echo $approval->APPROVAL_TWO; ?></td>
-				<td><?php echo formatEventDate($approval->DATE_CREATED); ?></td>
-				<td>
-				<?php 
-                            switch($approval->STATUS) {
-                                case 0:
-									echo '<div class="badge badge-light-success">Active</div>';
-                                break;
-                                case 1:
-                                    echo '<div class="badge badge-light-success">Active</div>';
-                                break;
-                                case 2:
-                                    echo '<div class="badge badge-light-danger">Disabled</div>';
-                                break;
-                            }
-                        ?>
-				</td>
-			</tr>
-			<?php $x++; ?>
-			<?php endforeach; ?>
-		</tbody>
-	</table>
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Loan Amount</label>
+        <input type="text" name="employerArea" id="cust_loan_amount" readonly class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Loan Tenor</label>
+        <input type="text" name="employerState" id="cust_loan_tenor" readonly class="form-control"/>
+     </div>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Loan Purpose</label>
+        <input type="text" name="employerArea" id="cust_loan_purpose" readonly class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Interest Rate</label>
+        <input type="text" name="employerState" id="cust_loan_interest" readonly class="form-control"/>
+     </div>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Monthly Repayment</label>
+        <input type="text" readonly name="no_staff" id="cust_mon_repay" class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Total Repayment</label>
+        <input type="text" name="loan_percent" readonly  id="cus_total_paymt" class="form-control"/>
+     </div>
+    </div>
+
+	</form>
+
+	</div>
+
+    </div>
+    <!--end::Card body-->     
 </div>
-<br>
-<br>
-<?php endif; ?>
+<!--end::details View-->
+  
+<!--end::Container-->                	</div>
+                    <!--end::Post-->
+				</div>
 
-<div style="width:60%;">
-
-<form id="workflowForm" action="<?php echo URLROOT ?>/dashboard/workflowSetup" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
-
-<h5 class="fw-bold my-2 descTxthdr" style="color:#f8285c;">Workflow Approval Setup</h5>
-    <br>
-    <div class="mb-10">
-        <label for="exampleFormControlInput1" class="required form-label">Workflow Type</label>
-            <select name="fundtype" id="fundtype" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="01">Investments</option>
-            <option value="02">Loans</option>
-            <option value="03">Account Savings</option>
-        </select>
-    </div>
-
-    <div class="mb-10">
-        <label for="exampleFormControlInput1" class="required form-label">Approval Policy</label>
-            <select name="policyType" id="policyType" onchange="ValidatePolicy(this.value);" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="APPR1">One Approval</option>
-            <option value="APPR2">Two Approvals</option>
-            <option value="SYSM">System Approval</option>
-        </select>
-    </div>
-
-    <div class="mb-10" id="approval_one">
-        <label for="exampleFormControlInput1" class="required form-label">Approval One</label>
-        <select class="form-select" name="apprv1"  id="apprv1" data-control="select2" data-placeholder="Select staff name here">
-                <option></option>
-					<?php foreach($data['users'] as $user): ?>
-						<option value="<?php echo $user->ENTRY_ID ?>"><?php echo $user->FIRST_NAME.' '.$user->LAST_NAME; ?></option>
-					<?php endforeach; ?>
-            </select>
-    </div>
-
-    <div class="mb-10" id="approval_two">
-        <label for="exampleFormControlInput1" class="required form-label">Approval Two</label>
-        <select class="form-select" name="apprv2" id="apprv2" data-control="select2" data-placeholder="Select staff name here">
-                <option></option>
-				<?php foreach($data['users'] as $user): ?>
-						<option value="<?php echo $user->ENTRY_ID ?>"><?php echo $user->FIRST_NAME.' '.$user->LAST_NAME; ?></option>
-				<?php endforeach; ?>
-            </select>
-    </div>
-
-   
-    <button type="button" class="btn btn-primary" id="btnUpdateWorkflowSetup">
-        
-<!--begin::Indicator label-->
-<span class="indicator-label">
-    Save Setup</span>
-<!--end::Indicator label-->
-
-<i class="ki-duotone ki-send fs-2">
- <span class="path1"></span>
- <span class="path2"></span>
-</i>
-
-</button>
-
-   </div>
-
-   </form>
-   
-   </div>
-</div>										
-<!-- ****************************** Create New Fund Form ends here *********************************** -->
-								
-							</div>
-							<!--end::Container-->
-						</div>
-						<!--end::Post-->
-					</div>
-					<!--end::Content-->
+<!-- ****************************** END OF NEW CONTENT STARTS HERE ********************************* -->
+				
+				
 					<!--begin::Footer-->
 					<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
 						<!--begin::Container-->

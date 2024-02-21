@@ -314,11 +314,10 @@ class CustomerManager {
         try {
 
             //prepered statement
-            $this->db->query("SELECT C.STATUS, C.CUSTOMER_ID, C.ACCOUNT_NO,
-            C.CUSTOMER_NO, C.ACCOUNT_TYPE, C.LAST_NAME, C.FIRST_NAME, C.KYC_STATUS, 
-            C.PHONE_NUMBER, C.GENDER,C.DATE_OF_BIRTH, E.EMPLOYER_NAME, C.DATE_CREATED FROM LAM_CUSTOMER C 
-            LEFT JOIN LAM_CUSTOMER_EMPLOYERS E ON C.CUSTOMER_ID = E.CUSTOMER_ID WHERE 
-            C.STATUS IN (0,1,2);");
+            $this->db->query("SELECT C.STATUS, C.CUSTOMER_ID, C.ACCOUNT_NO, C.CUSTOMER_NO, C.SCHEME_TYPE, C.LAST_NAME, C.FIRST_NAME, C.KYC_STATUS, 
+                              C.PHONE_NUMBER, C.GENDER,C.DATE_OF_BIRTH, C.DATE_CREATED, 
+                              (SELECT P.COMPANY_NAME FROM LAM_CUSTOMER_EMPLOYERS E LEFT JOIN LAM_COMPANY_PROFILE P ON E.EMPLOYER_ID = P.PROFILE_ID WHERE 
+                              E.CUSTOMER_ID = C.CUSTOMER_ID)EMPLOYER_NAME FROM LAM_CUSTOMER C WHERE C.STATUS IN (0,1,2);");
         
             $results = $this->db->resultSet();
                     
@@ -328,8 +327,30 @@ class CustomerManager {
             echo 'ERROR!';
             print_r( $e );
         }
-}
+        }
         // end of function
+
+        // function to load manager CRM preview data
+        public function loadCustomerChannelData() {
+
+                try {
+        
+                    //prepered statement
+                    $this->db->query("SELECT E.CUSTOMER_ENTRY_ID, E.ACCOUNT_TYPE, E.FULL_NAME, 
+                                      E.PHONE_NUMBER, E.EMAIL_ADDRESS, P.COMPANY_NAME,E.DATE_CREATED, E.STATUS FROM 
+                                      LAM_CUSTOMER_ENTRY E LEFT JOIN LAM_COMPANY_PROFILE P ON E.EMPLOYER_PROFILE_ID = 
+                                      P.PROFILE_ID WHERE E.STATUS IN (0,1)");
+                
+                    $results = $this->db->resultSet();
+                            
+                    return $results;
+        
+                }catch (PDOException $e) {
+                    echo 'ERROR!';
+                    print_r( $e );
+                }
+        }
+                // end of function
 
         // function to check that customer exists
         public function checkCustomerExists($data) {

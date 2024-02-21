@@ -160,6 +160,11 @@ public function companyProfile () {
                 'clientFullname' => trim($_POST['clientFullname']),
                 'phonenumber' => trim($_POST['phonenumber']),
                 'emailaddress' => trim($_POST['emailaddress']),
+                'no_staff' => trim($_POST['no_staff']),
+                'loan_percent' => trim($_POST['loan_percent']),
+                'loanInterest' => trim($_POST['loanInterest']),
+                'loanTenor' => trim($_POST['loanTenor']),
+                'repayStructure' => trim($_POST['repayStructure']),
                 'userid' => $userid,
                 'fieldError' => '',
                 'remoteIP' => $this->getRealIPAddr(),
@@ -171,7 +176,7 @@ public function companyProfile () {
 
                 //
                 $create = $this->userModel->createCompanyProfile($data);
-
+                
                 if($create) {
 
                         // page data
@@ -235,6 +240,7 @@ public function companyProfile () {
             $data = [
 
                 'fundtype' => trim($_POST['fundtype']),
+                'policyType' => trim($_POST['policyType']),
                 'apprv1' => trim($_POST['apprv1']),
                 'apprv2' => trim($_POST['apprv2']),
                 'userid' => $userid,
@@ -242,21 +248,6 @@ public function companyProfile () {
                 'remoteIP' => $this->getRealIPAddr(),
                 'active' => 'home',
             ];
-
-             //Validate username
-             if (empty($data['fundtype'])) {
-                $data['fieldError'] = 'Please provide a fund type!';
-            }
-
-            //Validate username
-            if (empty($data['apprv1'])) {
-                $data['fieldError'] = 'Please select approval one';
-            }
-
-              //Validate username
-              if (empty($data['apprv2'])) {
-                $data['fieldError'] = 'Please select approval two';
-            }
 
             //validate error and post 
             if ($data['fieldError'] == '') {
@@ -329,7 +320,6 @@ public function companyProfile () {
         return $ip;
     }
 
-
     // ************** HOME DASHBOARD ******************* //
     public function home() {
 
@@ -348,8 +338,32 @@ public function companyProfile () {
 
         $this->view('dashboard/dashboard', $data);
     }
-
     // ************* END OF FUNCTION ****************** //
+
+    // ************** HOME DASHBOARD ******************* //
+        public function loan() {
+
+            if(isLoggedIn()){
+                
+                $customerid = $_SESSION['user_id'];
+                
+            }else{
+    
+                header("Location: " . URLROOT . "?isLogged=0");
+            }
+
+            //load customer loan request
+            $loanRequest = $this->userModel->loadCustomerLoanRequest();
+    
+            $data = [
+                'title' => 'Loan Dashboard Page',
+                'loanRequests' => $loanRequest,
+            ];
+    
+            $this->view('dashboard/dashboard_loan', $data);
+        }
+    // ************* END OF FUNCTION ****************** //
+
 }
 
 ?>

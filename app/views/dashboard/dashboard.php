@@ -1184,7 +1184,7 @@
 										<a href="#" class="card bg-success hoverable card-xl-stretch mb-xl-8">
 											<!--begin::Body-->
 											<div class="card-body">
-												<i class="ki-duotone ki-user text-white fs-2x ms-n1">
+												<i class="ki-duotone ki-user text-white fs-3x ms-n1">
 													<span class="path1"></span>
 													<span class="path2"></span>
 													<span class="path3"></span>
@@ -1202,7 +1202,7 @@
 										<a href="#" class="card bg-primary hoverable card-xl-stretch mb-xl-8">
 											<!--begin::Body-->
 											<div class="card-body">
-												<i class="ki-duotone ki-cheque text-white fs-2x ms-n1">
+												<i class="ki-duotone ki-cheque text-white fs-3x ms-n1">
 													<span class="path1"></span>
 													<span class="path2"></span>
 													<span class="path3"></span>
@@ -1223,7 +1223,7 @@
 										<a href="#" class="card bg-danger hoverable card-xl-stretch mb-5 mb-xl-8">
 											<!--begin::Body-->
 											<div class="card-body">
-												<i class="ki-duotone ki-chart-simple-3 text-white fs-2x ms-n1">
+												<i class="ki-duotone ki-chart-simple-3 text-white fs-3x ms-n1">
 													<span class="path1"></span>
 													<span class="path2"></span>
 													<span class="path3"></span>

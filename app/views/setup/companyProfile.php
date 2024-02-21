@@ -1310,6 +1310,44 @@
         <input type="text" name="emailaddress"  id="emailaddress" class="form-control"/>
      </div>
     </div>
+
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-danger">Scheme Setup</span>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Number of Staff</label>
+        <input type="number" value="1" name="no_staff" id="no_staff" class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Percent Loan Limited (%)</label>
+        <input type="number" name="loan_percent"  id="loan_percent" class="form-control"/>
+     </div>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Loan interest Rate</label>
+        <input type="number" value="1" name="loanInterest" id="loanInterest" class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Approved Maximum Loan Tenor (Month)</label>
+        <input type="number" value="1" name="loanTenor"  id="loanTenor" class="form-control"/>
+     </div>
+    </div>
+
+	<div class="mb-10">
+        <label for="exampleFormControlInput1" class="required form-label">Repayment Structure</label>
+		<select name="repayStructure" id="repayStructure" class="form-select" aria-label="Select example">
+        <option default value="">Select here</option>
+            <option value="001">Amortized Principle on Reducing Balance</option>
+			<option value="002">Interest Monthly Repayment with Bullet Principle Repayment</option>
+			<option value="003">bullet repayment of principal with Accumulated Interest</option>
+        </select>
+    </div>
+
+
    
 	<br>
     <button type="button" class="btn btn-primary" id="btnCoyProfile">

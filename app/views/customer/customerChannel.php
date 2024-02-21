@@ -994,7 +994,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-muted">System</li>
+										<li class="breadcrumb-item text-muted">Customer CRM</li>
 										<!--end::Item-->
 										<!--begin::Item-->
 										<li class="breadcrumb-item">
@@ -1002,7 +1002,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-gray-900">Workflow Setup</li>
+										<li class="breadcrumb-item text-gray-900">Manage</li>
 										<!--end::Item-->
 									</ul>
 									<!--end::Breadcrumb-->
@@ -1173,125 +1173,75 @@
 							<!--begin::Container-->
 							<div id="kt_content_container" class="container-xxl">
 							<div class="welcomeProfile">
-					<h3 class="fw-bold my-2 welcomeTxt">Setup Workflow Approval</h3>
+					<h3 class="fw-bold my-2 welcomeTxt">Customer Channel List</h3>
 					
 					</div>
 							
 								
 
-<!-- ****************************** Create New Fund Form starts here ********************************* -->
-							
-								<div class="card">
-   
-   <div class="card-body p-lg-17">
+<!-- ****************************** Manage Funds starts here ********************************* -->
+<div class="card">
+   <!--begin::Card header-->
+   <div class="card-header border-0 pt-6">
+      <!--begin::Card title-->
+      <div class="card-title">
+         <!--begin::Search-->
+         <div class="d-flex align-items-center position-relative my-1">
+            <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5"><span class="path1"></span><span class="path2"></span></i>
+			<input type="text" data-kt-subscription-table-filter="search" class="form-control form-control-solid w-250px ps-12" placeholder="Search Customer">
+         </div>
+         <!--end::Search-->
+      </div>
+      <!--begin::Card title-->
+      <!--begin::Card toolbar-->
+      <div class="card-toolbar">
+         <!--begin::Group actions-->
+         <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
+            <div class="fw-bold me-5">
+               <span class="me-2" data-kt-subscription-table-select="selected_count"></span> Selected
+            </div>
+            <button type="button" class="btn btn-danger" data-kt-subscription-table-select="delete_selected">
+            Delete Selected
+            </button>
+         </div>
+         <!--end::Group actions-->        
+      </div>
+      <!--end::Card toolbar-->
+   </div>
+   <!--end::Card header-->
+   <!--begin::Card body-->
+   <div class="card-body pt-0">
+      <!--begin::Table-->
+      <div id="kt_subscriptions_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+         <div class="table-responsive">
+            <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="kt_subscriptions_table">
+               <thead>
+                  <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+				    <th>#</th>
+				    <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Status</th>
+                    <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Account Type</th>
+					 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Full Name</th>
+                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Phone Number</th>
+					 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Billing: activate to sort column ascending" style="width: 201.297px;">Email Address</th>
+					 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Billing: activate to sort column ascending" style="width: 201.297px;">Employer</th>
+                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Billing: activate to sort column ascending" style="width: 201.297px;">Date Created</th>
+                     <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 144.922px;">Actions</th>
+                  </tr>
+               </thead>
+               <tbody class="text-gray-600 fw-semibold">
 
-   <?php if(isset($data['status']) && $data['status'] == 'true') : ?>
-    <!--begin::Alert-->
-<div class="alert alert-success d-flex align-items-center p-5">
-    <!--begin::Icon-->
-    <i class="ki-duotone ki-shield-tick fs-2hx text-success me-4"><span class="path1"></span><span class="path2"></span></i>
-    <!--end::Icon-->
+               <?php $x=1; ?>
 
-    <!--begin::Wrapper-->
-    <div class="d-flex flex-column">
-        <!--begin::Title-->
-        <h4 class="mb-1 text-success">Request was successful!</h4>
-        <!--end::Title-->
+               <?php foreach($data['channelList'] as $customer): ?>
 
-        <!--begin::Content-->
-        <span>A workflow approval has been setup successfully!</span>
-        <!--end::Content-->
-    </div>
-    <!--end::Wrapper-->
-</div>
-<!--end::Alert-->
-<br><br>
-   <?php endif; ?>
+                <tr class="odd">
+				  	 <td><?php echo $x; ?></td>
+                     <td>
 
-   <?php if(count($data['approvals']) == 0) : ?>
-        <!--begin::Alert-->
-        <div class="alert alert-dismissible bg-light-danger d-flex flex-column flex-sm-row p-5 mb-10">
-            <!--begin::Icon-->
-            <i class="ki-duotone ki-cross-square fs-2hx text-danger me-4 mb-5 mb-sm-0">
-            <span class="path1"></span>
-            <span class="path2"></span>
-            </i>
-            <!--end::Icon-->
-
-            <!--begin::Wrapper-->
-    <div class="d-flex flex-column">
-        <!--begin::Title-->
-        <h4 class="mb-1 text-danger">No workflow approval setup found!</h4>
-        <!--end::Title-->
-
-        <!--begin::Content-->
-        <span>You will be unable to use the workflow engine without workflow approval setup.</span>
-        <!--end::Content-->
-    </div>
-    <!--end::Wrapper-->
-        </div>
-        <!--end::Alert-->  
-        <br><br>
-    <?php endif; ?>
-
-
-	<?php if(count($data['approvals']) > 0) : ?>
-
-    <h5 class="fw-bold my-2 descTxthdr" style="color:#f8285c;">Existing Workflow Approvals</h5>
-    <br>
-	
-    <div class="table-responsive">
-	<table class="table table-bordered">
-		<thead>
-			<tr class="fw-bold fs-6 text-gray-800">
-                <th>#</th>
-				<th>Workflow Type</th>
-				<th>Approval Policy</th>
-				<th>Approval One</th>
-				<th>Approval Two</th>
-				<th>Date Created</th>
-				<th>Status</th>
-			</tr>
-		</thead>
-		<tbody>
-		<?php $x = 1; ?>
-		<?php foreach($data['approvals'] as $approval): ?>
-			<tr>
-				<td><?php echo $x; ?></td>
-				<td><?php 
-					switch ($approval->WORKFLOW_TYPE) {
-						case '01':
-							echo 'Investments';
-						break;
-						case '02':
-							echo 'Loans';
-						break;
-						case '03':
-							echo 'Account Savings';
-						break;
-					}
-				?></td>
-					<td><?php 
-					switch ($approval->WORKFLOW_POLICY) {
-						case 'APPR1':
-							echo 'One Approval';
-						break;
-						case 'APPR1':
-							echo 'Two Approvals';
-						break;
-						case 'SYSM':
-							echo 'System Approval';
-						break;
-					}
-				?></td>
-				<td><?php echo $approval->APPROVAL_ONE; ?></td>
-				<td><?php echo $approval->APPROVAL_TWO; ?></td>
-				<td><?php echo formatEventDate($approval->DATE_CREATED); ?></td>
-				<td>
-				<?php 
-                            switch($approval->STATUS) {
+                        <?php 
+                            switch($customer->STATUS) {
                                 case 0:
-									echo '<div class="badge badge-light-success">Active</div>';
+                                    echo '<div class="badge badge-light-success">Registered</div>';
                                 break;
                                 case 1:
                                     echo '<div class="badge badge-light-success">Active</div>';
@@ -1301,85 +1251,68 @@
                                 break;
                             }
                         ?>
-				</td>
-			</tr>
-			<?php $x++; ?>
-			<?php endforeach; ?>
-		</tbody>
-	</table>
-</div>
-<br>
-<br>
-<?php endif; ?>
+                     
+                     </td>
+                     <td>
+                        <div class="badge badge-primary"><?php echo $customer->ACCOUNT_TYPE; ?></div>
+                     </td>
+                     <td>
+                        <div class="badge badge-light"><?php echo $customer->FULL_NAME; ?></div>
+                     </td>
+                    <td>
+					<span class="badge badge-light"><?php echo $customer->PHONE_NUMBER; ?></span> 
+                     </td>
+                     <td>
+                     <div class="badge badge-light"><?php echo $customer->EMAIL_ADDRESS; ?></div>
+                     </td>
+					 <td>
+                     <div class="badge badge-light"><?php echo $customer->COMPANY_NAME; ?></div>
+                     </td>
+                     <td>
+                        <span class="badge badge-light"><?php echo formatDateCreated($customer->DATE_CREATED); ?></span>  
+                     </td>
+                     <td class="text-end">
+                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                        Actions
+                        <i class="ki-duotone ki-down fs-5 m-0"></i></a>
+                        <!--begin::Menu-->
+                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+                           <!--begin::Menu item-->
+                           <div class="menu-item px-3">
+                              <a href="/metronic8/demo8/../demo8/apps/subscriptions/add.html" class="menu-link px-3">
+                              View
+                              </a>
+                           </div>
+                           <!--end::Menu item-->
+                           <!--begin::Menu item-->
+                           <div class="menu-item px-3">
+                              <a href="/metronic8/demo8/../demo8/apps/subscriptions/add.html" class="menu-link px-3">
+                              Manage
+                              </a>
+                           </div>
+                           <!--end::Menu item-->
+                        </div>
+                        <!--end::Menu-->
+                     </td>
+                  </tr>
 
-<div style="width:60%;">
-
-<form id="workflowForm" action="<?php echo URLROOT ?>/dashboard/workflowSetup" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
-
-<h5 class="fw-bold my-2 descTxthdr" style="color:#f8285c;">Workflow Approval Setup</h5>
-    <br>
-    <div class="mb-10">
-        <label for="exampleFormControlInput1" class="required form-label">Workflow Type</label>
-            <select name="fundtype" id="fundtype" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="01">Investments</option>
-            <option value="02">Loans</option>
-            <option value="03">Account Savings</option>
-        </select>
-    </div>
-
-    <div class="mb-10">
-        <label for="exampleFormControlInput1" class="required form-label">Approval Policy</label>
-            <select name="policyType" id="policyType" onchange="ValidatePolicy(this.value);" class="form-select" aria-label="Select example">
-            <option selected="selected" value="">Select here</option>
-            <option value="APPR1">One Approval</option>
-            <option value="APPR2">Two Approvals</option>
-            <option value="SYSM">System Approval</option>
-        </select>
-    </div>
-
-    <div class="mb-10" id="approval_one">
-        <label for="exampleFormControlInput1" class="required form-label">Approval One</label>
-        <select class="form-select" name="apprv1"  id="apprv1" data-control="select2" data-placeholder="Select staff name here">
-                <option></option>
-					<?php foreach($data['users'] as $user): ?>
-						<option value="<?php echo $user->ENTRY_ID ?>"><?php echo $user->FIRST_NAME.' '.$user->LAST_NAME; ?></option>
-					<?php endforeach; ?>
-            </select>
-    </div>
-
-    <div class="mb-10" id="approval_two">
-        <label for="exampleFormControlInput1" class="required form-label">Approval Two</label>
-        <select class="form-select" name="apprv2" id="apprv2" data-control="select2" data-placeholder="Select staff name here">
-                <option></option>
-				<?php foreach($data['users'] as $user): ?>
-						<option value="<?php echo $user->ENTRY_ID ?>"><?php echo $user->FIRST_NAME.' '.$user->LAST_NAME; ?></option>
-				<?php endforeach; ?>
-            </select>
-    </div>
-
-   
-    <button type="button" class="btn btn-primary" id="btnUpdateWorkflowSetup">
-        
-<!--begin::Indicator label-->
-<span class="indicator-label">
-    Save Setup</span>
-<!--end::Indicator label-->
-
-<i class="ki-duotone ki-send fs-2">
- <span class="path1"></span>
- <span class="path2"></span>
-</i>
-
-</button>
-
+                  <?php $x++; ?>
+                  
+                <?php endforeach; ?>
+				
+               </tbody>
+            </table>
+         </div>
+         <div class="row">
+            <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start"></div>
+         </div>
+      </div>
+      <!--end::Table-->    
    </div>
-
-   </form>
-   
-   </div>
-</div>										
-<!-- ****************************** Create New Fund Form ends here *********************************** -->
+   <!--end::Card body-->
+</div>	
+															
+<!-- ****************************** Manage Funds ends here *********************************** -->
 								
 							</div>
 							<!--end::Container-->

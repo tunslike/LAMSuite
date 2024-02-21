@@ -97,6 +97,18 @@
 											<!--end:Menu link-->
 										</div>
 										<!--end:Menu item-->
+											<!--begin:Menu item-->
+											<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'customer') { echo 'active';} ?>" href="<?php echo URLROOT ?>/customer/customerChannel">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Customer Channel</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
 										<!--begin:Menu item-->
 										<div class="menu-item">
 											<!--begin:Menu link-->
@@ -109,61 +121,14 @@
 											<!--end:Menu link-->
 										</div>
 										<!--end:Menu item-->
-					
-									</div>
-									<!--end:Menu sub-->
-								</div>
-								<!--end:Menu item-->
-								<!--begin:Menu item-->
-								<div data-kt-menu-trigger="click" class="menu-item <?php if(isset($data['parent']) && $data['parent'] == 'account') {echo 'here show';} ?> menu-accordion">
-									<!--begin:Menu link-->
-									<span class="menu-link">
-										<span class="menu-icon">
-											<i class="ki-duotone ki-element-plus fs-2">
-												<span class="path1"></span>
-												<span class="path2"></span>
-												<span class="path3"></span>
-												<span class="path4"></span>
-												<span class="path5"></span>
-											</i>
-										</span>
-										<span class="menu-title">Accounts</span>
-										<span class="menu-arrow"></span>
-									</span>
-									<!--end:Menu link-->
-									<!--begin:Menu sub-->
-									<div class="menu-sub menu-sub-accordion">
-										<!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link-->
-											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'newAccount') { echo 'active';} ?>" href="<?php echo URLROOT ?>/customer/newAccount">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">New Account</span>
-											</a>
-											<!--end:Menu link-->
-										</div>
-										<!--end:Menu item-->
-										<!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link-->
-											<a class="menu-link" href="account/settings.html">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Manage Accounts</span>
-											</a>
-											<!--end:Menu link-->
-										</div>
-										<!--end:Menu item-->
+										
 					
 									</div>
 									<!--end:Menu sub-->
 								</div>
 								<!--end:Menu item-->
 							    <!--begin:Menu item-->
-								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+								<div data-kt-menu-trigger="click" class="menu-item <?php if(isset($data['parent']) && $data['parent'] == 'loan') {echo 'here show';} ?> menu-accordion">
 									<!--begin:Menu link-->
 									<span class="menu-link">
 										<span class="menu-icon">
@@ -179,50 +144,39 @@
 									<!--end:Menu link-->
 									<!--begin:Menu sub-->
 									<div class="menu-sub menu-sub-accordion">
-										<!--begin:Menu item-->
-										<div class="menu-item">
+											<!--begin:Menu item-->
+											<div class="menu-item">
 											<!--begin:Menu link-->
-											<a class="menu-link" href="pages/user-profile/documents.html">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">New Loan</span>
-											</a>
-											<!--end:Menu link-->
-										</div>
-										<!--end:Menu item-->
-										<!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link-->
-											<a class="menu-link" href="pages/user-profile/documents.html">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Disburse Loan</span>
-											</a>
-											<!--end:Menu link-->
-										</div>
-										<!--end:Menu item-->
-										<!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link-->
-											<a class="menu-link" href="pages/user-profile/documents.html">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Loan Repayment</span>
-											</a>
-											<!--end:Menu link-->
-										</div>
-										<!--end:Menu item-->
-										<!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link-->
-											<a class="menu-link" href="pages/user-profile/followers.html">
+											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'manageLoan') { echo 'active';} ?>" href="<?php echo URLROOT ?>/loan/manageLoans">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
 												<span class="menu-title">Manage Loans</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
+								
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link" href="pages/user-profile/documents.html">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Disbursement</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
+										<!--begin:Menu item-->
+										<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link" href="pages/user-profile/documents.html">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">Repayment</span>
 											</a>
 											<!--end:Menu link-->
 										</div>
@@ -274,19 +228,7 @@
                                         <!--begin:Menu item-->
 										<div class="menu-item">
 											<!--begin:Menu link-->
-											<a class="menu-link" href="widgets/lists.html">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Accounts</span>
-											</a>
-											<!--end:Menu link-->
-										</div>
-										<!--end:Menu item-->
-                                        <!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link-->
-											<a class="menu-link" href="widgets/lists.html">
+											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'approveLoan') { echo 'active';} ?>" href="<?php echo URLROOT ?>/loan/approveNewLoan">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>

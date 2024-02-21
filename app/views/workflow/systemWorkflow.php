@@ -1276,6 +1276,41 @@
         <input type="text" name="emailaddress" readonly id="emailaddress" class="form-control form-control-solid"/>
      </div>
     </div>
+
+
+
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-danger">Contact Details</span>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Number of Staff</label>
+        <input type="text" readonly name="no_staff" id="no_staff" class="form-control form-control-solid"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Percent Loan Limited (%)</label>
+        <input type="text" name="loan_percent" readonly  id="loan_percent" class="form-control form-control-solid"/>
+     </div>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Loan interest Rate</label>
+        <input type="text" readonly name="loanInterest" id="loanInterest" class="form-control form-control-solid"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Approved Maximum Loan Tenor (Month)</label>
+        <input type="text" name="loanTenor" readonly  id="loanTenor" class="form-control form-control-solid"/>
+     </div>
+    </div>
+
+	<div class="mb-10">
+        <label for="exampleFormControlInput1" class="required form-label">Repayment Structure</label>
+		<input type="text" name="repayment" readonly id="repayment" class="form-control form-control-solid"/>
+    </div>
+
+
    <br>
 	<div style="margin-bottom:20px;">
     <span class="badge badge-light-primary">Administration</span>

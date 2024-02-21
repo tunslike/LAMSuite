@@ -139,8 +139,7 @@ class UserAccount {
         $firstLogin = $rowData->FIRST_LOGIN_DATE;  
 
         //get password
-        $this->db->query('SELECT ACCESS_CODE FROM LAM_ACCESS 
-                        WHERE STATUS = 0 AND ENTRY_ID = :accountid');
+        $this->db->query('SELECT ACCESS_CODE FROM LAM_ACCESS WHERE STATUS = 0 AND ENTRY_ID = :accountid');
 
         //Bind value
         $this->db->bind(':accountid', $accountid);
