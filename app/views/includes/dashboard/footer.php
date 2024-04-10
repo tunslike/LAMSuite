@@ -7,6 +7,8 @@
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Vendors Javascript(used for this page only)-->
 		<script src="<?php echo URLROOT ?>/public/scripts/datatables.bundle.js"></script>
+		<script src="<?php echo URLROOT ?>/public/scripts/moment.js"></script>
+		<script src="<?php echo URLROOT ?>/public/scripts/moment-with-locales.js"></script>
 		<!--end::Vendors Javascript-->
 
 		<!--begin::Custom Javascript(used for this page only)-->

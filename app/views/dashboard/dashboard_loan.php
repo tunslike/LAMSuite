@@ -927,9 +927,9 @@
 					<!--end::Aside menu-->
 					<!--begin::Footer-->
 					<div class="aside-footer flex-column-auto py-5" id="kt_aside_footer">
-						<a href="https://preview.keenthemes.com/html/metronic/docs" style="background-color:#f8285b; color: #fff;" class="btn btn-flex btn-custom btn-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click" title="Click here to logout">
+						<a onclick="logoutUser();" style="background-color:#f8285b; color: #fff;" class="btn btn-flex btn-custom btn-primary w-100">
 							<span class="btn-label">Logout</span>
-							<i class="ki-duotone ki-document ms-2 fs-2">
+							<i class="ki-duotone ki-entrance-left ms-2 fs-2">
 								<span class="path1"></span>
 								<span class="path2"></span>
 							</i>
@@ -1011,21 +1011,11 @@
 								<!--end::Page title-->
 								<!--begin::Action group-->
 								<div class="d-flex align-items-stretch overflow-auto pt-3 pt-lg-0">
-									<!--begin::Action wrapper-->
-									<div class="d-flex align-items-center">
-										<!--begin::Label-->
-										<span class="fs-7 fw-bold text-gray-700 pe-4 text-nowrap d-none d-xxl-block">Default View:</span>
-										<!--end::Label-->
-										<!--begin::Select-->
-										<select class="form-select form-select-sm form-select-solid w-100px w-xxl-125px" data-control="select2" data-placeholder="Latest" data-hide-search="true">
-											<option value=""></option>
-											<option value="1">CRM</option>
-											<option value="2" selected="selected">Loans</option>
-											<option value="3">Savings</option>
-										</select>
-										<!--end::Select-->
-									</div>
-									<!--end::Action wrapper-->
+								
+								<?php
+   require APPROOT . '/views/includes/dashboard/configureView.php';
+?>
+		
 									<!--begin::Action wrapper-->
 									<div class="d-flex align-items-center">
 										<!--begin::Separartor-->
@@ -1254,30 +1244,6 @@
          <!--end::Search-->
       </div>
       <!--begin::Card title-->
-      <!--begin::Card toolbar-->
-      <div class="card-toolbar">
-         <!--begin::Toolbar-->
-         <div class="d-flex justify-content-end" data-kt-subscription-table-toolbar="base">
-        
-        <!--begin::Add subscription-->
-            <a href="/metronic8/demo8/../demo8/apps/subscriptions/add.html" class="btn btn-primary">
-            <i class="ki-duotone ki-plus fs-2"></i> New Loan
-            </a>
-            <!--end::Add subscription-->
-         </div>
-         <!--end::Toolbar-->
-         <!--begin::Group actions-->
-         <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
-            <div class="fw-bold me-5">
-               <span class="me-2" data-kt-subscription-table-select="selected_count"></span> Selected
-            </div>
-            <button type="button" class="btn btn-danger" data-kt-subscription-table-select="delete_selected">
-            Delete Selected
-            </button>
-         </div>
-         <!--end::Group actions-->        
-      </div>
-      <!--end::Card toolbar-->
    </div>
    <!--end::Card header-->
    <!--begin::Card body-->
@@ -1309,22 +1275,27 @@
                   <tr class="odd">
 				  	 <td><?php echo $x; ?></td>
 					   <td>
-                            <a href="<?php echo URLROOT ?>/loan/manageCard/?loan_id=<?php echo $loan->LOAN_ID; ?>" title="Click to Manage"><span class="badge badge-light-danger">Manage</span> </a>           
+            
+							<a href="<?php echo URLROOT ?>/loan/manageCard/?loan_id=<?php echo $loan->LOAN_ID; ?>" title="Manage" class="btn btn-light-primary btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                        Manage</a>
                      </td>
                      <td>
-						 <?php 
-                            switch($loan->LOAN_STATUS) {
-                                case 0:
-                                    echo '<div class="badge badge-light-primary">Pending Review</div>';
-                                break;
-                                case 1:
-                                    echo '<div class="badge badge-light-success">Active</div>';
-                                break;
-                                case 2:
-                                    echo '<div class="badge badge-light-danger">Disabled</div>';
-                                break;
-                            }
-                       	 ?>
+					 <?php 
+		  switch($loan->LOAN_STATUS) {
+			  case 0:
+				  echo '<div class="badge badge-light-primary">Pending Review</div>';
+			  break;
+			  case 1:
+				echo '<div class="badge badge-light-primary">Pending Authorization</div>';
+			break;
+			  case 2:
+				  echo '<div class="badge badge-light-warning">Pending Disbursement</div>';
+			  break;
+			  case 3:
+				  echo '<div class="badge badge-light-success">Active Loan</div>';
+			  break;
+		  }
+		  ?>
                      </td>
                     <td>
 					<span class="badge badge-light-primary"><?php echo $loan->LOAN_NUMBER; ?></span> 
@@ -1333,7 +1304,7 @@
                             <span class="badge badge-light"><?php echo $loan->FIRST_NAME.' '.$loan->LAST_NAME ?></span>              
                      </td>
 					 <td>
-					 <span class="badge badge-light"><?php echo $loan->LOAN_AMOUNT; ?></span>                
+					 <span class="badge badge-light"><?php echo number_format($loan->LOAN_AMOUNT,2); ?></span>                
                      </td>
 					 <td>
 					 <span class="badge badge-light"><?php echo $loan->LOAN_TENOR; ?> Months</span>          
@@ -1372,31 +1343,10 @@
 					</div>
 					<!--end::Content-->
 					<!--begin::Footer-->
-					<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
-						<!--begin::Container-->
-						<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
-							<!--begin::Copyright-->
-							<div class="text-gray-900 order-2 order-md-1">
-								<span class="text-muted fw-semibold me-1">2023&copy;</span>
-								<a href="https://keenthemes.com" target="_blank" class="text-gray-800 text-hover-primary">Keenthemes</a>
-							</div>
-							<!--end::Copyright-->
-							<!--begin::Menu-->
-							<ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
-								<li class="menu-item">
-									<a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
-								</li>
-								<li class="menu-item">
-									<a href="https://devs.keenthemes.com" target="_blank" class="menu-link px-2">Support</a>
-								</li>
-								<li class="menu-item">
-									<a href="https://1.envato.market/EA4JP" target="_blank" class="menu-link px-2">Purchase</a>
-								</li>
-							</ul>
-							<!--end::Menu-->
-						</div>
-						<!--end::Container-->
-					</div>
+						
+						<?php
+				   require APPROOT . '/views/includes/dashboard/footerDetails.php';
+				?>
 					<!--end::Footer-->
 				</div>
 				<!--end::Wrapper-->

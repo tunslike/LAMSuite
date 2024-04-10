@@ -83,7 +83,7 @@ class Dashboard extends Controller {
            
             $userid = $_SESSION['user_id'];
             
-        }else{
+        }else{   
  
             header("Location: " . URLROOT . "?isLogged=0");
         }
@@ -101,6 +101,34 @@ class Dashboard extends Controller {
 
     }
     //end of function
+
+           // function to create role
+           public function manageUsers() {
+
+            if(isLoggedIn()){
+            
+                $userid = $_SESSION['user_id'];
+                
+            }else{
+    
+                header("Location: " . URLROOT . "home?isLogged=0");
+            }
+    
+          
+            $userList = $this->userModel->loadActiveUser();
+    
+            $data = [
+                'event' => '',
+                'title' => 'Manage Users',
+                'active' => 'manageUser',
+                'parent' => 'user',
+                'users' => $userList
+            ];
+    
+            $this->view('user/manageUsers', $data);
+    
+        }
+
 
     //public function to show company profile list
     public function companyProfileList() {

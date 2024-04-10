@@ -269,6 +269,19 @@
         }
         //end of function
 
+         //function to load user
+         public function loadActiveUser() {
+
+            //Prepared statement
+            $this->db->query("SELECT USERNAME, LAST_NAME, FIRST_NAME, MOBILE_PHONE, 
+                             EMAIL_ADDRESS, ROLE_ID, DATE_CREATED,CREATED_BY, FIRST_LOGIN_DATE, IS_LOGGED, STATUS FROM LAM_ENTRY;");
+    
+            $results = $this->db->resultSet();
+    
+            return $results;
+}
+
+
         // function to update approval workflow setup 
         public function updateWorkflowApproval($data) {
 

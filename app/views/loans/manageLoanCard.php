@@ -1211,34 +1211,71 @@
 
 	<div class="row mb-10">
      <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Loan Amount</label>
-        <input type="text" name="employerArea" id="cust_loan_amount" readonly class="form-control"/>
+        <label for="exampleFormControlInput1" class="form-label">Loan Amount</label>
+        <input type="text" name="employerArea" id="cust_loan_amount" value="₦ <?php echo number_format($data['loanDetails'][0]->LOAN_AMOUNT,2); ?>" readonly class="form-control"/>
      </div>
      <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Loan Tenor</label>
-        <input type="text" name="employerState" id="cust_loan_tenor" readonly class="form-control"/>
-     </div>
-    </div>
-
-	<div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Loan Purpose</label>
-        <input type="text" name="employerArea" id="cust_loan_purpose" readonly class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Interest Rate</label>
-        <input type="text" name="employerState" id="cust_loan_interest" readonly class="form-control"/>
+        <label for="exampleFormControlInput1" class="form-label">Loan Tenor</label>
+        <input type="text" value="<?php $data['loanDetails'][0]->LOAN_TENOR; ?> Months" readonly class="form-control"/>
      </div>
     </div>
 
 	<div class="row mb-10">
      <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Monthly Repayment</label>
-        <input type="text" readonly name="no_staff" id="cust_mon_repay" class="form-control"/>
+        <label for="exampleFormControlInput1" class="form-label">Loan Purpose</label>
+        <input type="text" value="<?php echo $data['loanDetails'][0]->LOAN_PURPOSE; ?>" readonly class="form-control"/>
      </div>
      <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Total Repayment</label>
-        <input type="text" name="loan_percent" readonly  id="cus_total_paymt" class="form-control"/>
+        <label for="exampleFormControlInput1" class="form-label">Loan Interest Rate</label>
+        <input type="text" value="<?php echo $data['loanDetails'][0]->INTEREST_RATE; ?> %"  readonly class="form-control"/>
+     </div>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Monthly Repayment</label>
+        <input type="text" readonly value="₦ <?php echo number_format($data['loanDetails'][0]->MONTHLY_REPAYMENT,2); ?>" class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Total Repayment</label>
+        <input type="text" readonly value="₦ <?php echo number_format($data['loanDetails'][0]->TOTAL_REPAYMENT,2); ?>" class="form-control"/>
+     </div>
+    </div>
+
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-danger">Bank Account Details</span>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Bank Account Number</label>
+        <input type="text" readonly value="<?php echo $data['bankDetails']->ACCOUNT_NUMBER; ?>" class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Bank Name</label>
+        <input type="text" readonly value="<?php echo $data['bankDetails']->ACCOUNT_NAME; ?>" class="form-control"/>
+     </div>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Bank Name</label>
+        <input type="text" readonly value="<?php echo $data['bankDetails']->BANK_NAME; ?>" class="form-control"/>
+     </div>
+    </div>
+
+
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-danger">Administration</span>
+    </div>
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Date Created</label>
+        <input type="text" value="<?php echo $data['loanDetails'][0]->DATE_CREATED; ?>" readonly class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Created By</label>
+        <input type="text" readonly value="<?php echo $data['loanDetails'][0]->CREATED_BY; ?>" class="form-control"/>
      </div>
     </div>
 

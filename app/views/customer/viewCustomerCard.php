@@ -994,7 +994,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-muted">Loan</li>
+										<li class="breadcrumb-item text-muted">Customer CRM</li>
 										<!--end::Item-->
 										<!--begin::Item-->
 										<li class="breadcrumb-item">
@@ -1002,7 +1002,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-gray-900">Manage</li>
+										<li class="breadcrumb-item text-gray-900">Manage Customer Card</li>
 										<!--end::Item-->
 									</ul>
 									<!--end::Breadcrumb-->
@@ -1165,146 +1165,153 @@
 						<!--end::Toolbar-->
 					</div>
 					<!--end::Header-->
-				
-					<!--begin::Content-->
-					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						<!--begin::Post-->
-						<div class="post d-flex flex-column-fluid" id="kt_post">
-							<!--begin::Container-->
-							<div id="kt_content_container" class="container-xxl">
-							<div class="welcomeProfile">
-					<h3 class="fw-bold my-2 welcomeTxt">Manage Customer Loan Requests</h3>
+
+<!-- ****************************** BEGINNING OF NEW CONTENT STARTS HERE ********************************* -->
+
+<div class="content d-flex flex-column flex-column-fluid " id="kt_content">
+					<!--begin::Post-->
+                    <div class="post d-flex flex-column-fluid" id="kt_post">
+						<!--begin::Container-->
+<div id="kt_content_container" class=" container-xxl ">
+
+<div class="welcomeProfile">
+					<h3 class="fw-bold my-2 welcomeTxt">Manage Customer Card</h3>
 					
 					</div>
-							
-								
+    
 
-<!-- ****************************** Manage Funds starts here ********************************* -->
-<div class="card">
-   <!--begin::Card header-->
-   <div class="card-header border-0 pt-6">
-      <!--begin::Card title-->
-      <div class="card-title">
-         <!--begin::Search-->
-         <div class="d-flex align-items-center position-relative my-1">
-            <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5"><span class="path1"></span><span class="path2"></span></i>
-			<input type="text" data-kt-subscription-table-filter="search" class="form-control form-control-solid w-250px ps-12" placeholder="Search Customer Loan Request">
-         </div>
-         <!--end::Search-->
-      </div>
-      <!--begin::Card title-->
-      <!--begin::Card toolbar-->
-      <div class="card-toolbar">
-         <!--begin::Group actions-->
-         <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
-            <div class="fw-bold me-5">
-               <span class="me-2" data-kt-subscription-table-select="selected_count"></span> Selected
-            </div>
-            <button type="button" class="btn btn-danger" data-kt-subscription-table-select="delete_selected">
-            Delete Selected
-            </button>
-         </div>
-         <!--end::Group actions-->        
-      </div>
-      <!--end::Card toolbar-->
-   </div>
-   <!--end::Card header-->
-   <!--begin::Card body-->
-   <div class="card-body pt-0">
-      <!--begin::Table-->
-      <div id="kt_subscriptions_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-         <div class="table-responsive">
-            <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="kt_subscriptions_table">
-               <thead>
-                  <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-				    <th>#</th>
-					<th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 144.922px;">Actions</th>
-				    <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Status</th>
-					<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Loan Number</th>
-                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Customer Name</th>
-					 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Loan Amount</th>
-                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 188.375px;">Loan Tenor</th>
-					 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Billing: activate to sort column ascending" style="width: 201.297px;">Loan Purpose</th>
-                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Created Date: activate to sort column ascending" style="width: 188.375px;">Employer Name</th>
-					 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Created Date: activate to sort column ascending" style="width: 188.375px;">Created Date</th>
-                  </tr>
-               </thead>
-               <tbody class="text-gray-600 fw-semibold">
+<!--*****************************************************  START OF LOAN CARD HEADER  ******************************************************  -->
 
-               <?php $x=1; ?>
+<?php
+   require APPROOT . '/views/includes/dashboard/customerCardHeader.php';
+?>
 
-			   <?php foreach($data['loanRequests'] as $loan): ?>
 
-<tr class="odd">
-	 <td><?php echo $x; ?></td>
-	 <td>
-		  <a href="<?php echo URLROOT ?>/loan/manageCard/?loan_id=<?php echo $loan->LOAN_ID; ?>" title="Click to Manage"><span class="btn btn-primary btn-active-light-primary btn-sm">Manage</span> </a>           
-   </td>
-   <td>
-	   <?php 
-		  switch($loan->LOAN_STATUS) {
-			  case 0:
-				  echo '<div class="badge badge-light-primary">Pending Review</div>';
-			  break;
-			  case 1:
-				echo '<div class="badge badge-light-primary">Pending Authorization</div>';
-			break;
-			  case 2:
-				  echo '<div class="badge badge-light-warning">Pending Disbursement</div>';
-			  break;
-			  case 3:
-				  echo '<div class="badge badge-light-success">Active Loan</div>';
-			  break;
-		  }
-		  ?>
-   </td>
-  <td>
-  <span class="badge badge-light-primary"><?php echo $loan->LOAN_NUMBER; ?></span> 
-   </td>
-   <td>
-		  <span class="badge badge-light"><?php echo $loan->FIRST_NAME.' '.$loan->LAST_NAME ?></span>              
-   </td>
-   <td>
-   <span class="badge badge-light"><?php echo $loan->LOAN_AMOUNT; ?></span>                
-   </td>
-   <td>
-   <span class="badge badge-light"><?php echo $loan->LOAN_TENOR; ?> Months</span>          
-   </td>
-   <td>
-   <span class="badge badge-light"><?php echo $loan->LOAN_PURPOSE; ?></span>                
-   </td>
-   <td>
-   <span class="badge badge-light"><?php echo $loan->EMPLOYER_NAME; ?></span>       
-   </td>
-   <td>
-	  <span class="badge badge-light"><?php echo formatDateCreated($loan->DATE_CREATED); ?></span>  
-   </td>
-</tr>
+<!--*****************************************************  END OF LOAN CARD HEADER  ****************************************************** -->
 
-<?php $x++; ?>
+<!--begin::details View-->
+<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+    <!--begin::Card header-->
+    <div class="card-header cursor-pointer">
+        <!--begin::Card title-->
+        <div class="card-title m-0">
+            <h3 class="fw-bold m-0">Personal Record</h3>
+        </div>
+        <!--end::Card title--> 
+    </div>
+    <!--begin::Card header-->
 
-<?php endforeach; ?>
+    <!--begin::Card body-->
+    <div class="card-body p-9">
+
+	<div style="width:60%;">
+
+
+	<form action="#" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">First Name</label>
+        <input type="text" name="employerArea" id="cust_loan_amount" value="<?php echo $data['customer']->FIRST_NAME; ?>" readonly class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Last Name</label>
+        <input type="text" value="<?php echo $data['customer']->LAST_NAME; ?>" readonly class="form-control"/>
+     </div>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Other Name</label>
+        <input type="text" value="<?php echo $data['customer']->OTHER_NAME; ?>" readonly class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Gender</label>
+        <input type="text" value="<?php echo $data['customer']->GENDER; ?>"  readonly class="form-control"/>
+     </div>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Date of Birth</label>
+        <input type="text" readonly value="<?php echo $data['customer']->DATE_OF_BIRTH; ?>" class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Place of Birth</label>
+        <input type="text" readonly value="<?php echo $data['customer']->PLACE_OF_BIRTH; ?>" class="form-control"/>
+     </div>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Phone Number</label>
+        <input type="text" readonly value="<?php echo $data['customer']->PHONE_NUMBER; ?>" class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Email Address</label>
+        <input type="text" readonly value="<?php echo $data['customer']->EMAIL_ADDRESS; ?>" class="form-control"/>
+     </div>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">State of Origin</label>
+        <input type="text" readonly value="<?php echo $data['customer']->STATE_OF_ORIGIN; ?>" class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Nationality</label>
+        <input type="text" readonly value="<?php echo $data['customer']->NATIONALITY; ?>" class="form-control"/>
+     </div>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Address</label>
+        <input type="text" readonly value="<?php echo $data['customer']->ADDRESS; ?>" class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Area/Locality</label>
+        <input type="text" readonly value="<?php echo $data['customer']->AREA_LOCALITY; ?>" class="form-control"/>
+     </div>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">State</label>
+        <input type="text" readonly value="<?php echo $data['customer']->ADDRESS; ?>" class="form-control"/>
+     </div>
+    </div>
+
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-primary">Administration</span>
+    </div>
+	<div class="row mb-10">
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Date Created</label>
+        <input type="text" value="<?php echo $data['customer']->DATE_CREATED; ?>" readonly class="form-control"/>
+     </div>
+     <div class="col-md-6 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="required form-label">Created By</label>
+        <input type="text" readonly value="<?php echo $data['customer']->CREATED_BY; ?>" class="form-control"/>
+     </div>
+    </div>
+
+	</form>
+
+	</div>
+
+    </div>
+    <!--end::Card body-->     
+</div>
+<!--end::details View-->
+  
+<!--end::Container-->                	</div>
+                    <!--end::Post-->
+				</div>
+
+<!-- ****************************** END OF NEW CONTENT STARTS HERE ********************************* -->
 				
-               </tbody>
-            </table>
-         </div>
-         <div class="row">
-            <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start"></div>
-         </div>
-      </div>
-      <!--end::Table-->    
-   </div>
-   <!--end::Card body-->
-</div>	
-															
-<!-- ****************************** Manage Funds ends here *********************************** -->
-								
-							</div>
-							<!--end::Container-->
-						</div>
-						<!--end::Post-->
-					</div>
-					<!--end::Content-->
+				
 					<!--begin::Footer-->
 					<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
 						<!--begin::Container-->

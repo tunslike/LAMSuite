@@ -1218,17 +1218,16 @@
                <thead>
                   <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
 				    <th>#</th>
-				    <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Status</th>
-                    <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Account Type</th>
-                    <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Account No</th>
-                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Customer No</th>
+					 <th class="min-w-125px sorting" rowspan="1" colspan="1" aria-label="Actions" style="width: 144.922px;">Action</th>
+				     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Status</th>
+                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Account Type</th>
+                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Account No</th>
 					 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Full Name</th>
                      <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Date of Birth</th>
                      <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending">Gender</th>
 					 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Billing: activate to sort column ascending" style="width: 201.297px;">KYC Status</th>
                      <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Billing: activate to sort column ascending" style="width: 201.297px;">Employer</th>
                      <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Billing: activate to sort column ascending" style="width: 201.297px;">Date Created</th>
-                     <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 144.922px;">Actions</th>
                   </tr>
                </thead>
                <tbody class="text-gray-600 fw-semibold">
@@ -1239,6 +1238,11 @@
 
                 <tr class="odd">
 				  	 <td><?php echo $x; ?></td>
+					   <td>
+                        <a href="<?php echo URLROOT ?>/customer/viewCustomerCard/?customer_id=<?php echo $customer->CUSTOMER_ID; ?>" class="btn btn-primary btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                        Manage
+                       </a>
+                     </td>
                      <td>
 
                         <?php 
@@ -1274,9 +1278,6 @@
                      <td>
                         <div class="badge badge-primary"><?php echo $customer->ACCOUNT_NO; ?></div>
                      </td>
-                     <td>
-                        <div class="badge badge-light"><?php echo $customer->CUSTOMER_NO; ?></div>
-                     </td>
                     <td>
 					<span class="badge badge-light"><?php echo $customer->LAST_NAME.' '.$customer->FIRST_NAME; ?></span> 
                      </td>
@@ -1307,29 +1308,6 @@
                      </td>
                      <td>
                         <span class="badge badge-light"><?php echo formatDateCreated($customer->DATE_CREATED); ?></span>  
-                     </td>
-                     <td class="text-end">
-                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                        Actions
-                        <i class="ki-duotone ki-down fs-5 m-0"></i></a>
-                        <!--begin::Menu-->
-                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
-                           <!--begin::Menu item-->
-                           <div class="menu-item px-3">
-                              <a href="/metronic8/demo8/../demo8/apps/subscriptions/add.html" class="menu-link px-3">
-                              View
-                              </a>
-                           </div>
-                           <!--end::Menu item-->
-                           <!--begin::Menu item-->
-                           <div class="menu-item px-3">
-                              <a href="/metronic8/demo8/../demo8/apps/subscriptions/add.html" class="menu-link px-3">
-                              Manage
-                              </a>
-                           </div>
-                           <!--end::Menu item-->
-                        </div>
-                        <!--end::Menu-->
                      </td>
                   </tr>
 

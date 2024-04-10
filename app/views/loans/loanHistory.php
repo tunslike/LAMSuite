@@ -1189,67 +1189,94 @@
 
 <!--*****************************************************  END OF LOAN CARD HEADER  ****************************************************** -->
 
-<!--begin::details View-->
-<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
-    <!--begin::Card header-->
-    <div class="card-header cursor-pointer">
-        <!--begin::Card title-->
-        <div class="card-title m-0">
-            <h3 class="fw-bold m-0">Loan Details</h3>
+<div class="card ">
+    <!--begin::Header-->
+    <div class="card-header card-header-stretch">
+        <!--begin::Title-->
+        <div class="card-title">
+            <h3>Loan History</h3>
         </div>
-        <!--end::Card title--> 
+        <!--end::Title-->
+        
+        <!--begin::Toolbar-->
+        <div class="card-toolbar">
+            <!--begin::Tab nav-->
+            <ul class="nav nav-stretch fs-5 fw-semibold nav-line-tabs border-transparent" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a id="kt_referrals_tab_1" class="nav-link text-active-gray-800 me-4 active" data-bs-toggle="tab" role="tab" href="#kt_referrals_1" aria-selected="true">
+                        2024
+                    </a>
+                </li>
+            </ul>
+            <!--end::Tab nav-->
+        </div>
+        <!--end::Toolbar-->
     </div>
-    <!--begin::Card header-->
+    <!--end::Header-->
 
-    <!--begin::Card body-->
-    <div class="card-body p-9">
+    <!--begin::Tab content-->
+    <div id="kt_referred_users_tab_content" class="tab-content">
+                    
+            <!--begin::Tab panel-->
+            <div id="kt_referrals_1" class="card-body p-0 tab-pane fade show active" role="tabpanel" aria-labelledby="kt_referrals_tab_1">
 
-	<div style="width:60%;">
+			<div class="py-5" style="width:50%; margin-left:30px; margin-top:10px; margin-bottom:20px;">
+        		<div class="d-flex align-items-center rounded py-5 px-5 bg-light-primary ">
+				<i class="ki-duotone ki-information-5 fs-3x text-primary me-5">
+						<span class="path1"></span>
+						<span class="path2"></span>
+						<span class="path3"></span>
+				</i>
+				<div class="text-gray-700 fw-bold fs-6">
+           		No customer loan history found!
+            </div>
+			</div>
+			</div>
 
+                <div class="table-responsive">
+                    <!--begin::Table-->
+                    <table class="table table-row-bordered align-middle gy-6">
+                        <!--begin::Thead-->
+                        <thead class="border-bottom border-gray-200 fs-6 fw-bold bg-lighten">
+                            <tr>
+                                <th class="min-w-125px ps-9">#</th>
+                                <th class="min-w-125px px-0">Transaction No</th>
+                                <th class="min-w-125px">Repayment Amount</th>
+								<th class="min-w-125px">Narration</th>
+                                <th class="min-w-125px">Payment Date</th>
+                                <th class="min-w-125px ps-0">Amortized Balance</th>
+                            </tr>
+                        </thead>
+                        <!--end::Thead-->
 
-	<form action="#" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
-
-	<div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Loan Amount</label>
-        <input type="text" name="employerArea" id="cust_loan_amount" readonly class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Loan Tenor</label>
-        <input type="text" name="employerState" id="cust_loan_tenor" readonly class="form-control"/>
-     </div>
+                        <!--begin::Tbody-->
+                        <tbody class="fs-6 fw-semibold text-gray-600">
+                                <tr>
+									<td class="ps-9">1</td>
+                                    <td class="ps-9">678935899</td>
+                                    <td>Nov 24, 2020</td>
+                                    <td>26%</td>
+                                    <td class="text-success">$1,200.00</td>
+									<td class="text-success">$1,200.00</td>
+                                </tr>
+                                <tr>
+									<td class="ps-9">2</td>
+                                    <td class="ps-9">578433345</td>                                    
+                                    <td>Aug 10, 2020</td>
+                                    <td>35%</td>
+                                    <td class="text-success">$2,400.00</td>
+									<td class="text-success">$1,200.00</td>
+                                </tr>
+                        </tbody>
+                        <!--end::Tbody-->
+                    </table>
+                    <!--end::Table-->
+                </div>
+            </div>
+            <!--end::Tab panel-->     
     </div>
-
-	<div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Loan Purpose</label>
-        <input type="text" name="employerArea" id="cust_loan_purpose" readonly class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Interest Rate</label>
-        <input type="text" name="employerState" id="cust_loan_interest" readonly class="form-control"/>
-     </div>
-    </div>
-
-	<div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Monthly Repayment</label>
-        <input type="text" readonly name="no_staff" id="cust_mon_repay" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Total Repayment</label>
-        <input type="text" name="loan_percent" readonly  id="cus_total_paymt" class="form-control"/>
-     </div>
-    </div>
-
-	</form>
-
-	</div>
-
-    </div>
-    <!--end::Card body-->     
+    <!--end::Tab content-->
 </div>
-<!--end::details View-->
   
 <!--end::Container-->                	</div>
                     <!--end::Post-->

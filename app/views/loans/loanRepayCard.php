@@ -1002,7 +1002,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-gray-900">Manage</li>
+										<li class="breadcrumb-item text-gray-900">Manage Loan Card</li>
 										<!--end::Item-->
 									</ul>
 									<!--end::Breadcrumb-->
@@ -1165,146 +1165,126 @@
 						<!--end::Toolbar-->
 					</div>
 					<!--end::Header-->
-				
-					<!--begin::Content-->
-					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						<!--begin::Post-->
-						<div class="post d-flex flex-column-fluid" id="kt_post">
-							<!--begin::Container-->
-							<div id="kt_content_container" class="container-xxl">
-							<div class="welcomeProfile">
-					<h3 class="fw-bold my-2 welcomeTxt">Manage Customer Loan Requests</h3>
+
+<!-- ****************************** BEGINNING OF NEW CONTENT STARTS HERE ********************************* -->
+
+<div class="content d-flex flex-column flex-column-fluid " id="kt_content">
+					<!--begin::Post-->
+                    <div class="post d-flex flex-column-fluid" id="kt_post">
+						<!--begin::Container-->
+<div id="kt_content_container" class=" container-xxl ">
+
+<div class="welcomeProfile">
+					<h3 class="fw-bold my-2 welcomeTxt">Manage Loan Card</h3>
 					
 					</div>
-							
-								
+    
 
-<!-- ****************************** Manage Funds starts here ********************************* -->
-<div class="card">
-   <!--begin::Card header-->
-   <div class="card-header border-0 pt-6">
-      <!--begin::Card title-->
-      <div class="card-title">
-         <!--begin::Search-->
-         <div class="d-flex align-items-center position-relative my-1">
-            <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5"><span class="path1"></span><span class="path2"></span></i>
-			<input type="text" data-kt-subscription-table-filter="search" class="form-control form-control-solid w-250px ps-12" placeholder="Search Customer Loan Request">
-         </div>
-         <!--end::Search-->
-      </div>
-      <!--begin::Card title-->
-      <!--begin::Card toolbar-->
-      <div class="card-toolbar">
-         <!--begin::Group actions-->
-         <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
-            <div class="fw-bold me-5">
-               <span class="me-2" data-kt-subscription-table-select="selected_count"></span> Selected
-            </div>
-            <button type="button" class="btn btn-danger" data-kt-subscription-table-select="delete_selected">
-            Delete Selected
-            </button>
-         </div>
-         <!--end::Group actions-->        
-      </div>
-      <!--end::Card toolbar-->
-   </div>
-   <!--end::Card header-->
-   <!--begin::Card body-->
-   <div class="card-body pt-0">
-      <!--begin::Table-->
-      <div id="kt_subscriptions_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-         <div class="table-responsive">
-            <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="kt_subscriptions_table">
-               <thead>
-                  <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-				    <th>#</th>
-					<th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 144.922px;">Actions</th>
-				    <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Status</th>
-					<th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Loan Number</th>
-                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Customer Name</th>
-					 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style="width: 188.375px;">Loan Amount</th>
-                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 188.375px;">Loan Tenor</th>
-					 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Billing: activate to sort column ascending" style="width: 201.297px;">Loan Purpose</th>
-                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Created Date: activate to sort column ascending" style="width: 188.375px;">Employer Name</th>
-					 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Created Date: activate to sort column ascending" style="width: 188.375px;">Created Date</th>
-                  </tr>
-               </thead>
-               <tbody class="text-gray-600 fw-semibold">
+<!--*****************************************************  START OF LOAN CARD HEADER  ******************************************************  -->
 
-               <?php $x=1; ?>
+<?php
+   require APPROOT . '/views/includes/dashboard/loanCardHeader.php';
+?>
 
-			   <?php foreach($data['loanRequests'] as $loan): ?>
 
-<tr class="odd">
-	 <td><?php echo $x; ?></td>
-	 <td>
-		  <a href="<?php echo URLROOT ?>/loan/manageCard/?loan_id=<?php echo $loan->LOAN_ID; ?>" title="Click to Manage"><span class="btn btn-primary btn-active-light-primary btn-sm">Manage</span> </a>           
-   </td>
-   <td>
-	   <?php 
-		  switch($loan->LOAN_STATUS) {
-			  case 0:
-				  echo '<div class="badge badge-light-primary">Pending Review</div>';
-			  break;
-			  case 1:
-				echo '<div class="badge badge-light-primary">Pending Authorization</div>';
-			break;
-			  case 2:
-				  echo '<div class="badge badge-light-warning">Pending Disbursement</div>';
-			  break;
-			  case 3:
-				  echo '<div class="badge badge-light-success">Active Loan</div>';
-			  break;
-		  }
-		  ?>
-   </td>
-  <td>
-  <span class="badge badge-light-primary"><?php echo $loan->LOAN_NUMBER; ?></span> 
-   </td>
-   <td>
-		  <span class="badge badge-light"><?php echo $loan->FIRST_NAME.' '.$loan->LAST_NAME ?></span>              
-   </td>
-   <td>
-   <span class="badge badge-light"><?php echo $loan->LOAN_AMOUNT; ?></span>                
-   </td>
-   <td>
-   <span class="badge badge-light"><?php echo $loan->LOAN_TENOR; ?> Months</span>          
-   </td>
-   <td>
-   <span class="badge badge-light"><?php echo $loan->LOAN_PURPOSE; ?></span>                
-   </td>
-   <td>
-   <span class="badge badge-light"><?php echo $loan->EMPLOYER_NAME; ?></span>       
-   </td>
-   <td>
-	  <span class="badge badge-light"><?php echo formatDateCreated($loan->DATE_CREATED); ?></span>  
-   </td>
-</tr>
+<!--*****************************************************  END OF LOAN CARD HEADER  ****************************************************** -->
 
-<?php $x++; ?>
+<div class="card ">
+    <!--begin::Header-->
+    <div class="card-header card-header-stretch">
+        <!--begin::Title-->
+        <div class="card-title">
+            <h3>Loan Repayment</h3>
+        </div>
+        <!--end::Title-->
+        
+        <!--begin::Toolbar-->
+        <div class="card-toolbar">
+            <!--begin::Tab nav-->
+            <ul class="nav nav-stretch fs-5 fw-semibold nav-line-tabs border-transparent" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a id="kt_referrals_tab_1" class="nav-link text-active-gray-800 me-4 active" data-bs-toggle="tab" role="tab" href="#kt_referrals_1" aria-selected="true">
+                        2024
+                    </a>
+                </li>
+            </ul>
+            <!--end::Tab nav-->
+        </div>
+        <!--end::Toolbar-->
+    </div>
+    <!--end::Header-->
 
-<?php endforeach; ?>
-				
-               </tbody>
-            </table>
-         </div>
-         <div class="row">
-            <div class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start"></div>
-         </div>
-      </div>
-      <!--end::Table-->    
-   </div>
-   <!--end::Card body-->
-</div>	
-															
-<!-- ****************************** Manage Funds ends here *********************************** -->
-								
-							</div>
-							<!--end::Container-->
+    <!--begin::Tab content-->
+    <div id="kt_referred_users_tab_content" class="tab-content">
+                    
+            <!--begin::Tab panel-->
+            <div id="kt_referrals_1" class="card-body p-0 tab-pane fade show active" role="tabpanel" aria-labelledby="kt_referrals_tab_1">
+
+			<?php if(!$data['repaymentDetails']) : ?>
+				<div class="py-5" style="width:50%; margin-left:30px; margin-top:10px; margin-bottom:20px;">
+					<div class="d-flex align-items-center rounded py-5 px-5 bg-light-primary ">
+						<i class="ki-duotone ki-information-5 fs-3x text-primary me-5">
+								<span class="path1"></span>
+								<span class="path2"></span>
+								<span class="path3"></span>
+						</i>
+						<div class="text-gray-700 fw-bold fs-6">
+							No customer loan history found!
 						</div>
-						<!--end::Post-->
 					</div>
-					<!--end::Content-->
+				</div>
+			<?php endif; ?>
+
+                <div class="table-responsive">
+                    <!--begin::Table-->
+                    <table class="table table-row-bordered align-middle gy-6">
+                        <!--begin::Thead-->
+                        <thead class="border-bottom border-gray-200 fs-6 fw-bold bg-lighten">
+                            <tr>
+                                <th class="min-w-50px ps-9">#</th>
+                                <th class="min-w-125px px-0">Transaction No</th>
+                                <th class="min-w-125px">Repayment Amount</th>
+								<th class="min-w-125px">Narration</th>
+								<th class="min-w-125px">Payment Type</th>
+                                <th class="min-w-125px">Payment Date</th>
+                                <th class="min-w-125px ps-0">Payment Channel</th>
+                            </tr>
+                        </thead>
+                        <!--end::Thead-->
+
+                        <!--begin::Tbody-->
+                        <tbody class="fs-6 fw-semibold text-gray-600">
+						<?php $x=1; ?>
+						<?php foreach($data['repaymentDetails'] as $loan): ?>
+                                <tr>
+									<td class="ps-9"><?php echo $x; ?></td>
+                                    <td class="ps-9"><?php echo $loan->TRANSACTION_NO; ?></td>
+									<td class="text-success"><?php echo number_format($loan->REPAYMENT_AMOUNT,2); ?></td>
+                                    <td><?php echo $loan->NARRATION; ?></td>
+									<td><?php echo $loan->REPAYMENT_TYPE; ?></td>
+                                    <td class="text-primary"><?php echo $loan->REPAYMENT_DATE; ?></td>
+									<td class="text-primary"><?php echo $loan->REPAYMENT_CHANNEL; ?></td>
+                                </tr>
+						<?php $x++; ?>
+						<?php endforeach; ?>
+                        </tbody>
+                        <!--end::Tbody-->
+                    </table>
+                    <!--end::Table-->
+                </div>
+            </div>
+            <!--end::Tab panel-->     
+    </div>
+    <!--end::Tab content-->
+</div>
+  
+<!--end::Container-->                	</div>
+                    <!--end::Post-->
+				</div>
+
+<!-- ****************************** END OF NEW CONTENT STARTS HERE ********************************* -->
+				
+				
 					<!--begin::Footer-->
 					<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
 						<!--begin::Container-->

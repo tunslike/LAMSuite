@@ -13,3 +13,7 @@
 
     //Sitename
     define('SITENAME', 'Finserve LAM Suite 1.0');
+
+    define('EmailAPIKey', 'F29ED63071B4571F1665AAF2B82ABD58304757C5DD11BC404CA1A420F33C4A1AE1203EA01A15D61E8FBDEB2B43E795A4');
+
+    define('lamSuiteAPIUrl','http://localhost:8082/api/v1/loanService/');

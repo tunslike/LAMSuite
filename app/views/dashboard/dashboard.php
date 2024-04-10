@@ -927,9 +927,9 @@
 					<!--end::Aside menu-->
 					<!--begin::Footer-->
 					<div class="aside-footer flex-column-auto py-5" id="kt_aside_footer">
-						<a href="https://preview.keenthemes.com/html/metronic/docs" style="background-color:#f8285b; color: #fff;" class="btn btn-flex btn-custom btn-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click" title="Click here to logout">
+						<a onclick="logoutUser();" style="background-color:#f8285b; color: #fff;" class="btn btn-flex btn-custom btn-primary w-100">
 							<span class="btn-label">Logout</span>
-							<i class="ki-duotone ki-document ms-2 fs-2">
+							<i class="ki-duotone ki-entrance-left ms-2 fs-2">
 								<span class="path1"></span>
 								<span class="path2"></span>
 							</i>
@@ -1011,32 +1011,12 @@
 								<!--end::Page title-->
 								<!--begin::Action group-->
 								<div class="d-flex align-items-stretch overflow-auto pt-3 pt-lg-0">
-									<!--begin::Action wrapper-->
-									<div class="d-flex align-items-center">
-										<!--begin::Label-->
-										<span class="fs-7 fw-bold text-gray-700 pe-4 text-nowrap d-none d-xxl-block">Default View:</span>
-										<!--end::Label-->
-										<!--begin::Select-->
-										<select class="form-select form-select-sm form-select-solid w-100px w-xxl-125px" data-control="select2" data-placeholder="Latest" data-hide-search="true">
-											<option value=""></option>
-											<option value="1" selected="selected">CRM</option>
-											<option value="2">Loans</option>
-											<option value="3">Accounts</option>
-										</select>
-										<!--end::Select-->
-									</div>
-									<!--end::Action wrapper-->
-									<!--begin::Action wrapper-->
-									<div class="d-flex align-items-center">
-										<!--begin::Separartor-->
-										<div class="bullet bg-secondary h-35px w-1px mx-5"></div>
-										<!--end::Separartor-->
-										<!--begin::Label-->
-										<span class="fs-7 text-gray-700 fw-bold d-none d-sm-block"> 
-										<span class="d-none d-xxl-inline"></span></span>
-										<!--end::Label-->							
-									</div>
-									<!--end::Action wrapper-->
+									
+
+								<?php
+   require APPROOT . '/views/includes/dashboard/configureView.php';
+?>
+									
 									<!--begin::Action wrapper-->
 									<div class="d-flex align-items-center">
 										<!--begin::Label-->
@@ -1046,37 +1026,13 @@
 										<div class="d-flex">
 											<!--begin::Action-->
 											<a href="#" class="btn btn-sm btn-icon btn-icon-muted btn-active-icon-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends">
-												<i class="ki-duotone ki-file fs-1">
+												<i class="ki-duotone ki-setting-2 fs-1">
 													<span class="path1"></span>
 													<span class="path2"></span>
 												</i>
 											</a>
 											<!--end::Action-->
-											<!--begin::Notifications-->
-											<div class="d-flex align-items-center">
-												<!--begin::Menu- wrapper-->
-												<a href="apps/subscriptions/add.html" class="btn btn-sm btn-icon btn-icon-muted btn-active-icon-primary">
-													<i class="ki-duotone ki-add-files fs-1">
-														<span class="path1"></span>
-														<span class="path2"></span>
-														<span class="path3"></span>
-													</i>
-												</a>
-												<!--end::Menu wrapper-->
-											</div>
-											<!--end::Notifications-->
-											<!--begin::Quick links-->
-											<div class="d-flex align-items-center">
-												<!--begin::Menu wrapper-->
-												<a href="apps/file-manager/folders.html" class="btn btn-sm btn-icon btn-icon-muted btn-active-icon-primary">
-													<i class="ki-duotone ki-file-up fs-1">
-														<span class="path1"></span>
-														<span class="path2"></span>
-													</i>
-												</a>
-												<!--end::Menu wrapper-->
-											</div>
-											<!--end::Quick links-->
+							
 										</div>
 										<!--end::Actions-->
 									</div>
@@ -1260,16 +1216,6 @@
       <!--begin::Card title-->
       <!--begin::Card toolbar-->
       <div class="card-toolbar">
-         <!--begin::Toolbar-->
-         <div class="d-flex justify-content-end" data-kt-subscription-table-toolbar="base">
-        
-        <!--begin::Add subscription-->
-            <a href="/metronic8/demo8/../demo8/apps/subscriptions/add.html" class="btn btn-primary">
-            <i class="ki-duotone ki-plus fs-2"></i> New Customer
-            </a>
-            <!--end::Add subscription-->
-         </div>
-         <!--end::Toolbar-->
          <!--begin::Group actions-->
          <div class="d-flex justify-content-end align-items-center d-none" data-kt-subscription-table-toolbar="selected">
             <div class="fw-bold me-5">
@@ -1333,8 +1279,7 @@
                      </td>
                      <td class="text-end">
                         <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                        Actions
-                        <i class="ki-duotone ki-down fs-5 m-0"></i></a>
+                        Actions</a>
                         <!--begin::Menu-->
                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
                            <!--begin::Menu item-->
@@ -1476,31 +1421,11 @@
 					</div>
 					<!--end::Content-->
 					<!--begin::Footer-->
-					<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
-						<!--begin::Container-->
-						<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
-							<!--begin::Copyright-->
-							<div class="text-gray-900 order-2 order-md-1">
-								<span class="text-muted fw-semibold me-1">2023&copy;</span>
-								<a href="https://keenthemes.com" target="_blank" class="text-gray-800 text-hover-primary">Keenthemes</a>
-							</div>
-							<!--end::Copyright-->
-							<!--begin::Menu-->
-							<ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
-								<li class="menu-item">
-									<a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
-								</li>
-								<li class="menu-item">
-									<a href="https://devs.keenthemes.com" target="_blank" class="menu-link px-2">Support</a>
-								</li>
-								<li class="menu-item">
-									<a href="https://1.envato.market/EA4JP" target="_blank" class="menu-link px-2">Purchase</a>
-								</li>
-							</ul>
-							<!--end::Menu-->
-						</div>
-						<!--end::Container-->
-					</div>
+						
+		<?php
+   require APPROOT . '/views/includes/dashboard/footerDetails.php';
+?>
+					
 					<!--end::Footer-->
 				</div>
 				<!--end::Wrapper-->

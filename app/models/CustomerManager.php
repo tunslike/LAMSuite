@@ -330,6 +330,94 @@ class CustomerManager {
         }
         // end of function
 
+           //function to get validation data and pull customer name
+           public function loadCustomerPersonalRecord($customer_id) {
+
+            try {
+
+                $this->db->query("SELECT * FROM LAM_CUSTOMER WHERE CUSTOMER_ID = :customer_id");
+
+                //Bind values
+                $this->db->bind(':customer_id', $customer_id);
+            
+                $row = $this->db->single();
+
+                return $row;
+
+            }catch (PDOException $e) {
+                echo 'ERROR!';
+                print_r( $e );
+            }
+        }
+        //end of function
+
+             //function to get validation data and pull customer name
+             public function loadCustomerEmployerRecord($customer_id) {
+
+                try {
+    
+                    $this->db->query("SELECT P.COMPANY_NAME, E.SECTOR, E.GRADE_LEVEL, E.SERVICE_LENGTH, 
+                                    E.STAFF_ID_NUMBER, E.SALARY_PAYMENT_DATE, E.ANNUAL_SALARY FROM LAM_CUSTOMER_EMPLOYERS E 
+                                    LEFT JOIN LAM_COMPANY_PROFILE P ON E.EMPLOYER_ID = P.PROFILE_ID WHERE E.CUSTOMER_ID = :customer_id;");
+    
+                    //Bind values
+                    $this->db->bind(':customer_id', $customer_id);
+                
+                    $row = $this->db->single();
+    
+                    return $row;
+    
+                }catch (PDOException $e) {
+                    echo 'ERROR!';
+                    print_r( $e );
+                }
+            }
+            //end of function
+
+        
+        //function to get validation data and pull customer name
+        public function loadCustomerNOKRecord($customer_id) {
+
+                try {
+    
+                    $this->db->query("SELECT * FROM LAM_NEXT_OF_KIN WHERE CUSTOMER_ID = :customer_id;");
+    
+                    //Bind values
+                    $this->db->bind(':customer_id', $customer_id);
+                
+                    $row = $this->db->single();
+    
+                    return $row;
+    
+                }catch (PDOException $e) {
+                    echo 'ERROR!';
+                    print_r( $e );
+                }
+            }
+            //end of function
+
+        
+               //function to get validation data and pull customer name
+        public function checkCustomerLoanCard($customer_id) {
+
+            try {
+
+                $this->db->query("SELECT * FROM LAM_CUSTOMER_LOAN_REQUEST WHERE CUSTOMER_ID = :customer_id;");
+
+                //Bind values
+                $this->db->bind(':customer_id', $customer_id);
+            
+                $row = $this->db->single();
+
+                return $row;
+
+            }catch (PDOException $e) {
+                echo 'ERROR!';
+                print_r( $e );
+            }
+        }
+        //end of function
+
         // function to load manager CRM preview data
         public function loadCustomerChannelData() {
 
@@ -350,7 +438,8 @@ class CustomerManager {
                     print_r( $e );
                 }
         }
-                // end of function
+        // end of function
+        
 
         // function to check that customer exists
         public function checkCustomerExists($data) {

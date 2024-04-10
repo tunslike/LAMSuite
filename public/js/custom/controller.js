@@ -12,6 +12,20 @@ function showErrorAlert(message) {
 }
 //end of function 
 
+//function to show alert
+function showWarningAlert(message) {
+    Swal.fire({
+        text: message,
+        icon: "warning",
+        buttonsStyling: false,
+        confirmButtonText: "Ok, got it!",
+        customClass: {
+            confirmButton: "btn btn-warning"
+        }
+    });
+}
+//end of function 
+
 //function to validate workflow policy
 function ValidatePolicy(value) {
     if(value == 'APPR1') {
@@ -25,6 +39,411 @@ function ValidatePolicy(value) {
     }
 }
 //end of function
+
+//function to authorize payment
+$('#btnAuthorizeLoanPayment').click(function () {
+
+    //get amount
+    let loadID = $('#loadIDNumber').val()
+    let disburseAmount =  $('#disburs_amount').val()
+    let loanAmount = $('#cust_loan_amount').val()
+    let authorizeComment = $('#disburse_authorize_comment').val()
+    let paymentMethod = $('#paymentMethod').val()
+
+    if(paymentMethod == '') {
+        showErrorAlert('Please select payment gateway to proceed!')
+        return;
+    }
+
+    if(disburseAmount < loanAmount) {
+        if(authorizeComment == '') {
+
+            showErrorAlert('Please provide authorization comment to proceed!')
+            return;
+        }
+    }
+
+    let disburseAmt = disburseAmount.split(',').join('');
+
+    // show prompt
+    Swal.fire({
+        text: "Do you want to authorize loan disbursement for payment?",
+        icon: "question",
+        buttonsStyling: false,
+        showCancelButton: true,
+        confirmButtonText: "Yes, Proceed!",
+        cancelButtonText: 'Nope, cancel it',
+        customClass: {
+            cancelButton: 'btn btn-danger',
+            confirmButton: "btn btn-primary"
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+        // Show page loading
+        KTApp.showPageLoading();
+
+         //ajax request
+            $.ajax({
+                type: "POST",
+                data: {loadid: loadID, disAmount: disburseAmt, comment:authorizeComment, payMethod:paymentMethod},
+                url: "http://localhost/lamsuite/loan/authorizeLoanDisbursement",
+                success: function (data) {
+
+                    //hide
+                    KTApp.hidePageLoading();
+
+                    //check data
+                    if(data == 1) {
+
+                        Swal.fire({
+                            title: "Authorize Loan Disbursement",
+                            text: "Loan has been authorized for disbursement!",
+                            icon: "success"
+                          });
+
+                          // refresh
+                          $('#authorize_loan_amount').modal('hide');
+
+                    }else {
+
+                        Swal.fire({
+                            title: "Authorize Loan Disbursement",
+                            text: "Unable to process your request, please retry!",
+                            icon: "error"
+                          });
+
+                          // refresh
+                          $('#authorize_loan_amount').modal('hide');
+
+                    }
+                
+                },
+            });
+        }
+      });
+
+
+})
+//end of function
+
+// function to validate disburse amount
+function validateDisburseAmount() {
+
+    $('#btnAuthorizeLoanPayment').show()
+
+    let disburseAmount =  $('#disburs_amount').val()
+    let loanAmount = $('#cust_loan_amount').val()
+
+    if(disburseAmount < loanAmount) {
+        showWarningAlert('Amount to be disbursed is not the same with approved amount!')
+    }
+
+    if(disburseAmount > loanAmount) {
+        showWarningAlert('Amount to be disbursed cannot be higher than approved amount!')
+        $('#btnAuthorizeLoanPayment').hide()
+    }
+
+    return;
+}
+// end of function
+
+
+function createUsername() {
+    var firstname = $('#user_firstname').val()
+    var lastname = $('#user_lastname').val()
+
+    if(firstname.trim() != '' || lastname.trim() != '') {
+        var fullname = firstname + "@finserveinvestment.com";
+        $('#username').val(fullname.toLowerCase())
+    }
+}
+
+
+// function to log out user
+function logoutUser() {
+    // show prompt
+    Swal.fire({
+       text: "Do you want to logout?",
+       icon: "question",
+       buttonsStyling: false,
+       showCancelButton: true,
+       confirmButtonText: "Yes!",
+       cancelButtonText: 'Cancel',
+       customClass: {
+           cancelButton: 'btn btn-danger',
+           confirmButton: "btn btn-primary"
+       }
+   }).then((result) => {
+       if (result.isConfirmed) {
+
+        //ajax request
+           $.ajax({
+               type: "POST",
+               data: {},
+               url: "http://localhost/lamsuite/account/logoutUser",
+               success: function (data) {
+               
+                   window.location.replace("http://localhost/lamsuite/signin");
+                   return;
+   
+               },
+           });
+       }
+     });
+}
+// end of function
+
+//function to create new food category
+$('#btnCreateNewUser').click(function () {
+    
+    //get details
+    let user_firstname = $('#user_firstname').val()
+    let user_lastname = $('#user_lastname').val()
+    let username = $('#username').val()
+    let user_role = $('#userRole').val()
+    let user_phone = $('#user_phone').val()
+    let user_email = $('#user_email').val()
+
+    if(user_firstname == '' || user_lastname == '' || user_role == '' || username == '') {
+        showErrorAlert('Please enter all fields!')
+        return false;
+    }
+    
+     // show prompt
+     Swal.fire({
+        text: "Do you want to create user?",
+        icon: "question",
+        buttonsStyling: false,
+        showCancelButton: true,
+        confirmButtonText: "Yes, Proceed!",
+        cancelButtonText: 'Nope, cancel it',
+        customClass: {
+            cancelButton: 'btn btn-danger',
+            confirmButton: "btn btn-primary"
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+        // Show page loading
+        KTApp.showPageLoading();
+
+         //ajax request
+            $.ajax({
+                type: "POST",
+                data: { username:username, userFirstname: user_firstname, userLastname:user_lastname,userRole: user_role, userPhone: user_phone, userEmail:user_email},
+                url: "http://localhost/lamsuite/account/createNewUser",
+                success: function (data) {
+
+                    //hide
+                    KTApp.hidePageLoading();
+
+                    //check data
+                    if(data == 1) {
+
+                        //clear data
+                        $('#user_firstname').val('')
+                        $('#user_lastname').val('')
+                        $('#username').val('')
+                        $('#user_phone').val('')
+                        $('#user_email').val('')
+
+                        $('#create_new_user').modal('hide');
+
+                        Swal.fire({
+                            title: "Create New User!",
+                            text: "User created successfully!",
+                            icon: "success"
+                          });
+
+                    }else {
+
+                        //clear data
+                        $('#user_firstname').val('')
+                        $('#user_lastname').val('')
+                        $('#username').val('')
+                        $('#user_phone').val('')
+                        $('#user_email').val('')
+
+                        $('#create_new_user').modal('hide');
+
+                        Swal.fire({
+                            title: "Create New User",
+                            text: "Unable to process your request, please retry!",
+                            icon: "error"
+                          });
+                    }
+    
+                },
+            });
+        }
+      });
+    
+})
+//end of function
+
+// function to show manage menu function
+function showManageMenuModal(menuID) {
+    
+
+    // Show page loading
+    KTApp.showPageLoading();
+
+    //ajax request
+       $.ajax({
+           type: "POST",
+           data: { menuid: menuID},
+           url: "http://localhost/delushadmin/dashboard/loadMenuDetails",
+           success: function (data) {
+
+               //hide
+               KTApp.hidePageLoading();
+
+               let menu = JSON.parse(data);
+
+               $('#menuID').val(menu.FOOD_MENU_ID)
+               $('#mn_foodCategory').val(menu.CATEGORY_ID)
+               $('#mn_foodName').val(menu.FOOD_NAME)
+               $('#mn_foodDesc').val(menu.DESCRIPTION)
+               $('#mn_foodAmount').val(menu.AMOUNT)
+               $('#mn_foodQuant').val(menu.QUANTITY)
+
+               if(menu.FOOD_MENU_IMG != '') {
+                  $('#nofoodPicture').hide()
+                  $('#currentImg').attr("src", menu.FOOD_MENU_IMG)
+                  $('#currentImgBox').show()
+               }else {
+                  $('#currentImgBox').hide()
+                  $('#nofoodPicture').show()
+               }
+              
+      
+               //show modal
+               $('#manage_food_menu').modal('show');
+           
+           },
+       });
+
+}
+// end of function
+
+// function to authorize loan disbursement
+$('#btnAuthoriseLoanDisburse').click(function () {
+
+     //show button
+     $('#btnAuthorizeLoanPayment').show()
+
+     //get details
+     let loanAmount = $('#cust_loan_amount').val()
+     let bankName = $('#cus_bank_name').val()
+     let accountNumber = $('#cus_acct_num').val()
+     let loadid = $('#loanProfileid').val()
+
+     let profID = $('#loanProfileid').val()
+ 
+     if(profID == '') {
+         showErrorAlert('Please select customer loan profile to proceed!')
+         return false;
+     }
+
+     $('#loadIDNumber').val(loadid)
+     $('#disburs_approve_amount').val(loanAmount)
+     $('#disburs_amount').val(loanAmount)
+     $('#disburs_bankname').val(bankName)
+     $('#disburs_accountName').val(accountNumber)
+
+
+     $('#authorize_loan_amount').modal('show');
+
+})
+
+// end of function
+
+
+// function to authorize loan disbursement
+$('#btnPostCustomerRepayment').click(function () {
+
+    //get details
+    let repay_amount = $('#repay_amount').val()
+    let repay_type = $('#repay_type').val()
+    let repay_channel = $('#repay_channel').val()
+    let repay_date = $('#repay_date').val()
+    let repay_narration = $('#repay_narration').val()
+
+    let profID = $('#loanProfileid').val()
+
+    if(profID == '') {
+        showErrorAlert('Please select customer loan profile to proceed!')
+        return false;
+    }
+
+if(repay_amount == '' || repay_type == '' || repay_channel == '' || repay_date == '' || repay_narration == '') {
+    showErrorAlert('All fields are compulsory!')
+    return false;
+}
+
+    // show prompt
+    Swal.fire({
+        text: "Do you want to post customer loan repayment?",
+        icon: "question",
+        buttonsStyling: false,
+        showCancelButton: true,
+        confirmButtonText: "Yes, Proceed!",
+        cancelButtonText: 'Nope, cancel it',
+        customClass: {
+            cancelButton: 'btn btn-danger',
+            confirmButton: "btn btn-primary"
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+        // Show page loading
+        KTApp.showPageLoading();
+
+         //ajax request
+            $.ajax({
+                type: "POST",
+                data: { loanID: profID, repayAmount:repay_amount, repayType: repay_type, repayChannel: repay_channel, repayDate: repay_date, repayNarration: repay_narration},
+                url: "http://localhost/lamsuite/loan/postCustomerLoanRepayment",
+                success: function (data) {
+
+                    //hide
+                    KTApp.hidePageLoading();
+
+                    //check data
+                    if(data == 1) {
+
+                        Swal.fire({
+                            title: "Customer Loan Repayment!",
+                            text: "Customer loan repayment successully posted!",
+                            icon: "success"
+                          });
+
+                          // refresh
+                          location.reload();
+
+                    }else {
+
+                        Swal.fire({
+                            title: "Customer Loan Repayment!",
+                            text: "Unable to process your request, please retry!",
+                            icon: "error"
+                          });
+
+                          // refresh
+                          //location.reload();
+
+                    }
+                
+                },
+            });
+        }
+      });
+
+})
+
+// end of function
+
 
 //function to approve customer profile
 $('#btnApproveCustomerLoan').click(function () {
@@ -227,6 +646,76 @@ $('#btnSearchCompanyProfile').click(function () {
 })
 //end of funcfion 
 
+//function to switch dashboards
+function switchDashboards(value) {
+
+    if(value == 1) {
+        location.replace("http://localhost/lamsuite/dashboard/home")
+    }else if(value == 2) {
+        location.replace("http://localhost/lamsuite/dashboard/loan")
+    }
+
+}
+//end of function
+
+//function to load customer loan profile
+$('#btnSearchCustomerProfileDisbursement').click(function () {
+    //get details
+    let profileid = $('#loanProfileid').val()
+
+    //check
+    if(profileid == '') {
+        showErrorAlert('Select customer loan profile to proceed!')
+        return false;
+    }
+
+     // Show page loading
+     KTApp.showPageLoading();
+
+    //ajax request
+    $.ajax({
+        type: "POST",
+        data: { profileid: profileid},
+        url: "http://localhost/lamsuite/loan/customerLoanApproval",
+        success: function (data) {
+
+            //hide
+            KTApp.hidePageLoading();
+
+            var response = JSON.parse(data);
+
+            //set personal details
+            $('#cust_fullname').val(response[0].FIRST_NAME + ' ' + response[0].LAST_NAME)
+            $('#cust_emp_name').val(response[0].EMPLOYER_NAME)
+            $('#emp_phone').val(response[0].PHONE_NUMBER)
+            $('#emp_email').val(response[0].EMAIL_ADDRESS)
+
+            $('#cust_loan_amount').val(Intl.NumberFormat('en-US').format(response[0].LOAN_AMOUNT))
+            $('#cust_loan_tenor').val(response[0].LOAN_TENOR + ' Months')
+            $('#cust_loan_purpose').val(response[0].LOAN_PURPOSE)
+            $('#cust_loan_interest').val(response[0].INTEREST_RATE + "%")
+
+            $('#cust_mon_repay').val(Intl.NumberFormat('en-US').format(response[0].MONTHLY_REPAYMENT))
+            $('#cus_total_paymt').val(Intl.NumberFormat('en-US').format(response[0].TOTAL_REPAYMENT))
+            $('#cus_bank_name').val(response[0].BANK_NAME)
+            $('#cus_acct_num').val(response[0].ACCOUNT_NUMBER)
+
+            $('#dateCreated').val(response[0].DATE_CREATED)
+            $('#createdBy').val('SYSTEM')
+
+            $('#approvalPolicy').val(response[0].APPROVAL_POLICY)
+
+            $('#approval1By').val(response[0].APPROVAL_ONE_BY)
+            $('#approval1Date').val(response[0].APPROVAL_ONE_DATE)
+
+            $('#approval2By').val(response[0].APPROVAL_TWO_BY)
+            $('#approval1Date').val(response[0].APPROVAL_TWO_DATE)
+
+        },
+    });
+})
+//end of funcfion 
+
 
 //function to load customer loan profile
 $('#btnSearchCustomerProfile').click(function () {
@@ -260,13 +749,13 @@ $('#btnSearchCustomerProfile').click(function () {
             $('#emp_phone').val(response[0].PHONE_NUMBER)
             $('#emp_email').val(response[0].EMAIL_ADDRESS)
 
-            $('#cust_loan_amount').val(response[0].LOAN_AMOUNT)
+            $('#cust_loan_amount').val(Intl.NumberFormat('en-US').format(response[0].LOAN_AMOUNT))
             $('#cust_loan_tenor').val(response[0].LOAN_TENOR + ' Months')
             $('#cust_loan_purpose').val(response[0].LOAN_PURPOSE)
             $('#cust_loan_interest').val(response[0].INTEREST_RATE + "%")
 
-            $('#cust_mon_repay').val(response[0].MONTHLY_REPAYMENT)
-            $('#cus_total_paymt').val(response[0].TOTAL_REPAYMENT)
+            $('#cust_mon_repay').val(Intl.NumberFormat('en-US').format(response[0].MONTHLY_REPAYMENT))
+            $('#cus_total_paymt').val(Intl.NumberFormat('en-US').format(response[0].TOTAL_REPAYMENT))
             $('#cus_bank_name').val(response[0].BANK_NAME)
             $('#cus_acct_num').val(response[0].ACCOUNT_NUMBER)
 

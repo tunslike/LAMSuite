@@ -33,6 +33,99 @@ class Account extends Controller {
 
     }
 
+     // function to create user
+     public function createNewUser() {
+
+        if(isLoggedIn()){
+            
+            $userid = $_SESSION['user_id'];
+        }else{
+
+            header("Location: " . URLROOT . "home?isLogged=0");
+        }
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            
+            $data = [
+                'firstname' => trim($_POST['userFirstname']),
+                'lastname' => trim($_POST['userLastname']),
+                'username' => trim($_POST['username']),
+                'email' => trim($_POST['userEmail']),
+                'mobile' => trim($_POST['userPhone']),
+                'roleid' => trim($_POST['userRole']),
+                'userid' => $userid,
+                'password' => '',
+                'errorMessage' => '',
+                'remoteIP' => $this->getRealIPAddr(),
+                'status' => 'false'
+            ]; 
+      
+           // Hash password
+           $data['password'] = password_hash('1234567', PASSWORD_DEFAULT);
+
+           //Register user from model function
+           if ($this->userModel->register($data)) { 
+
+               echo '1';
+               exit();
+
+           } else {
+
+               echo '2';
+               exit();
+           }
+
+        }
+    }
+
+
+    public function logoutUser() {
+
+        $userid = $_SESSION['user_id'];
+
+        $logoutUser = $this->userModel->logoutUser($userid);
+
+        if($logoutUser) {
+            unset($_SESSION['user_id']);
+            unset($_SESSION['username']);
+            unset($_SESSION['firstname']);
+            unset($_SESSION['mobile']);
+            unset($_SESSION['email']);
+            unset($_SESSION['role']);
+        }
+
+          //redirect to home page
+          header('location:' . URLROOT . '/signin');
+
+    }
+
+        // function to create role
+        public function manageUsers() {
+
+            if(isLoggedIn()){
+            
+                $userid = $_SESSION['user_id'];
+                
+            }else{
+    
+                header("Location: " . URLROOT . "home?isLogged=0");
+            }
+    
+          
+            $userList = $this->userModel->loadActiveUser();
+    
+            $data = [
+                'event' => '',
+                'title' => 'Manage Users',
+                'active' => 'manageUser',
+                'parent' => 'system',
+                'users' => $userList
+            ];
+    
+            $this->view('user/manageUsers', $data);
+    
+        }
+
     // function to create user
     public function createUser() {
 
@@ -137,9 +230,6 @@ class Account extends Controller {
         //Check for post
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            //Sanitize post data
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
             $data = [
                 'username' => trim($_POST['username']),
                 'password' => trim($_POST['entry']),
@@ -170,6 +260,8 @@ class Account extends Controller {
                 } else {
 
                     $data['passwordError'] = 'Password or username is incorrect. Please try again.';
+                    var_dump($data);
+                    exit();
                     $this->view('index', $data);
                 }
 

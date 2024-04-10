@@ -211,6 +211,154 @@ class Customer extends Controller {
     }
     //end of function
 
+        //function to manage customer CRM
+        public function viewCustomerCard () {
+
+            // check isLogged
+            if(isLoggedIn()){
+               
+               $userid = $_SESSION['user_id'];
+               
+           }else{
+   
+               header("Location: " . URLROOT . "?isLogged=0");
+           }
+
+        if(isset($_GET['customer_id'])) {
+            $customer_id = $_GET['customer_id'];
+        }
+
+           $customer_data = $this->userModel->loadCustomerPersonalRecord($customer_id);
+           $loan_card = $this->userModel->checkCustomerLoanCard($customer_id);
+
+            // data
+            $data = [
+                'title' => 'Manage CRM Customer',
+                'activeTab' => 'personal',
+                'parent' => 'crm',
+                'active' => 'manage_crm',
+                'customer' => $customer_data,
+                'loan' => $loan_card,
+            ];
+           
+                   $this->view('customer/viewCustomercard', $data);
+   
+       }
+       //end of function
+
+        //function to manage customer CRM
+        public function viewEmployerCard () {
+
+            // check isLogged
+            if(isLoggedIn()){
+               
+               $userid = $_SESSION['user_id'];
+               
+           }else{
+   
+               header("Location: " . URLROOT . "?isLogged=0");
+           }
+
+        if(isset($_GET['customer_id'])) {
+            $customer_id = $_GET['customer_id'];
+        }
+
+           $customer_data = $this->userModel->loadCustomerPersonalRecord($customer_id);
+           $employer_data = $this->userModel->loadCustomerEmployerRecord($customer_id);
+           $loan_card = $this->userModel->checkCustomerLoanCard($customer_id);
+        
+                   // data
+                $data = [
+                       'title' => 'Manage CRM Customer',
+                       'activeTab' => 'employment',
+                       'parent' => 'crm',
+                       'active' => 'manage_crm',
+                       'customer' => $customer_data,
+                       'employer' => $employer_data,
+                       'loan' => $loan_card
+                   ];
+           
+                   $this->view('customer/viewEmploymentCard', $data);
+   
+       }
+       //end of function
+
+
+             //function to manage customer CRM
+             public function viewNOKRecordCard () {
+
+                // check isLogged
+                if(isLoggedIn()){
+                   
+                   $userid = $_SESSION['user_id'];
+                   
+               }else{
+       
+                   header("Location: " . URLROOT . "?isLogged=0");
+               }
+    
+            if(isset($_GET['customer_id'])) {
+                $customer_id = $_GET['customer_id'];
+            }
+    
+            $customer_data = $this->userModel->loadCustomerPersonalRecord($customer_id);
+            $nok_data = $this->userModel->loadCustomerNOKRecord($customer_id);
+            $loan_card = $this->userModel->checkCustomerLoanCard($customer_id);
+            
+                       // data
+                    $data = [
+                        'title' => 'Manage CRM Customer',
+                        'activeTab' => 'nok',
+                        'parent' => 'crm',
+                        'active' => 'manage_crm',
+                        'customer' => $customer_data,
+                        'nok' => $nok_data,
+                        'loan' => $loan_card
+                    ];
+               
+                       $this->view('customer/viewNOKRecordCard', $data);
+       
+           }
+           //end of function
+
+    
+            //function to manage customer CRM
+            public function viewKYCDocumentsCard  () {
+
+                // check isLogged
+                if(isLoggedIn()){
+                   
+                   $userid = $_SESSION['user_id'];
+                   
+               }else{
+       
+                   header("Location: " . URLROOT . "?isLogged=0");
+               }
+    
+            if(isset($_GET['customer_id'])) {
+                $customer_id = $_GET['customer_id'];
+            }
+    
+            $customer_data = $this->userModel->loadCustomerPersonalRecord($customer_id);
+            $nok_data = $this->userModel->loadCustomerNOKRecord($customer_id);
+            $loan_card = $this->userModel->checkCustomerLoanCard($customer_id);
+            
+                       // data
+                    $data = [
+                           'title' => 'Manage CRM Customer',
+                           'activeTab' => 'document',
+                           'parent' => 'crm',
+                           'active' => 'manage_crm',
+                           'customer' => $customer_data,
+                           'nok' => $nok_data,
+                           'loan' => $loan_card
+                       ];
+               
+                       $this->view('customer/viewKYCDocumentsCard', $data);
+       
+           }
+           //end of function
+
 
      //function to manage customer CRM
      public function customerChannel () {
@@ -231,7 +379,7 @@ class Customer extends Controller {
                // data
                $data = [
                    'title' => 'Manage CRM Customer',
-                   'active' => 'manage_crm',
+                   'active' => 'channel',
                    'parent' => 'crm',
                    'channelList' => $customersChannel
                ];

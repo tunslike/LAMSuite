@@ -1195,7 +1195,7 @@
     <div class="card-header cursor-pointer">
         <!--begin::Card title-->
         <div class="card-title m-0">
-            <h3 class="fw-bold m-0">Loan Details</h3>
+            <h3 class="fw-bold m-0">Loan Reviews and Approvals</h3>
         </div>
         <!--end::Card title--> 
     </div>
@@ -1209,36 +1209,39 @@
 
 	<form action="#" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
 
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-danger">Employer Authorization</span>
+    </div>
+
+	<div class="row mb-10">
+     <div class="col-md-12 fv-row fv-plugins-icon-container">
+        <label for="exampleFormControlInput1" class="form-label">Employer Name</label>
+        <input type="text" name="employerArea" id="cust_loan_amount" readonly class="form-control"/>
+     </div>
+    </div>
 	<div class="row mb-10">
      <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Loan Amount</label>
+        <label for="exampleFormControlInput1" class="form-label">Authorized By</label>
         <input type="text" name="employerArea" id="cust_loan_amount" readonly class="form-control"/>
      </div>
      <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Loan Tenor</label>
+        <label for="exampleFormControlInput1" class="form-label">Date Authorized</label>
         <input type="text" name="employerState" id="cust_loan_tenor" readonly class="form-control"/>
      </div>
     </div>
 
+
+	<div style="margin-bottom:20px;">
+    <span class="badge badge-light-danger">Employer Authorization</span>
+    </div>
 	<div class="row mb-10">
      <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Loan Purpose</label>
+        <label for="exampleFormControlInput1" class="form-label">Approved By</label>
         <input type="text" name="employerArea" id="cust_loan_purpose" readonly class="form-control"/>
      </div>
      <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Interest Rate</label>
+        <label for="exampleFormControlInput1" class="form-label">Date Approved</label>
         <input type="text" name="employerState" id="cust_loan_interest" readonly class="form-control"/>
-     </div>
-    </div>
-
-	<div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Monthly Repayment</label>
-        <input type="text" readonly name="no_staff" id="cust_mon_repay" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Total Repayment</label>
-        <input type="text" name="loan_percent" readonly  id="cus_total_paymt" class="form-control"/>
      </div>
     </div>
 

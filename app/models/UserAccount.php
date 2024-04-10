@@ -134,29 +134,37 @@ class UserAccount {
 
         $rowData = $this->db->single();
 
-        $accountid = $rowData->ENTRY_ID;
-        $email = $rowData->EMAIL_ADDRESS;
-        $firstLogin = $rowData->FIRST_LOGIN_DATE;  
+        if($rowData) {
 
-        //get password
-        $this->db->query('SELECT ACCESS_CODE FROM LAM_ACCESS WHERE STATUS = 0 AND ENTRY_ID = :accountid');
+            $accountid = $rowData->ENTRY_ID;
+            $email = $rowData->EMAIL_ADDRESS;
+            $firstLogin = $rowData->FIRST_LOGIN_DATE;  
+    
+            //get password
+            $this->db->query('SELECT ACCESS_CODE FROM LAM_ACCESS WHERE STATUS = 0 AND ENTRY_ID = :accountid');
+    
+            //Bind value
+            $this->db->bind(':accountid', $accountid);
+    
+            $row = $this->db->single();
+    
+            $hashedPassword = $row->ACCESS_CODE;
+    
+            if (password_verify($password, $hashedPassword)) {
+    
+                $this->ActivateUserLogin($accountid, $firstLogin, $ipaddr);
+    
+                return $rowData;
+                
+            } else {
+                return false;
+            }
 
-        //Bind value
-        $this->db->bind(':accountid', $accountid);
+        }else{
 
-        $row = $this->db->single();
-
-        $hashedPassword = $row->ACCESS_CODE;
-
-        if (password_verify($password, $hashedPassword)) {
-
-            $this->ActivateUserLogin($accountid, $firstLogin, $ipaddr);
-
-            return $rowData;
-            
-        } else {
             return false;
         }
+
      }
 
     //update user login details

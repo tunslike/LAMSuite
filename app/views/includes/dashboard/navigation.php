@@ -8,7 +8,19 @@
                                         <span class="menu-icon">
                                             <i class="ki-duotone ki-home fs-2"></i>
                                         </span>
-                                        <span class="menu-title">Dashboard</span>
+                                        <span class="menu-title">CRM</span>
+                                    </a>
+                                    <!--end:Menu link-->
+									  <!--begin:Menu link-->
+									  <a class="menu-link" href="<?php echo URLROOT ?>/dashboard/loan">
+                                        <span class="menu-icon">
+                                            <i class="ki-duotone ki-chart-pie-3 fs-2">
+												<span class="path1"></span>
+												<span class="path2"></span>
+												<span class="path3"></span>
+											</i>
+                                        </span>
+                                        <span class="menu-title">Loan</span>
                                     </a>
                                     <!--end:Menu link-->
             </div>
@@ -85,22 +97,20 @@
 									<!--end:Menu link-->
 									<!--begin:Menu sub-->
 									<div class="menu-sub menu-sub-accordion">
-										<!--begin:Menu item-->
+										<!--begin:Menu item
 										<div class="menu-item">
-											<!--begin:Menu link-->
 											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'customer') { echo 'active';} ?>" href="<?php echo URLROOT ?>/customer/newCustomer">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
 												<span class="menu-title">New Customer</span>
 											</a>
-											<!--end:Menu link-->
 										</div>
-										<!--end:Menu item-->
+										nd:Menu item-->
 											<!--begin:Menu item-->
 											<div class="menu-item">
 											<!--begin:Menu link-->
-											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'customer') { echo 'active';} ?>" href="<?php echo URLROOT ?>/customer/customerChannel">
+											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'channel') { echo 'active';} ?>" href="<?php echo URLROOT ?>/customer/customerChannel">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
@@ -132,10 +142,9 @@
 									<!--begin:Menu link-->
 									<span class="menu-link">
 										<span class="menu-icon">
-											<i class="ki-duotone ki-address-book fs-2">
+											<i class="ki-duotone ki-briefcase fs-2">
 												<span class="path1"></span>
 												<span class="path2"></span>
-												<span class="path3"></span>
 											</i>
 										</span>
 										<span class="menu-title">Loans</span>
@@ -156,11 +165,11 @@
 											<!--end:Menu link-->
 										</div>
 										<!--end:Menu item-->
-								
+
 										<!--begin:Menu item-->
 										<div class="menu-item">
 											<!--begin:Menu link-->
-											<a class="menu-link" href="pages/user-profile/documents.html">
+											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'disburseLoan') { echo 'active';} ?>" href="<?php echo URLROOT ?>/loan/disburseLoan">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
@@ -169,10 +178,11 @@
 											<!--end:Menu link-->
 										</div>
 										<!--end:Menu item-->
+								
 										<!--begin:Menu item-->
 										<div class="menu-item">
 											<!--begin:Menu link-->
-											<a class="menu-link" href="pages/user-profile/documents.html">
+											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'repayLoan') { echo 'active';} ?>" href="<?php echo URLROOT ?>/loan/loanRepayment">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
@@ -190,9 +200,12 @@
 									<!--begin:Menu link-->
 									<span class="menu-link">
 										<span class="menu-icon">
-											<i class="ki-duotone ki-element-7 fs-2">
+											<i class="ki-duotone ki-element-plus fs-2">
 												<span class="path1"></span>
 												<span class="path2"></span>
+												<span class="path3"></span>
+												<span class="path4"></span>
+												<span class="path5"></span>
 											</i>
 										</span>
 										<span class="menu-title">Workflows</span>
@@ -216,18 +229,6 @@
                                         <!--begin:Menu item-->
 										<div class="menu-item">
 											<!--begin:Menu link-->
-											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'crmWorkflow') { echo 'active';} ?>" href="<?php echo URLROOT ?>/customer/crmWorkflow">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">CRM</span>
-											</a>
-											<!--end:Menu link-->
-										</div>
-										<!--end:Menu item-->
-                                        <!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link-->
 											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'approveLoan') { echo 'active';} ?>" href="<?php echo URLROOT ?>/loan/approveNewLoan">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
@@ -243,7 +244,7 @@
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">System</span>
+												<span class="menu-title">Company Profile</span>
 											</a>
 											<!--end:Menu link-->
 										</div>
@@ -262,7 +263,7 @@
 								</div>
 								<!--end:Menu item-->
 								<!--begin:Menu item-->
-								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+								<div data-kt-menu-trigger="click" class="menu-item <?php if(isset($data['parent']) && $data['parent'] == 'user') {echo 'here show';} ?> menu-accordion">
 									<!--begin:Menu link-->
 									<span class="menu-link">
 										<span class="menu-icon">
@@ -280,23 +281,23 @@
 										<!--begin:Menu item-->
 										<div class="menu-item">
 											<!--begin:Menu link-->
-											<a class="menu-link" href="apps/projects/list.html">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">New User</span>
-											</a>
-											<!--end:Menu link-->
-										</div>
-										<!--end:Menu item-->
-										<!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link-->
-											<a class="menu-link" href="apps/projects/project.html">
+											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'manageUser') { echo 'active';} ?>" href="<?php echo URLROOT ?>/dashboard/manageUsers">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
 												<span class="menu-title">Manage Users</span>
+											</a>
+											<!--end:Menu link-->
+										</div>
+										<!--end:Menu item-->
+												<!--begin:Menu item-->
+												<div class="menu-item">
+											<!--begin:Menu link-->
+											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'userRole') { echo 'active';} ?>" href="<?php echo URLROOT ?>/dashboard/manageUsers">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">User Roles</span>
 											</a>
 											<!--end:Menu link-->
 										</div>
@@ -311,7 +312,7 @@
 									<!--begin:Menu link-->
 									<span class="menu-link">
 										<span class="menu-icon">
-											<i class="ki-duotone ki-abstract-25 fs-2">
+											<i class="ki-duotone ki-gear fs-2">
 												<span class="path1"></span>
 												<span class="path2"></span>
 											</i>
