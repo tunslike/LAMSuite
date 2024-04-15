@@ -282,9 +282,167 @@ $('#btnCreateNewUser').click(function () {
 })
 //end of function
 
-// function to show manage menu function
-function showManageMenuModal(menuID) {
+
+//function to create new food category
+$('#btnUpdateUser').click(function () {
     
+    //get details
+    let userid = $('#userid').val()
+    let user_firstname = $('#user_firstname').val()
+    let user_lastname = $('#user_lastname').val()
+    let username = $('#username').val()
+    let user_role = $('#userRole').val()
+    let user_phone = $('#user_phone').val()
+    let user_email = $('#user_email').val()
+
+    if(user_firstname == '' || user_lastname == '' || user_role == '' || username == '') {
+        showErrorAlert('Please enter all fields!')
+        return false;
+    }
+    
+     // show prompt
+     Swal.fire({
+        text: "Do you want to create user?",
+        icon: "question",
+        buttonsStyling: false,
+        showCancelButton: true,
+        confirmButtonText: "Yes, Proceed!",
+        cancelButtonText: 'Nope, cancel it',
+        customClass: {
+            cancelButton: 'btn btn-danger',
+            confirmButton: "btn btn-primary"
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+        // Show page loading
+        KTApp.showPageLoading();
+
+         //ajax request
+            $.ajax({
+                type: "POST",
+                data: { username:username, userFirstname: user_firstname, userLastname:user_lastname,userRole: user_role, userPhone: user_phone, userEmail:user_email},
+                url: "http://localhost/lamsuite/account/createNewUser",
+                success: function (data) {
+
+                    //hide
+                    KTApp.hidePageLoading();
+
+                    //check data
+                    if(data == 1) {
+
+                        //clear data
+                        $('#user_firstname').val('')
+                        $('#user_lastname').val('')
+                        $('#username').val('')
+                        $('#user_phone').val('')
+                        $('#user_email').val('')
+
+                        $('#create_new_user').modal('hide');
+
+                        Swal.fire({
+                            title: "Create New User!",
+                            text: "User created successfully!",
+                            icon: "success"
+                          });
+
+                    }else {
+
+                        //clear data
+                        $('#user_firstname').val('')
+                        $('#user_lastname').val('')
+                        $('#username').val('')
+                        $('#user_phone').val('')
+                        $('#user_email').val('')
+
+                        $('#create_new_user').modal('hide');
+
+                        Swal.fire({
+                            title: "Create New User",
+                            text: "Unable to process your request, please retry!",
+                            icon: "error"
+                          });
+                    }
+    
+                },
+            });
+        }
+      });
+    
+})
+//end of function
+
+//function to create new food category
+$('#btnUpdateBankDetails').click(function () {
+    
+    //get details
+    let bank_name = $('#bank_name').val()
+    let bank_account_number = $('#bank_account_number').val()
+    let bank_account_name = $('#bank_account_name').val()
+    
+    if(bank_name == '' || bank_account_number == '' || bank_account_name == '') {
+        showErrorAlert('Please enter all fields!')
+        return false;
+    }
+    
+     // show prompt
+     Swal.fire({
+        text: "Do you want to save bank details?",
+        icon: "question",
+        buttonsStyling: false,
+        showCancelButton: true,
+        confirmButtonText: "Yes, Proceed!",
+        cancelButtonText: 'Nope, cancel it',
+        customClass: {
+            cancelButton: 'btn btn-danger',
+            confirmButton: "btn btn-primary"
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+        // Show page loading
+        KTApp.showPageLoading();
+
+         //ajax request
+            $.ajax({
+                type: "POST",
+                data: { bankName:bank_name, acctNumber: bank_account_number, acctName:bank_account_name},
+                url: "http://localhost/lamsuite/dashboard/saveUpdateBankDetails",
+                success: function (data) {
+
+                    //hide
+                    KTApp.hidePageLoading();
+
+                    //check data
+                    if(data == 1) {
+
+                        //clear data
+                        Swal.fire({
+                            title: "Save Bank Details!",
+                            text: "Bank account details saved successfully!",
+                            icon: "success"
+                          });
+
+                    }else {
+
+                        //clear data
+                        Swal.fire({
+                            title: "Save Bank Details",
+                            text: "Unable to process your request, please retry!",
+                            icon: "error"
+                          });
+                    }
+    
+                },
+            });
+        }
+      });
+    
+})
+//end of function
+
+// function to show manage menu function
+function showManageUserProfile(userID) {
 
     // Show page loading
     KTApp.showPageLoading();
@@ -292,34 +450,25 @@ function showManageMenuModal(menuID) {
     //ajax request
        $.ajax({
            type: "POST",
-           data: { menuid: menuID},
-           url: "http://localhost/delushadmin/dashboard/loadMenuDetails",
+           data: { user_id: userID},
+           url: "http://localhost/lamsuite/dashboard/loanManageProfile",
            success: function (data) {
 
                //hide
                KTApp.hidePageLoading();
 
-               let menu = JSON.parse(data);
+               let profile = JSON.parse(data);
 
-               $('#menuID').val(menu.FOOD_MENU_ID)
-               $('#mn_foodCategory').val(menu.CATEGORY_ID)
-               $('#mn_foodName').val(menu.FOOD_NAME)
-               $('#mn_foodDesc').val(menu.DESCRIPTION)
-               $('#mn_foodAmount').val(menu.AMOUNT)
-               $('#mn_foodQuant').val(menu.QUANTITY)
-
-               if(menu.FOOD_MENU_IMG != '') {
-                  $('#nofoodPicture').hide()
-                  $('#currentImg').attr("src", menu.FOOD_MENU_IMG)
-                  $('#currentImgBox').show()
-               }else {
-                  $('#currentImgBox').hide()
-                  $('#nofoodPicture').show()
-               }
+               $('#userid').val(profile.ENTRY_ID)
+               $('#acct_firstname').val(profile.FIRST_NAME)
+               $('#acct_lastname').val(profile.LAST_NAME)
+               $('#acct_username').val(profile.EMAIL_ADDRESS)
+               $('#acct_userRole').val(profile.ROLE_ID)
+               $('#acct_emailaddress').val(profile.EMAIL_ADDRESS)
+               $('#acct_phone').val(profile.MOBILE_PHONE)
               
-      
                //show modal
-               $('#manage_food_menu').modal('show');
+               $('#manage_new_user').modal('show');
            
            },
        });
@@ -369,6 +518,7 @@ $('#btnPostCustomerRepayment').click(function () {
     let repay_channel = $('#repay_channel').val()
     let repay_date = $('#repay_date').val()
     let repay_narration = $('#repay_narration').val()
+    let outstanding_amt = $('#next_due_payment').val()
 
     let profID = $('#loanProfileid').val()
 
@@ -379,6 +529,11 @@ $('#btnPostCustomerRepayment').click(function () {
 
 if(repay_amount == '' || repay_type == '' || repay_channel == '' || repay_date == '' || repay_narration == '') {
     showErrorAlert('All fields are compulsory!')
+    return false;
+}
+
+if(repay_type == 'Full Repayment' && repay_amount != outstanding_amt) {
+    showErrorAlert('Please provide full outstanding payment as full payment to proceed!')
     return false;
 }
 
@@ -684,6 +839,10 @@ $('#btnSearchCustomerProfileDisbursement').click(function () {
 
             var response = JSON.parse(data);
 
+            let totalRepayment = response[0].TOTAL_REPAYMENT;
+            let loanBalance = response[0].TOTAL_LOAN_REPAYMENT;
+            let next_payment_due = totalRepayment - loanBalance;
+
             //set personal details
             $('#cust_fullname').val(response[0].FIRST_NAME + ' ' + response[0].LAST_NAME)
             $('#cust_emp_name').val(response[0].EMPLOYER_NAME)
@@ -694,6 +853,9 @@ $('#btnSearchCustomerProfileDisbursement').click(function () {
             $('#cust_loan_tenor').val(response[0].LOAN_TENOR + ' Months')
             $('#cust_loan_purpose').val(response[0].LOAN_PURPOSE)
             $('#cust_loan_interest').val(response[0].INTEREST_RATE + "%")
+            $('#loan_repayment_balance').val(Intl.NumberFormat('en-US').format(response[0].TOTAL_LOAN_REPAYMENT))
+            $('#next_due_payment').val(Intl.NumberFormat('en-US').format(next_payment_due));
+        
 
             $('#cust_mon_repay').val(Intl.NumberFormat('en-US').format(response[0].MONTHLY_REPAYMENT))
             $('#cus_total_paymt').val(Intl.NumberFormat('en-US').format(response[0].TOTAL_REPAYMENT))

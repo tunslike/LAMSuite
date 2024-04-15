@@ -51,6 +51,28 @@
     }
  // end of function
 
+
+    //function to get validation data and pull customer name
+    public function loadUserProfile($userid) {
+    
+        try {
+        
+                        $this->db->query("SELECT * FROM LAM_ENTRY WHERE ENTRY_ID = :userid;");
+        
+                        //Bind values
+                        $this->db->bind(':userid', $userid);
+                    
+                        $row = $this->db->single();
+        
+                        return $row;
+        
+                    }catch (PDOException $e) {
+                        echo 'ERROR!';
+                        print_r( $e );
+                    }
+    }
+    //end of function
+
         // function to approve company profile
         public function approveCompanyProfile ($data) {
             
@@ -222,6 +244,73 @@
     }
     //end of function
 
+       //function to create company loan Setup
+       public function updateBankAccountDetails($data) {
+
+        try{
+
+             // Prepared Statement
+             $this->db->query("SELECT COUNT(*)COUNT FROM LAM_BANK_DETAILS WHERE STATUS = 0;");
+         
+             $row = $this->db->single();
+         
+             $count = $row->COUNT;
+
+             if($count == 0) {
+
+                    $this->db->query("INSERT INTO LAM_BANK_DETAILS (BANK_ID, BANK_NAME, ACCOUNT_NUMBER, ACCOUNT_NAME, 
+                                      DATE_CREATED, CREATED_BY) VALUES (:bankid, :bankName, :acctNumber, :acctName, 
+                                      :dateCreated, :createdBy)");
+
+                    $date =  date('Y-m-d H:i:s');
+                    $hashid = $this->getUniqueID();
+
+                    //Bind values
+                    $this->db->bind(':bankid', $hashid);
+                    $this->db->bind(':bankName', $data['bankName']);
+                    $this->db->bind(':acctNumber', $data['acctNumber']);
+                    $this->db->bind(':acctName', $data['acctName']);
+                    $this->db->bind(':createdBy', $data['userid']);
+                    $this->db->bind(':dateCreated', $date);
+
+                    //Execute function
+                    if ($this->db->execute()) {
+                    return true;
+                    } else {
+                    return false;
+                    }
+
+             }else {
+
+                    $this->db->query("UPDATE LAM_BANK_DETAILS SET BANK_NAME = :bankName, ACCOUNT_NUMBER = :acctNumber, 
+                                     ACCOUNT_NAME = :acctName, DATE_UPDATED = :dateUpdated, UPDATED_BY = :updatedBy WHERE STATUS = 0");
+
+                    $date =  date('Y-m-d H:i:s');
+
+                    //Bind values
+                    $this->db->bind(':bankName', $data['bankName']);
+                    $this->db->bind(':acctNumber', $data['acctNumber']);
+                    $this->db->bind(':acctName', $data['acctName']);
+                    $this->db->bind(':updatedBy', $data['userid']);
+                    $this->db->bind(':dateUpdated', $date);
+
+                    //Execute function
+                    if ($this->db->execute()) {
+                    return true;
+                    } else {
+                    return false;
+                    }
+
+             }
+        
+
+        }catch(PDOException $e){
+            echo 'ERROR!';
+            print_r( $e );
+        }
+}
+//end of function
+
         //function to create company profile
         public function createCompanyProfile ($data) {
                 try{
@@ -273,14 +362,55 @@
          public function loadActiveUser() {
 
             //Prepared statement
-            $this->db->query("SELECT USERNAME, LAST_NAME, FIRST_NAME, MOBILE_PHONE, 
+            $this->db->query("SELECT ENTRY_ID, USERNAME, LAST_NAME, FIRST_NAME, MOBILE_PHONE, 
                              EMAIL_ADDRESS, ROLE_ID, DATE_CREATED,CREATED_BY, FIRST_LOGIN_DATE, IS_LOGGED, STATUS FROM LAM_ENTRY;");
     
             $results = $this->db->resultSet();
     
             return $results;
-}
+        }
 
+         //function to load user
+         public function loadDashboardDetails() {
+
+            //Prepared statement
+            $this->db->query("SELECT (SELECT COUNT(*) FROM LAM_CUSTOMER WHERE STATUS IN (0,1))TOTAL_CUSTOMERS, 
+                             (SELECT COUNT(*) FROM LAM_CUSTOMER WHERE STATUS IN (0,1))TOTAL_ACCOUNTS, 
+                             (SELECT COUNT(*) FROM LAM_CUSTOMER_LOAN_REQUEST WHERE LOAN_STATUS IN (1,2,3))TOTAL_LOAN_ACCOUNTS;");
+    
+            $results = $this->db->single();
+    
+            return $results;
+        }
+
+        // load customer CRM
+        public function loadCustomerCRMDashboard() {
+
+              //Prepared statement
+              $this->db->query("SELECT C.CUSTOMER_ID, CUSTOMER_NO, SCHEME_TYPE,ACCOUNT_NO, LAST_NAME, FIRST_NAME, 
+                                OTHER_NAME, GENDER, PHONE_NUMBER, EMAIL_ADDRESS, DATE_CREATED, C.STATUS,
+                                (SELECT COMPANY_NAME FROM LAM_COMPANY_PROFILE WHERE PROFILE_ID = E.EMPLOYER_ID)EMPLOYER_NAME 
+                                FROM LAM_CUSTOMER C LEFT JOIN LAM_CUSTOMER_EMPLOYERS E ON C.CUSTOMER_ID = E.CUSTOMER_ID;");
+
+            $results = $this->db->resultSet();
+
+              return $results;
+        }
+        // end of customer CRM
+
+        //function to load loan dashboard
+        public function loadLoanDashboardDetails () {
+
+             //Prepared statement
+             $this->db->query("SELECT (SELECT COUNT(*) FROM LAM_CUSTOMER_LOAN_REQUEST WHERE LOAN_STATUS = 3)ACTIVE_LOANS,
+                             (SELECT SUM(AMOUNT_DISBURSED) FROM LAM_CUSTOMER_LOAN_REQUEST WHERE LOAN_STATUS = 3)AMOUNT_DISBURSED,
+                             (SELECT SUM(REPAYMENT_AMOUNT) FROM LAM_CUSTOMER_LOAN_REPAYMENT)TOTAL_REPAYMENT;");
+
+            $results = $this->db->single();
+
+            return $results;
+        }
+        // end of function
 
         // function to update approval workflow setup 
         public function updateWorkflowApproval($data) {

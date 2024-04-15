@@ -178,6 +178,51 @@
             }
             //end of function
 
+            //function to get validation data and pull customer name
+            public function fetchTotalRepayment($loanid) {
+    
+                try {
+            
+                    $this->db->query("SELECT SUM(REPAYMENT_AMOUNT)TOTAL_REPAYMENT FROM LAM_CUSTOMER_LOAN_REPAYMENT 
+                                     WHERE LOAN_ID = :loanid;");
+            
+                            //Bind values
+                            $this->db->bind(':loanid', $loanid);
+                        
+                            $row = $this->db->single();
+            
+                            return $row;
+            
+                    }catch (PDOException $e) {
+                            echo 'ERROR!';
+                            print_r( $e );
+                    }
+            }
+            //end of function
+        
+              //function to get validation data and pull customer name
+              public function loadEmployerDetailsAuthorization($loanid) {
+    
+                try {
+    
+                    $this->db->query("SELECT P.COMPANY_NAME, P.CONTACT_PERSON, L.EMPLOYER_AUTHORISED_BY, L.EMPLOYER_AUTHORISED_DATE FROM LAM_COMPANY_PROFILE P LEFT JOIN LAM_CUSTOMER_EMPLOYERS E ON P.PROFILE_ID = E.EMPLOYER_ID
+                    LEFT JOIN LAM_CUSTOMER_LOAN_REQUEST L ON E.CUSTOMER_ID = L.CUSTOMER_ID
+                    WHERE L.LOAN_ID = :loanid;");
+    
+                    //Bind values
+                    $this->db->bind(':loanid', $loanid);
+                
+                    $row = $this->db->single();
+    
+                    return $row;
+    
+                }catch (PDOException $e) {
+                    echo 'ERROR!';
+                    print_r( $e );
+                }
+            }
+            //end of function
+
         //function to get validation data and pull customer name
         public function validateCustomerVerification($token) {
 
@@ -197,6 +242,79 @@
                 $row = $this->db->single();
 
                 return $row;
+
+            }catch (PDOException $e) {
+                echo 'ERROR!';
+                print_r( $e );
+            }
+        }
+        //end of function
+
+        // function to calculate amortized repayment schedule
+public function calculateAmortizedRepaymentSchedule($loanAmount, $loanInterest, $tenor) {
+
+    //Loan parameters
+    $loanAmount = $loanAmount; // Principal amount
+    $annualInterestRate = $loanInterest / 100; // Annual interest rate (2.5%)
+    $loanTermInMonths = $tenor; // Loan term in months
+
+    // Calculate monthly interest rate
+    $monthlyInterestRate = $annualInterestRate / 12;
+
+    // Calculate number of payments
+    $numberOfPayments = $loanTermInMonths;
+
+    // Calculate monthly payment
+    $monthlyPayment = ($loanAmount * $monthlyInterestRate) /
+        (1 - pow(1 + $monthlyInterestRate, -$numberOfPayments));
+
+    // Print header
+    //echo "Monthly Payment: $" . number_format($monthlyPayment, 2) . "\n";
+    //echo "Payment #\tPrincipal\tInterest\tBalance\n";
+
+    // Calculate amortization schedule
+    $balance = $loanAmount;
+
+    $loan_schedule = array(); 
+    $i = 0;
+
+    for ($i = 1; $i <= $numberOfPayments; $i++) {
+
+        $interest = $balance * $monthlyInterestRate;
+        $principal = $monthlyPayment - $interest;
+        $balance -= $principal;
+
+        $loan_schedule [$i]["Payment"] = $i;
+        $loan_schedule [$i]["Repayment"]= number_format(($principal + $interest), 2);
+        $loan_schedule [$i]["Principal"]= number_format($principal, 2);
+        $loan_schedule [$i]["Interest"]= number_format($interest, 2);
+        $loan_schedule [$i]["Balance"]= number_format($balance, 2);
+
+            //echo $i . "\t\t$" . number_format($principal, 2) . "\t\t$" .
+            //number_format($interest, 2) . "\t\t$" . number_format($balance, 2) . "\n";
+    }
+
+    return $loan_schedule;
+
+}
+// end of function
+
+           //function to get validation data and pull customer name
+           public function fetchLoanHistory($loanid) {
+
+            try {
+
+                $this->db->query("SELECT LOAN_NUMBER, LOAN_AMOUNT, LOAN_TENOR, LOAN_PURPOSE, LOAN_STATUS, 
+                                 TOTAL_REPAYMENT, SUM(R.REPAYMENT_AMOUNT)REPAYMENT_AMOUNT, AUTHORISE_DISBURSE_DATE 
+                                 FROM LAM_CUSTOMER_LOAN_REQUEST L LEFT JOIN LAM_CUSTOMER_LOAN_REPAYMENT R ON 
+                                 L.LOAN_ID = R.LOAN_ID WHERE L.LOAN_ID = :loanid;");
+
+                //Bind values
+                $this->db->bind(':loanid', $loanid);
+            
+                $results = $this->db->resultSet();
+                        
+                return $results;
 
             }catch (PDOException $e) {
                 echo 'ERROR!';
@@ -303,17 +421,16 @@
                     L.LOAN_AMOUNT, L.LOAN_TENOR, L.LOAN_PURPOSE, L.MONTHLY_REPAYMENT, L.TOTAL_REPAYMENT, L.INTEREST_RATE,
                     (SELECT P.COMPANY_NAME FROM LAM_COMPANY_PROFILE P WHERE P.PROFILE_ID = E.EMPLOYER_ID)EMPLOYER_NAME, L.DATE_CREATED, L.CREATED_BY,
                     L.APPROVAL_ONE_BY, L.APPROVAL_ONE_DATE, L.APPROVAL_TWO_BY, APPROVAL_TWO_DATE, A.BANK_NAME, A.ACCOUNT_NUMBER, 
-                    (SELECT WORKFLOW_POLICY FROM LAM_WORKFLOW_SETUP WHERE STATUS = 0)APPROVAL_POLICY, A.BANK_NAME, A.ACCOUNT_NUMBER 
+                    (SELECT WORKFLOW_POLICY FROM LAM_WORKFLOW_SETUP WHERE STATUS = 0)APPROVAL_POLICY, A.BANK_NAME, A.ACCOUNT_NUMBER,
+                    (SELECT SUM(REPAYMENT_AMOUNT)TOTAL_REPAYMENT FROM LAM_CUSTOMER_LOAN_REPAYMENT WHERE LOAN_ID = L.LOAN_ID)TOTAL_LOAN_REPAYMENT
                     FROM LAM_CUSTOMER_LOAN_REQUEST L LEFT JOIN LAM_CUSTOMER C ON L.CUSTOMER_ID = C.CUSTOMER_ID LEFT JOIN LAM_CUSTOMER_EMPLOYERS E 
-                    ON L.CUSTOMER_ID = E.CUSTOMER_ID 
-                    LEFT JOIN LAM_CUSTOMER_BANK_ACCOUNTS A ON L.ACCOUNT_DETAILS_ID = A.BANK_ACCOUNT_ID
+                    ON L.CUSTOMER_ID = E.CUSTOMER_ID LEFT JOIN LAM_CUSTOMER_BANK_ACCOUNTS A ON L.ACCOUNT_DETAILS_ID = A.BANK_ACCOUNT_ID
                     WHERE L.LOAN_ID = :loadid");
         
                     //Bind values
                     $this->db->bind(':loadid', $loanid);
     
                     $results = $this->db->resultSet();
-    
     
                     return $results;
                 
@@ -331,8 +448,10 @@
             
                 //prepered statement
                 $this->db->query("SELECT L.LOAN_STATUS, L.LOAN_ID, L.LOAN_NUMBER, C.FIRST_NAME, C.LAST_NAME, L.LOAN_AMOUNT, L.MONTHLY_REPAYMENT, 
-                L.TOTAL_REPAYMENT, L.LOAN_PURPOSE, L.INTEREST_RATE, L.LOAN_TENOR,
-                (SELECT P.COMPANY_NAME FROM LAM_COMPANY_PROFILE P WHERE P.PROFILE_ID = E.EMPLOYER_ID)EMPLOYER_NAME, L.DATE_CREATED, L.CREATED_BY
+                L.TOTAL_REPAYMENT, L.LOAN_PURPOSE, L.INTEREST_RATE, L.LOAN_TENOR, L.AUTHORISE_DISBURSE_DATE, 
+                (SELECT CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME FROM LAM_ENTRY WHERE ENTRY_ID = L.AUTHORISE_DISBURSE_BY)DISBURSE_BY,
+                (SELECT P.COMPANY_NAME FROM LAM_COMPANY_PROFILE P WHERE P.PROFILE_ID = E.EMPLOYER_ID)EMPLOYER_NAME, L.DATE_CREATED, L.CREATED_BY,
+                (SELECT SUM(REPAYMENT_AMOUNT)TOTAL_REPAYMENT FROM LAM_CUSTOMER_LOAN_REPAYMENT WHERE LOAN_ID = L.LOAN_ID)TOTAL_LOAN_REPAYMENT
                 FROM LAM_CUSTOMER_LOAN_REQUEST L LEFT JOIN LAM_CUSTOMER C ON L.CUSTOMER_ID = C.CUSTOMER_ID LEFT JOIN LAM_CUSTOMER_EMPLOYERS E 
                 ON L.CUSTOMER_ID = E.CUSTOMER_ID WHERE L.LOAN_ID = :loadid;");
     

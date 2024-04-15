@@ -99,42 +99,23 @@
     </div>
     <!--end::Logo-->
 
-    <?php if(isset($data['otp']) && $data['otp'] == 'sent' && $data['validate'] == 'true'): ?>
-        <h1 class="fw-bolder text-gray-900 mb-7">
-        Enter validation OTP to authorize request
-        </h1>
-    <?php elseif(isset($data['otp']) && $data['otp'] != 'sent' && $data['validate'] == 'true'): ?>
-        <h1 class="fw-bolder text-gray-900 mb-7">
-        Authorization is required
-        </h1>
-    <?php endif; ?>
 
-    <?php if($data['authorized'] == 'true'):  ?>
-        <img style="text-align:center;" alt="Logo" src="<?php echo URLROOT ?>/public/img/pass_check.png" class="h-80px"/>
+        <img style="text-align:center;" alt="Logo" src="<?php echo URLROOT ?>/public/img/invalid_link.png" class="h-80px"/>
         <h1 class="fw-bolder text-gray-900 mb-7">
-            Authorization Completed!
+            Link has Expired!
         </h1>
-    <?php endif; ?>
     
     <!--begin::Text-->
     <div class="fw-semibold fs-6 text-gray-500 mb-7">
 
-    <?php if(isset($data['otp']) && $data['otp'] == 'sent' && $data['validate'] == 'true'): ?>
-        Please enter the OTP code sent to your phone <br/>to authorize the loan application request
-    <?php elseif(isset($data['otp']) && $data['otp'] != 'sent' && $data['validate'] == 'true'): ?>
-        You are required to authorize the loan application <br/>for your staff with details below.
-    <?php endif; ?>
-
-    <?php if(isset($data['authorized']) && $data['authorized'] == 'true'):  ?>
-        Your authorization for the loan request of your <br/>staff below has been submitted succesfully
+    <?php if(isset($data['authorized']) && $data['authorized'] == 'false'):  ?>
+        The authorization link you are trying to access is invalid and no longer valid!
     <?php endif; ?>
 
 
         <br/>
         <br/>
-        <div class="card-toolbar">
-            <span class="badge badge-light-primary fw-bold me-auto px-4 py-4"><?php if(isset($_SESSION['customerName'])) { echo ucwords($_SESSION['customerName']);} ?></span>
-        </div>
+  
     </div>
     <!--end::Text--> 
 
@@ -145,13 +126,13 @@
 
             <?php if($data['authorized'] != 'true'):  ?>
                 
-                <?php if($data['otp'] == 'sent' && $data['validate'] == 'true'): ?>
+                <?php if($data['otp'] == 'sent' && $data['authorized'] == 'true'): ?>
                     <input type="text" placeholder="Enter OTP here" required name="otpValue" maxlength="6" autocomplete="off" class="form-control">
                     <button class="btn btn-success text-nowrap" id="kt_coming_soon_submit">
                         <span class="indicator-label">Authorize Request</span>
                     </button>
 
-                <?php elseif($data['validate'] == 'true'): ?>
+                <?php elseif($data['authorized'] == 'true'): ?>
 
                     <button class="btn btn-success text-nowrap" id="kt_coming_soon_submit">
                         <span class="indicator-label">Validate Authorization</span>

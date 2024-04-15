@@ -82,6 +82,7 @@
 								</div>
 							</form>
 							<!--end::Form-->
+							<a style="border-radius: 7px; border-color: #66a1e6; border-width: 1px; border-style: solid; padding: 10px 35%;" href="<?php echo URLROOT; ?>/signin">Login In here</a>
 						</div>
 						<!--end::Wrapper-->
 						<!--begin::Footer-->

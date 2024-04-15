@@ -214,18 +214,6 @@
 									<!--end:Menu link-->
 									<!--begin:Menu sub-->
 									<div class="menu-sub menu-sub-accordion">
-										<!--begin:Menu item-->
-										<div class="menu-item">
-											<!--begin:Menu link-->
-											<a class="menu-link" href="widgets/lists.html">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-												<span class="menu-title">Schemes</span>
-											</a>
-											<!--end:Menu link-->
-										</div>
-										<!--end:Menu item-->
                                         <!--begin:Menu item-->
 										<div class="menu-item">
 											<!--begin:Menu link-->
@@ -326,7 +314,7 @@
 										<!--begin:Menu item-->
 										<div class="menu-item">
 											<!--begin:Menu link-->
-											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'setup') { echo 'active';} ?>" href="apps/contacts/getting-started.html">
+											<a class="menu-link <?php if(isset($data['active']) && $data['active'] == 'setup') { echo 'active';} ?>" href="<?php echo URLROOT ?>/dashboard/setup">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>

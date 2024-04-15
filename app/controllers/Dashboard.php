@@ -71,7 +71,43 @@ class Dashboard extends Controller {
            }
 
        }
+   }
+   // end of function 
 
+
+     // function to approve customer record
+     public function saveUpdateBankDetails() {
+
+        // check isLogged
+        if(isLoggedIn()){
+          
+           $userid = $_SESSION['user_id'];
+           
+       }else{
+
+           header("Location: " . URLROOT . "?isLogged=0");
+       }
+
+        //check post
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+           
+           $data = [
+               'bankName' => trim($_POST['bankName']),
+               'acctName' => trim($_POST['acctName']),
+               'acctNumber' => trim($_POST['acctNumber']),
+               'userid' => $userid
+           ];
+
+           // approve record
+           $approve = $this->userModel->updateBankAccountDetails($data);
+
+           if($approve) {
+               echo '1';
+           }else{ 
+               echo '0';
+           }
+
+       }
    }
    // end of function 
 
@@ -101,6 +137,59 @@ class Dashboard extends Controller {
 
     }
     //end of function
+
+    //HOME MANAGE MENU ******************* //
+          public function loanManageProfile() {
+
+            if(isLoggedIn()){
+                
+                $customerid = $_SESSION['user_id'];
+                
+            }else{
+    
+                header("Location: " . URLROOT . "home?isLogged=0");
+            }
+
+           //Check for post
+           if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                $user_id = $_POST['user_id'];
+
+                // create
+                $userProfile = $this->userModel->loadUserProfile($user_id);
+
+                echo json_encode($userProfile);
+            
+            }
+  
+        }
+
+           // ************* END OF FUNCTION ****************** //
+
+           // function to create role
+           public function setup() {
+
+            if(isLoggedIn()){
+            
+                $userid = $_SESSION['user_id'];
+                
+            }else{
+    
+                header("Location: " . URLROOT . "home?isLogged=0");
+            }
+    
+        
+            $data = [
+                'event' => '',
+                'title' => 'Manage Setup',
+                'active' => 'setup',
+                'parent' => 'admin',
+            ];
+    
+            $this->view('setup/portalSetup', $data);
+    
+        }
+        // ************* END OF FUNCTION ****************** //
 
            // function to create role
            public function manageUsers() {
@@ -360,8 +449,13 @@ public function companyProfile () {
             header("Location: " . URLROOT . "?isLogged=0");
         }
 
+        $dashboard = $this->userModel->loadDashboardDetails();
+        $crm_data = $this->userModel->loadCustomerCRMDashboard();
+
         $data = [
-            'title' => 'Dashboard Page'
+            'title' => 'Dashboard Page',
+            'dashboard' => $dashboard,
+            'crm' => $crm_data,
         ];
 
         $this->view('dashboard/dashboard', $data);
@@ -382,10 +476,15 @@ public function companyProfile () {
 
             //load customer loan request
             $loanRequest = $this->userModel->loadCustomerLoanRequest();
+            $loan = $this->userModel->loadLoanDashboardDetails
+            ();
+
+
     
             $data = [
                 'title' => 'Loan Dashboard Page',
                 'loanRequests' => $loanRequest,
+                'loan' =>$loan,
             ];
     
             $this->view('dashboard/dashboard_loan', $data);

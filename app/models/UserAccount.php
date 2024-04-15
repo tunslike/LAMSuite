@@ -94,6 +94,27 @@ class UserAccount {
         }
     }
 
+    //function to get validation data and pull customer name
+    public function loadUserProfile($userid) {
+    
+        try {
+        
+                        $this->db->query("SELECT * FROM LAM_ENTRY WHERE ENTRY_ID = :userid;");
+        
+                        //Bind values
+                        $this->db->bind(':userid', $userid);
+                    
+                        $row = $this->db->single();
+        
+                        return $row;
+        
+                    }catch (PDOException $e) {
+                        echo 'ERROR!';
+                        print_r( $e );
+                    }
+    }
+    //end of function
+
     public function setupPassword($customerid, $password) {
 
         try{
@@ -123,10 +144,45 @@ class UserAccount {
         }
     }
 
+
+    public function updatePassword($data) {
+
+        try{
+            
+        $this->db->query("UPDATE LAM_ACCESS SET ACCESS_CODE = :accesscode, PASSWORD_RESET_DATE = :resetDate, 
+                        PASSWORD_RESET_BY = 'SELF' WHERE ENTRY_ID = :entryid");
+
+        $date =  date('Y-m-d H:i:s');
+    
+        //Bind values
+        $this->db->bind(':entryid', $data['entry_id']);
+        $this->db->bind(':accesscode', $data['password']);
+        $this->db->bind(':resetDate', $date);
+
+        //Execute function
+        if ($this->db->execute()) {
+
+            $this->db->query("UPDATE LAM_ENTRY SET IS_PASSWORD_CHANGED = 1 WHERE ENTRY_ID = :entryid");
+
+            $this->db->bind(':entryid', $data['entry_id']);
+
+            $this->db->execute();
+
+        return true;
+        } else {
+        return false;
+        }
+
+        }catch(PDOException $e){
+            echo 'ERROR!';
+            print_r( $e );
+        }
+    }
+
     public function login($username, $password, $ipaddr) {
 
-        $this->db->query('SELECT ENTRY_ID, USERNAME, FIRST_NAME, LAST_NAME, MOBILE_PHONE, EMAIL_ADDRESS, 
-                          FIRST_LOGIN_DATE FROM LAM_ENTRY 
+        $this->db->query('SELECT ENTRY_ID, USERNAME, FIRST_NAME, LAST_NAME, MOBILE_PHONE, EMAIL_ADDRESS, ROLE_ID, LAST_LOGIN_DATE,
+                          FIRST_LOGIN_DATE, IS_PASSWORD_CHANGED FROM LAM_ENTRY 
                           WHERE STATUS = 0 AND USERNAME = :username');
 
         //Bind value

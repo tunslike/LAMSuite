@@ -37,7 +37,30 @@
 										<a href="#" class="text-white text-hover-primary fs-6 fw-bold"><?php echo ucfirst($_SESSION['firstname']); ?></a>
 										<!--end::Username-->
 										<!--begin::Description-->
-										<span class="text-gray-600 fw-semibold d-block fs-8 mb-1">Python Dev</span>
+										<span class="text-gray-600 fw-semibold d-block fs-8 mb-1">
+											<?php 
+												switch($_SESSION['role']) {
+													case "001":
+														echo 'Administrator';
+													break;
+													case "002":
+														echo 'Supervisor';
+													break;
+													case "003":
+														echo 'Loan Officer';
+													break;
+													case "004":
+														echo 'CRM Officer';
+													break;
+													case "005":
+														echo 'Operator';
+													break;
+													case "006":
+														echo 'Guest';
+													break;
+												}
+											?>
+										</span>
 										<!--end::Description-->
 										<!--begin::Label-->
 										<div class="d-flex align-items-center text-success fs-9">
@@ -927,7 +950,7 @@
 					<!--end::Aside menu-->
 					<!--begin::Footer-->
 					<div class="aside-footer flex-column-auto py-5" id="kt_aside_footer">
-						<a href="https://preview.keenthemes.com/html/metronic/docs" style="background-color:#f8285b; color: #fff;" class="btn btn-flex btn-custom btn-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click" title="Click here to logout">
+					<a onclick="logoutUser();" style="background-color:#f8285b; color: #fff;" class="btn btn-flex btn-custom btn-primary w-100">
 							<span class="btn-label">Logout</span>
 							<i class="ki-duotone ki-document ms-2 fs-2">
 								<span class="path1"></span>
@@ -1220,6 +1243,7 @@
             <!--begin::Tab panel-->
             <div id="kt_referrals_1" class="card-body p-0 tab-pane fade show active" role="tabpanel" aria-labelledby="kt_referrals_tab_1">
 
+			<?php if(!$data['history']) : ?>
 			<div class="py-5" style="width:50%; margin-left:30px; margin-top:10px; margin-bottom:20px;">
         		<div class="d-flex align-items-center rounded py-5 px-5 bg-light-primary ">
 				<i class="ki-duotone ki-information-5 fs-3x text-primary me-5">
@@ -1229,9 +1253,10 @@
 				</i>
 				<div class="text-gray-700 fw-bold fs-6">
            		No customer loan history found!
-            </div>
+                </div>
 			</div>
 			</div>
+			<?php endif; ?>
 
                 <div class="table-responsive">
                     <!--begin::Table-->
@@ -1239,34 +1264,46 @@
                         <!--begin::Thead-->
                         <thead class="border-bottom border-gray-200 fs-6 fw-bold bg-lighten">
                             <tr>
-                                <th class="min-w-125px ps-9">#</th>
-                                <th class="min-w-125px px-0">Transaction No</th>
-                                <th class="min-w-125px">Repayment Amount</th>
-								<th class="min-w-125px">Narration</th>
-                                <th class="min-w-125px">Payment Date</th>
-                                <th class="min-w-125px ps-0">Amortized Balance</th>
+                                <th class="min-w-50px ps-9">#</th>
+                                <th class="min-w-125px px-0">Loan Number</th>
+                                <th class="min-w-125px">Loan Amount</th>
+								<th class="min-w-125px">Total Repayment</th>
+								<th class="min-w-125px">Total Paid</th>
+                                <th class="min-w-125px">Loan Date</th>
+                                <th class="min-w-125px ps-0">Loan Status</th>
                             </tr>
                         </thead>
                         <!--end::Thead-->
 
                         <!--begin::Tbody-->
                         <tbody class="fs-6 fw-semibold text-gray-600">
+							<?php $x=1; ?>
+							<?php foreach($data['history'] as $row): ?>
                                 <tr>
-									<td class="ps-9">1</td>
-                                    <td class="ps-9">678935899</td>
-                                    <td>Nov 24, 2020</td>
-                                    <td>26%</td>
-                                    <td class="text-success">$1,200.00</td>
-									<td class="text-success">$1,200.00</td>
+								<td class="ps-9"><?php echo $x; ?></td>
+								<td class="text-primary"><?php echo $row->LOAN_NUMBER; ?></td>
+								<td>₦<?php echo number_format($row->LOAN_AMOUNT,2); ?></td>
+                                <td>₦<?php echo number_format($row->TOTAL_REPAYMENT,2); ?></td>
+                                <td>₦<?php echo number_format($row->REPAYMENT_AMOUNT,2); ?></td>
+								<td><?php echo formatDateCreated($row->AUTHORISE_DISBURSE_DATE); ?></td>
+								<td class="text-success">
+									<?php 
+										switch($row->LOAN_STATUS) {
+											case 3:
+												echo 'Active';
+											break;
+											case 4: 
+												echo 'Completed';
+											break;
+											case 5: 
+												echo 'Terminated';
+											break;
+										}
+									?>
+								</td>
                                 </tr>
-                                <tr>
-									<td class="ps-9">2</td>
-                                    <td class="ps-9">578433345</td>                                    
-                                    <td>Aug 10, 2020</td>
-                                    <td>35%</td>
-                                    <td class="text-success">$2,400.00</td>
-									<td class="text-success">$1,200.00</td>
-                                </tr>
+								<?php $x++; ?>
+							<?php endforeach; ?>
                         </tbody>
                         <!--end::Tbody-->
                     </table>

@@ -46,7 +46,30 @@
 										<a href="#" class="text-white text-hover-primary fs-6 fw-bold"><?php echo ucfirst($_SESSION['firstname']); ?></a>
 										<!--end::Username-->
 										<!--begin::Description-->
-										<span class="text-gray-600 fw-semibold d-block fs-8 mb-1">Python Dev</span>
+										<span class="text-gray-600 fw-semibold d-block fs-8 mb-1">
+											<?php 
+												switch($_SESSION['role']) {
+													case "001":
+														echo 'Administrator';
+													break;
+													case "002":
+														echo 'Supervisor';
+													break;
+													case "003":
+														echo 'Loan Officer';
+													break;
+													case "004":
+														echo 'CRM Officer';
+													break;
+													case "005":
+														echo 'Operator';
+													break;
+													case "006":
+														echo 'Guest';
+													break;
+												}
+											?>
+										</span>
 										<!--end::Description-->
 										<!--begin::Label-->
 										<div class="d-flex align-items-center text-success fs-9">

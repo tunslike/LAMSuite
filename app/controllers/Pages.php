@@ -5,10 +5,49 @@ class Pages extends Controller {
         $this->userModel = $this->model('UserAccount');
     }
 
+
+    public function changePassword() {
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            if(!isset($_SESSION['ENTRY_ID_CHANGED'])) {
+                header("Location: " . URLROOT . "/signin");
+                exit();
+            }
+
+            $data = [
+                'new_pwd' => trim($_POST['new_access_code']),
+                'confirm_pwd' => trim($_POST['confirm_pwd']),
+                'entry_id' => $_SESSION['ENTRY_ID_CHANGED'],
+            ];
+
+            $data['password'] = password_hash($data['new_pwd'], PASSWORD_DEFAULT);
+
+            $changePwd = $this->userModel->updatePassword($data);
+
+            if($changePwd) {
+                
+                $_SESSION['pwd_change_status'] = 1;
+
+                header("Location: " . URLROOT . "/signin?response=1");
+
+                exit();
+            }
+
+        }
+
+        $data = [
+            'title' => 'Change Password',
+        ];
+
+        $this->view('changePassword', $data);
+    }
+
+
     public function forgotPassword() {
 
         $data = [
-            'title' => 'Home page'
+            'title' => 'Forget Password'
         ];
 
         $this->view('forgotPassword', $data);
@@ -22,6 +61,8 @@ class Pages extends Controller {
         $_SESSION['firstname'] = $user->FIRST_NAME;
         $_SESSION['mobile'] = $user->MOBILE_PHONE;
         $_SESSION['email'] = $user->EMAIL_ADDRESS;
+        $_SESSION['role'] = $user->ROLE_ID;
+        $_SESSION['last_login_date'] = $user->LAST_LOGIN_DATE;
 
         //redirect to home page
         header('location:' . URLROOT . '/dashboard/home');
@@ -51,6 +92,8 @@ class Pages extends Controller {
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+            unset($_SESSION['pwd_change_status']);
+
             $data = [
                 'username' => trim($_POST['username']),
                 'password' => trim($_POST['entry']),
@@ -73,6 +116,17 @@ class Pages extends Controller {
             if ($data['fieldError'] != '') {
 
                 $loggedInUser = $this->userModel->login($data['username'], $data['password'], $data['remoteIP']);
+
+                if($loggedInUser->IS_PASSWORD_CHANGED == 0) {
+
+                    $_SESSION['ENTRY_ID_CHANGED'] = $loggedInUser->ENTRY_ID;
+                    $_SESSION['FIRSTNAME_CHANGED'] = $loggedInUser->FIRST_NAME;
+
+                    header('location:' . URLROOT . '/pages/changePassword');
+
+                    exit();
+                }
+
 
                 if ($loggedInUser) {
 

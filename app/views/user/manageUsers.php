@@ -37,7 +37,30 @@
 										<a href="#" class="text-white text-hover-primary fs-6 fw-bold"><?php echo ucfirst($_SESSION['firstname']); ?></a>
 										<!--end::Username-->
 										<!--begin::Description-->
-										<span class="text-gray-600 fw-semibold d-block fs-8 mb-1">Python Dev</span>
+										<span class="text-gray-600 fw-semibold d-block fs-8 mb-1">
+											<?php 
+												switch($_SESSION['role']) {
+													case "001":
+														echo 'Administrator';
+													break;
+													case "002":
+														echo 'Supervisor';
+													break;
+													case "003":
+														echo 'Loan Officer';
+													break;
+													case "004":
+														echo 'CRM Officer';
+													break;
+													case "005":
+														echo 'Operator';
+													break;
+													case "006":
+														echo 'Guest';
+													break;
+												}
+											?>
+										</span>
 										<!--end::Description-->
 										<!--begin::Label-->
 										<div class="d-flex align-items-center text-success fs-9">
@@ -927,7 +950,7 @@
 					<!--end::Aside menu-->
 					<!--begin::Footer-->
 					<div class="aside-footer flex-column-auto py-5" id="kt_aside_footer">
-					<a href="#" onclick="logoutUser();" style="background-color:#f8285b; color: #fff;" class="btn btn-flex btn-custom btn-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click" title="Click here to logout">
+					<a onclick="logoutUser();" style="background-color:#f8285b; color: #fff;" class="btn btn-flex btn-custom btn-primary w-100">
 							<span class="btn-label">Logout</span>
 							<i class="ki-duotone ki-document ms-2 fs-2">
 								<span class="path1"></span>
@@ -1148,7 +1171,7 @@
                      <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Billing: activate to sort column ascending" style="width: 201.297px;">Date Created</th>
 					 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Billing: activate to sort column ascending" style="width: 201.297px;">First Login</th>
 					 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table" rowspan="1" colspan="1" aria-label="Billing: activate to sort column ascending" style="width: 201.297px;">Logged In</th>
-                     <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 144.922px;">Manage</th>
+                     <th class="min-w-70px sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 144.922px;">Action</th>
                   </tr>
                </thead>
                <tbody class="text-gray-600 fw-semibold">
@@ -1236,7 +1259,7 @@
 					              
                      </td>
                      <td class="text-end">
-                        <a href="#" onclick="showManageMenuModal('<?php echo $menu->FOOD_MENU_ID; ?>');" class="btn btn-primary btn-active-light-primary btn-sm">
+                        <a href="#" onclick="showManageUserProfile('<?php echo $user->ENTRY_ID; ?>');" class="btn btn-primary btn-active-light-primary btn-sm">
                         Manage</a>
                      </td>
                   </tr>

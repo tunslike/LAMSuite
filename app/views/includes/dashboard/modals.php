@@ -557,6 +557,180 @@
     <!--end::Modal dialog-->
 </div>
 		<!--end::Modals-->
+  <!--begin::Modals-->
+  <div class="modal fade" id="manage_new_user" tabindex="-1" style="display: none;" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header" id="kt_modal_create_api_key_header">
+                <!--begin::Modal title-->
+                <h2>Manage User</h2>
+                <!--end::Modal title-->
+
+                <!--begin::Close-->
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>                </div>
+                <!--end::Close-->
+            </div>
+            <!--end::Modal header-->
+
+            <!--begin::Form-->
+            <form id="kt_modal_create_api_key_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#">
+                <!--begin::Modal body-->
+                <div class="modal-body py-10 px-lg-17">
+                    <!--begin::Scroll-->
+                    <div class="scroll-y me-n7 pe-7" id="kt_modal_create_api_key_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_create_api_key_header" data-kt-scroll-wrappers="#kt_modal_create_api_key_scroll" data-kt-scroll-offset="300px" style="max-height: 293px;">
+
+                    <input type="hidden" id="userid" name="userid">
+
+                    <!--begin::Input group-->
+                        <div class="row mb-5">
+
+                            <!--begin::Col-->
+                            <div class="col-md-6 fv-row">
+                                <!--begin::Label-->
+                                <label class="required fs-5 fw-semibold mb-2">First Name</label>
+                                <!--end::Label-->
+
+                                <!--begin::Input-->
+                                <input type="text" readonly class="form-control" id="acct_firstname"/>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-md-6 fv-row">
+                                <!--end::Label-->
+                                <label class="required fs-5 fw-semibold mb-2">Last Name</label>
+                                <!--end::Label-->
+
+                                <!--end::Input-->
+                                <input type="text" readonly id="acct_lastname" class="form-control"/>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="mb-5 fv-row fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="required fs-5 fw-semibold mb-2">System Username</label>
+                            <!--end::Label-->
+
+                            <!--begin::Input-->
+                            <input type="text" class="form-control" readonly id="acct_username">
+                            <!--end::Input-->
+                        <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
+                        <!--end::Input group-->
+
+                    <!--begin::Input group-->
+                        <div class="mb-5 fv-row fv-plugins-icon-container">
+                            <!--begin::Label-->
+                            <label class="required fs-5 fw-semibold mb-2">User Role</label>
+                            <!--end::Label-->
+
+                            <!--begin::Input-->
+                            <select id="acct_userRole" class="form-select" aria-label="Select example">
+                                <option value="" selected="selected">Select here</option>
+                                <option value="001">Administrator</option>
+                                <option value="002">Supervisor</option>
+                                <option value="003">Loan Officer</option>
+                                <option value="004">CRM Officer</option>
+                                <option value="005">Operator</option>
+                                <option value="006">Guest</option>
+                            </select>
+                            <!--end::Input-->
+                        <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-5">
+
+                            <!--begin::Col-->
+                            <div class="col-md-6 fv-row">
+                                <!--begin::Label-->
+                                <label class="fs-5 fw-semibold mb-2">Email Address</label>
+                                <!--end::Label-->
+
+                                <!--begin::Input-->
+                                <input type="text" readonly class="form-control" id="acct_emailaddress"/>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-md-6 fv-row">
+                                <!--end::Label-->
+                                <label class="fs-5 fw-semibold mb-2">Phone</label>
+                                <!--end::Label-->
+                                <!--end::Input-->
+                                <input type="text" readonly id="acct_phone" class="form-control"/>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <br>
+                        <div style="margin-bottom:15px;" class="form-check form-check-custom form-check-solid">
+                        <!--begin::Input-->
+                        <input class="form-check-input me-3" name="email_notification_2" type="checkbox" value="2" id="btnResetpwd">
+                        <!--end::Input-->
+
+                        <!--begin::Label-->
+                        <label class="form-check-label" for="btnResetpwd">
+                            <div class="fw-bold">Reset Password</div>
+                        </label>
+                        <!--end::Label-->
+                    </div>
+
+                    <div class="form-check form-check-custom form-check-solid">
+                        <!--begin::Input-->
+                        <input class="form-check-input me-3" name="email_notification_2" type="checkbox" value="2" id="btnDisable">
+                        <!--end::Input-->
+
+                        <!--begin::Label-->
+                        <label class="form-check-label" for="btnDisable">
+                            <div class="fw-bold">Disable Account</div>
+                        </label>
+                        <!--end::Label-->
+                    </div>
+
+                    </div>
+                    <!--end::Scroll-->
+                </div>
+                <!--end::Modal body-->
+
+                <!--begin::Modal footer-->
+                <div class="modal-footer flex-center">
+                    <!--begin::Button-->
+                    <button type="button" id="kt_modal_create_api_key_cancel" data-bs-dismiss="modal" class="btn btn-danger me-3">
+                        Discard
+                    </button>
+                    <!--end::Button-->
+
+                    <!--begin::Button-->
+                    <button type="button" id="btnUpdateUser" class="btn btn-primary">
+                        <span class="indicator-label">
+                            Update Account                        </span>
+                        <span class="indicator-progress">
+                            Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                    </button>
+                    <!--end::Button-->
+                </div>
+                <!--end::Modal footer-->
+            </form>
+            <!--end::Form-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+		<!--end::Modals-->       
    <!--begin::Modals-->
    <div class="modal fade" id="create_new_user" tabindex="-1" style="display: none;" aria-hidden="true">
     <!--begin::Modal dialog-->

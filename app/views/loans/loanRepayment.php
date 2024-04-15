@@ -37,7 +37,30 @@
 										<a href="#" class="text-white text-hover-primary fs-6 fw-bold"><?php echo ucfirst($_SESSION['firstname']); ?></a>
 										<!--end::Username-->
 										<!--begin::Description-->
-										<span class="text-gray-600 fw-semibold d-block fs-8 mb-1">Python Dev</span>
+										<span class="text-gray-600 fw-semibold d-block fs-8 mb-1">
+											<?php 
+												switch($_SESSION['role']) {
+													case "001":
+														echo 'Administrator';
+													break;
+													case "002":
+														echo 'Supervisor';
+													break;
+													case "003":
+														echo 'Loan Officer';
+													break;
+													case "004":
+														echo 'CRM Officer';
+													break;
+													case "005":
+														echo 'Operator';
+													break;
+													case "006":
+														echo 'Guest';
+													break;
+												}
+											?>
+										</span>
 										<!--end::Description-->
 										<!--begin::Label-->
 										<div class="d-flex align-items-center text-success fs-9">
@@ -927,7 +950,7 @@
 					<!--end::Aside menu-->
 					<!--begin::Footer-->
 					<div class="aside-footer flex-column-auto py-5" id="kt_aside_footer">
-						<a href="https://preview.keenthemes.com/html/metronic/docs" style="background-color:#f8285b; color: #fff;" class="btn btn-flex btn-custom btn-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click" title="Click here to logout">
+					<a onclick="logoutUser();" style="background-color:#f8285b; color: #fff;" class="btn btn-flex btn-custom btn-primary w-100">
 							<span class="btn-label">Logout</span>
 							<i class="ki-duotone ki-document ms-2 fs-2">
 								<span class="path1"></span>
@@ -1287,6 +1310,17 @@
 	   <input type="text" name="loan_percent" readonly  id="cus_total_paymt" class="form-control"/>
 	</div>
    </div>
+   <div class="row mb-10">
+	<div class="col-md-6 fv-row fv-plugins-icon-container">
+	   <label for="exampleFormControlInput1" style="color:red;" class="form-label">Loan Balance</label>
+	   <input type="text" readonly id="loan_repayment_balance" style="color:red;" class="form-control"/>
+	</div>
+	<div class="col-md-6 fv-row fv-plugins-icon-container">
+	   <label for="exampleFormControlInput1" style="color:red;" class="form-label">Next Due Payment</label>
+	   <input type="text" readonly id="next_due_payment" style="color:red;" class="form-control"/>
+	</div>
+   </div>
+
 <br>
    <div style="margin-bottom:20px;">
    <span class="badge badge-light-danger">Repayment Details</span>
@@ -1294,10 +1328,6 @@
 
 
    <div class="row mb-10">
-	<div class="col-md-6 fv-row fv-plugins-icon-container">
-	   <label for="exampleFormControlInput1" class="form-label">Repayment Amount</label>
-	   <input type="number" id="repay_amount" class="form-control"/>
-	</div>
 	<div class="col-md-6 fv-row fv-plugins-icon-container">
 	   <label for="exampleFormControlInput1" class="form-label">Repayment Type</label>
 	   <select name="repay_type" class="form-select" id="repay_type">
@@ -1307,8 +1337,13 @@
 				<option value="Full Repayment">Full Repayment</option>
 	   </select>
 	</div>
+	<div class="col-md-6 fv-row fv-plugins-icon-container">
+	   <label for="exampleFormControlInput1" class="form-label">Repayment Amount</label>
+	   <input type="number" id="repay_amount" class="form-control"/>
+	</div>
    </div>
 
+ 
 
    <div class="row mb-10">
 	<div class="col-md-6 fv-row fv-plugins-icon-container">
@@ -1322,7 +1357,7 @@
 	</div>
 	<div class="col-md-6 fv-row fv-plugins-icon-container">
 	   <label for="exampleFormControlInput1" class="form-label">Payment Date</label>
-	   <input type="text" id="repay_date" class="form-control"/>
+	   <input type="text" id="repay_date" placeholder="Sample: 01-Jan-2024" class="form-control"/>
 	</div>
    </div>
 

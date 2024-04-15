@@ -292,633 +292,6 @@
 									<!--end::Reset-->
 								</form>
 								<!--end::Form-->
-								<!--begin::Menu-->
-								<div data-kt-search-element="content" class="menu menu-sub menu-sub-dropdown py-7 px-7 overflow-hidden w-300px w-md-350px">
-									<!--begin::Wrapper-->
-									<div data-kt-search-element="wrapper">
-										<!--begin::Recently viewed-->
-										<div data-kt-search-element="results" class="d-none">
-											<!--begin::Items-->
-											<div class="scroll-y mh-200px mh-lg-350px">
-												<!--begin::Category title-->
-												<h3 class="fs-5 text-muted m-0 pb-5" data-kt-search-element="category-title">Users</h3>
-												<!--end::Category title-->
-												<!--begin::Item-->
-												<a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<img src="assets/media/avatars/300-6.jpg" alt="" />
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column justify-content-start fw-semibold">
-														<span class="fs-6 fw-semibold">Karina Clark</span>
-														<span class="fs-7 fw-semibold text-muted">Marketing Manager</span>
-													</div>
-													<!--end::Title-->
-												</a>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<img src="assets/media/avatars/300-2.jpg" alt="" />
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column justify-content-start fw-semibold">
-														<span class="fs-6 fw-semibold">Olivia Bold</span>
-														<span class="fs-7 fw-semibold text-muted">Software Engineer</span>
-													</div>
-													<!--end::Title-->
-												</a>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<img src="assets/media/avatars/300-9.jpg" alt="" />
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column justify-content-start fw-semibold">
-														<span class="fs-6 fw-semibold">Ana Clark</span>
-														<span class="fs-7 fw-semibold text-muted">UI/UX Designer</span>
-													</div>
-													<!--end::Title-->
-												</a>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<img src="assets/media/avatars/300-14.jpg" alt="" />
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column justify-content-start fw-semibold">
-														<span class="fs-6 fw-semibold">Nick Pitola</span>
-														<span class="fs-7 fw-semibold text-muted">Art Director</span>
-													</div>
-													<!--end::Title-->
-												</a>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<img src="assets/media/avatars/300-11.jpg" alt="" />
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column justify-content-start fw-semibold">
-														<span class="fs-6 fw-semibold">Edward Kulnic</span>
-														<span class="fs-7 fw-semibold text-muted">System Administrator</span>
-													</div>
-													<!--end::Title-->
-												</a>
-												<!--end::Item-->
-												<!--begin::Category title-->
-												<h3 class="fs-5 text-muted m-0 pt-5 pb-5" data-kt-search-element="category-title">Customers</h3>
-												<!--end::Category title-->
-												<!--begin::Item-->
-												<a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<img class="w-20px h-20px" src="assets/media/svg/brand-logos/volicity-9.svg" alt="" />
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column justify-content-start fw-semibold">
-														<span class="fs-6 fw-semibold">Company Rbranding</span>
-														<span class="fs-7 fw-semibold text-muted">UI Design</span>
-													</div>
-													<!--end::Title-->
-												</a>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<img class="w-20px h-20px" src="assets/media/svg/brand-logos/tvit.svg" alt="" />
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column justify-content-start fw-semibold">
-														<span class="fs-6 fw-semibold">Company Re-branding</span>
-														<span class="fs-7 fw-semibold text-muted">Web Development</span>
-													</div>
-													<!--end::Title-->
-												</a>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<img class="w-20px h-20px" src="assets/media/svg/misc/infography.svg" alt="" />
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column justify-content-start fw-semibold">
-														<span class="fs-6 fw-semibold">Business Analytics App</span>
-														<span class="fs-7 fw-semibold text-muted">Administration</span>
-													</div>
-													<!--end::Title-->
-												</a>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<img class="w-20px h-20px" src="assets/media/svg/brand-logos/leaf.svg" alt="" />
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column justify-content-start fw-semibold">
-														<span class="fs-6 fw-semibold">EcoLeaf App Launch</span>
-														<span class="fs-7 fw-semibold text-muted">Marketing</span>
-													</div>
-													<!--end::Title-->
-												</a>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<img class="w-20px h-20px" src="assets/media/svg/brand-logos/tower.svg" alt="" />
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column justify-content-start fw-semibold">
-														<span class="fs-6 fw-semibold">Tower Group Website</span>
-														<span class="fs-7 fw-semibold text-muted">Google Adwords</span>
-													</div>
-													<!--end::Title-->
-												</a>
-												<!--end::Item-->
-												<!--begin::Category title-->
-												<h3 class="fs-5 text-muted m-0 pt-5 pb-5" data-kt-search-element="category-title">Projects</h3>
-												<!--end::Category title-->
-												<!--begin::Item-->
-												<a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<i class="ki-duotone ki-notepad fs-2 text-primary">
-																<span class="path1"></span>
-																<span class="path2"></span>
-																<span class="path3"></span>
-																<span class="path4"></span>
-																<span class="path5"></span>
-															</i>
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column">
-														<span class="fs-6 fw-semibold">Si-Fi Project by AU Themes</span>
-														<span class="fs-7 fw-semibold text-muted">#45670</span>
-													</div>
-													<!--end::Title-->
-												</a>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<i class="ki-duotone ki-frame fs-2 text-primary">
-																<span class="path1"></span>
-																<span class="path2"></span>
-																<span class="path3"></span>
-																<span class="path4"></span>
-															</i>
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column">
-														<span class="fs-6 fw-semibold">Shopix Mobile App Planning</span>
-														<span class="fs-7 fw-semibold text-muted">#45690</span>
-													</div>
-													<!--end::Title-->
-												</a>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<i class="ki-duotone ki-message-text-2 fs-2 text-primary">
-																<span class="path1"></span>
-																<span class="path2"></span>
-																<span class="path3"></span>
-															</i>
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column">
-														<span class="fs-6 fw-semibold">Finance Monitoring SAAS Discussion</span>
-														<span class="fs-7 fw-semibold text-muted">#21090</span>
-													</div>
-													<!--end::Title-->
-												</a>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<a href="#" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<i class="ki-duotone ki-profile-circle fs-2 text-primary">
-																<span class="path1"></span>
-																<span class="path2"></span>
-																<span class="path3"></span>
-															</i>
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column">
-														<span class="fs-6 fw-semibold">Dashboard Analitics Launch</span>
-														<span class="fs-7 fw-semibold text-muted">#34560</span>
-													</div>
-													<!--end::Title-->
-												</a>
-												<!--end::Item-->
-											</div>
-											<!--end::Items-->
-										</div>
-										<!--end::Recently viewed-->
-										<!--begin::Recently viewed-->
-										<div class="" data-kt-search-element="main">
-											<!--begin::Heading-->
-											<div class="d-flex flex-stack fw-semibold mb-4">
-												<!--begin::Label-->
-												<span class="text-muted fs-6 me-2">Recently Searched:</span>
-												<!--end::Label-->
-												<!--begin::Toolbar-->
-												<div class="d-flex" data-kt-search-element="toolbar">
-													<!--begin::Preferences toggle-->
-													<div data-kt-search-element="preferences-show" class="btn btn-icon w-20px btn-sm btn-active-color-primary me-2 data-bs-toggle=" title="Show search preferences">
-														<i class="ki-duotone ki-setting-2 fs-2">
-															<span class="path1"></span>
-															<span class="path2"></span>
-														</i>
-													</div>
-													<!--end::Preferences toggle-->
-													<!--begin::Advanced search toggle-->
-													<div data-kt-search-element="advanced-options-form-show" class="btn btn-icon w-20px btn-sm btn-active-color-primary me-n1" data-bs-toggle="tooltip" title="Show more search options">
-														<i class="ki-duotone ki-down fs-2"></i>
-													</div>
-													<!--end::Advanced search toggle-->
-												</div>
-												<!--end::Toolbar-->
-											</div>
-											<!--end::Heading-->
-											<!--begin::Items-->
-											<div class="scroll-y mh-200px mh-lg-325px">
-												<!--begin::Item-->
-												<div class="d-flex align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<i class="ki-duotone ki-laptop fs-2 text-primary">
-																<span class="path1"></span>
-																<span class="path2"></span>
-															</i>
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column">
-														<a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">BoomApp by Keenthemes</a>
-														<span class="fs-7 text-muted fw-semibold">#45789</span>
-													</div>
-													<!--end::Title-->
-												</div>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<div class="d-flex align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<i class="ki-duotone ki-chart-simple fs-2 text-primary">
-																<span class="path1"></span>
-																<span class="path2"></span>
-																<span class="path3"></span>
-																<span class="path4"></span>
-															</i>
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column">
-														<a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">"Kept API Project Meeting</a>
-														<span class="fs-7 text-muted fw-semibold">#84050</span>
-													</div>
-													<!--end::Title-->
-												</div>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<div class="d-flex align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<i class="ki-duotone ki-chart fs-2 text-primary">
-																<span class="path1"></span>
-																<span class="path2"></span>
-															</i>
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column">
-														<a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">"KPI Monitoring App Launch</a>
-														<span class="fs-7 text-muted fw-semibold">#84250</span>
-													</div>
-													<!--end::Title-->
-												</div>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<div class="d-flex align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<i class="ki-duotone ki-chart-line-down fs-2 text-primary">
-																<span class="path1"></span>
-																<span class="path2"></span>
-															</i>
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column">
-														<a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">Project Reference FAQ</a>
-														<span class="fs-7 text-muted fw-semibold">#67945</span>
-													</div>
-													<!--end::Title-->
-												</div>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<div class="d-flex align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<i class="ki-duotone ki-sms fs-2 text-primary">
-																<span class="path1"></span>
-																<span class="path2"></span>
-															</i>
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column">
-														<a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">"FitPro App Development</a>
-														<span class="fs-7 text-muted fw-semibold">#84250</span>
-													</div>
-													<!--end::Title-->
-												</div>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<div class="d-flex align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<i class="ki-duotone ki-bank fs-2 text-primary">
-																<span class="path1"></span>
-																<span class="path2"></span>
-															</i>
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column">
-														<a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">Shopix Mobile App</a>
-														<span class="fs-7 text-muted fw-semibold">#45690</span>
-													</div>
-													<!--end::Title-->
-												</div>
-												<!--end::Item-->
-												<!--begin::Item-->
-												<div class="d-flex align-items-center mb-5">
-													<!--begin::Symbol-->
-													<div class="symbol symbol-40px me-4">
-														<span class="symbol-label bg-light">
-															<i class="ki-duotone ki-chart-line-down fs-2 text-primary">
-																<span class="path1"></span>
-																<span class="path2"></span>
-															</i>
-														</span>
-													</div>
-													<!--end::Symbol-->
-													<!--begin::Title-->
-													<div class="d-flex flex-column">
-														<a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">"Landing UI Design" Launch</a>
-														<span class="fs-7 text-muted fw-semibold">#24005</span>
-													</div>
-													<!--end::Title-->
-												</div>
-												<!--end::Item-->
-											</div>
-											<!--end::Items-->
-										</div>
-										<!--end::Recently viewed-->
-										<!--begin::Empty-->
-										<div data-kt-search-element="empty" class="text-center d-none">
-											<!--begin::Icon-->
-											<div class="pt-10 pb-10">
-												<i class="ki-duotone ki-search-list fs-4x opacity-50">
-													<span class="path1"></span>
-													<span class="path2"></span>
-													<span class="path3"></span>
-												</i>
-											</div>
-											<!--end::Icon-->
-											<!--begin::Message-->
-											<div class="pb-15 fw-semibold">
-												<h3 class="text-gray-600 fs-5 mb-2">No result found</h3>
-												<div class="text-muted fs-7">Please try again with a different query</div>
-											</div>
-											<!--end::Message-->
-										</div>
-										<!--end::Empty-->
-									</div>
-									<!--end::Wrapper-->
-									<!--begin::Preferences-->
-									<form data-kt-search-element="advanced-options-form" class="pt-1 d-none">
-										<!--begin::Heading-->
-										<h3 class="fw-semibold text-gray-900 mb-7">Advanced Search</h3>
-										<!--end::Heading-->
-										<!--begin::Input group-->
-										<div class="mb-5">
-											<input type="text" class="form-control form-control-sm form-control-solid" placeholder="Contains the word" name="query" />
-										</div>
-										<!--end::Input group-->
-										<!--begin::Input group-->
-										<div class="mb-5">
-											<!--begin::Radio group-->
-											<div class="nav-group nav-group-fluid">
-												<!--begin::Option-->
-												<label>
-													<input type="radio" class="btn-check" name="type" value="has" checked="checked" />
-													<span class="btn btn-sm btn-color-muted btn-active btn-active-primary">All</span>
-												</label>
-												<!--end::Option-->
-												<!--begin::Option-->
-												<label>
-													<input type="radio" class="btn-check" name="type" value="users" />
-													<span class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4">Users</span>
-												</label>
-												<!--end::Option-->
-												<!--begin::Option-->
-												<label>
-													<input type="radio" class="btn-check" name="type" value="orders" />
-													<span class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4">Orders</span>
-												</label>
-												<!--end::Option-->
-												<!--begin::Option-->
-												<label>
-													<input type="radio" class="btn-check" name="type" value="projects" />
-													<span class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4">Projects</span>
-												</label>
-												<!--end::Option-->
-											</div>
-											<!--end::Radio group-->
-										</div>
-										<!--end::Input group-->
-										<!--begin::Input group-->
-										<div class="mb-5">
-											<input type="text" name="assignedto" class="form-control form-control-sm form-control-solid" placeholder="Assigned to" value="" />
-										</div>
-										<!--end::Input group-->
-										<!--begin::Input group-->
-										<div class="mb-5">
-											<input type="text" name="collaborators" class="form-control form-control-sm form-control-solid" placeholder="Collaborators" value="" />
-										</div>
-										<!--end::Input group-->
-										<!--begin::Input group-->
-										<div class="mb-5">
-											<!--begin::Radio group-->
-											<div class="nav-group nav-group-fluid">
-												<!--begin::Option-->
-												<label>
-													<input type="radio" class="btn-check" name="attachment" value="has" checked="checked" />
-													<span class="btn btn-sm btn-color-muted btn-active btn-active-primary">Has attachment</span>
-												</label>
-												<!--end::Option-->
-												<!--begin::Option-->
-												<label>
-													<input type="radio" class="btn-check" name="attachment" value="any" />
-													<span class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4">Any</span>
-												</label>
-												<!--end::Option-->
-											</div>
-											<!--end::Radio group-->
-										</div>
-										<!--end::Input group-->
-										<!--begin::Input group-->
-										<div class="mb-5">
-											<select name="timezone" aria-label="Select a Timezone" data-control="select2" data-dropdown-parent="#kt_header_search" data-placeholder="date_period" class="form-select form-select-sm form-select-solid">
-												<option value="next">Within the next</option>
-												<option value="last">Within the last</option>
-												<option value="between">Between</option>
-												<option value="on">On</option>
-											</select>
-										</div>
-										<!--end::Input group-->
-										<!--begin::Input group-->
-										<div class="row mb-8">
-											<!--begin::Col-->
-											<div class="col-6">
-												<input type="number" name="date_number" class="form-control form-control-sm form-control-solid" placeholder="Lenght" value="" />
-											</div>
-											<!--end::Col-->
-											<!--begin::Col-->
-											<div class="col-6">
-												<select name="date_typer" aria-label="Select a Timezone" data-control="select2" data-dropdown-parent="#kt_header_search" data-placeholder="Period" class="form-select form-select-sm form-select-solid">
-													<option value="days">Days</option>
-													<option value="weeks">Weeks</option>
-													<option value="months">Months</option>
-													<option value="years">Years</option>
-												</select>
-											</div>
-											<!--end::Col-->
-										</div>
-										<!--end::Input group-->
-										<!--begin::Actions-->
-										<div class="d-flex justify-content-end">
-											<button type="reset" class="btn btn-sm btn-light fw-bold btn-active-light-primary me-2" data-kt-search-element="advanced-options-form-cancel">Cancel</button>
-											<a href="utilities/search/horizontal.html" class="btn btn-sm fw-bold btn-primary" data-kt-search-element="advanced-options-form-search">Search</a>
-										</div>
-										<!--end::Actions-->
-									</form>
-									<!--end::Preferences-->
-									<!--begin::Preferences-->
-									<form data-kt-search-element="preferences" class="pt-1 d-none">
-										<!--begin::Heading-->
-										<h3 class="fw-semibold text-gray-900 mb-7">Search Preferences</h3>
-										<!--end::Heading-->
-										<!--begin::Input group-->
-										<div class="pb-4 border-bottom">
-											<label class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack">
-												<span class="form-check-label text-gray-700 fs-6 fw-semibold ms-0 me-2">Projects</span>
-												<input class="form-check-input" type="checkbox" value="1" checked="checked" />
-											</label>
-										</div>
-										<!--end::Input group-->
-										<!--begin::Input group-->
-										<div class="py-4 border-bottom">
-											<label class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack">
-												<span class="form-check-label text-gray-700 fs-6 fw-semibold ms-0 me-2">Targets</span>
-												<input class="form-check-input" type="checkbox" value="1" checked="checked" />
-											</label>
-										</div>
-										<!--end::Input group-->
-										<!--begin::Input group-->
-										<div class="py-4 border-bottom">
-											<label class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack">
-												<span class="form-check-label text-gray-700 fs-6 fw-semibold ms-0 me-2">Affiliate Programs</span>
-												<input class="form-check-input" type="checkbox" value="1" />
-											</label>
-										</div>
-										<!--end::Input group-->
-										<!--begin::Input group-->
-										<div class="py-4 border-bottom">
-											<label class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack">
-												<span class="form-check-label text-gray-700 fs-6 fw-semibold ms-0 me-2">Referrals</span>
-												<input class="form-check-input" type="checkbox" value="1" checked="checked" />
-											</label>
-										</div>
-										<!--end::Input group-->
-										<!--begin::Input group-->
-										<div class="py-4 border-bottom">
-											<label class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack">
-												<span class="form-check-label text-gray-700 fs-6 fw-semibold ms-0 me-2">Users</span>
-												<input class="form-check-input" type="checkbox" value="1" />
-											</label>
-										</div>
-										<!--end::Input group-->
-										<!--begin::Actions-->
-										<div class="d-flex justify-content-end pt-7">
-											<button type="reset" class="btn btn-sm btn-light fw-bold btn-active-light-primary me-2" data-kt-search-element="preferences-dismiss">Cancel</button>
-											<button type="submit" class="btn btn-sm fw-bold btn-primary">Save Changes</button>
-										</div>
-										<!--end::Actions-->
-									</form>
-									<!--end::Preferences-->
-								</div>
-								<!--end::Menu-->
 							</div>
 							<!--end::Search-->
 						</div>
@@ -1017,7 +390,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-muted">System</li>
+										<li class="breadcrumb-item text-muted">Loan</li>
 										<!--end::Item-->
 										<!--begin::Item-->
 										<li class="breadcrumb-item">
@@ -1025,7 +398,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-gray-900">Company Profile</li>
+										<li class="breadcrumb-item text-gray-900">Manage Loan Card</li>
 										<!--end::Item-->
 									</ul>
 									<!--end::Breadcrumb-->
@@ -1188,219 +561,125 @@
 						<!--end::Toolbar-->
 					</div>
 					<!--end::Header-->
-				
-					<!--begin::Content-->
-					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						<!--begin::Post-->
-						<div class="post d-flex flex-column-fluid" id="kt_post">
-							<!--begin::Container-->
-							<div id="kt_content_container" class="container-xxl">
-							<div class="welcomeProfile">
-					<h3 class="fw-bold my-2 welcomeTxt">New Company Profile</h3>
+
+<!-- ****************************** BEGINNING OF NEW CONTENT STARTS HERE ********************************* -->
+
+<div class="content d-flex flex-column flex-column-fluid " id="kt_content">
+					<!--begin::Post-->
+                    <div class="post d-flex flex-column-fluid" id="kt_post">
+						<!--begin::Container-->
+<div id="kt_content_container" class=" container-xxl ">
+
+<div class="welcomeProfile">
+					<h3 class="fw-bold my-2 welcomeTxt">Manage Loan Card</h3>
 					
 					</div>
-							
-								
+    
 
-<!-- ****************************** Create New Fund Form starts here ********************************* -->
-							
-								<div class="card">
-   
-   <div class="card-body p-lg-17">
+<!--*****************************************************  START OF LOAN CARD HEADER  ******************************************************  -->
 
-   <form id="formCompanyProfile" action="<?php echo URLROOT ?>/dashboard/companyProfile" id="kt_careers_form" method="post" class="form mb-15 fv-plugins-bootstrap5 fv-plugins-framework">
-   
+<?php
+   require APPROOT . '/views/includes/dashboard/loanCardHeader.php';
+?>
 
-   <div style="width:60%;">
 
-   <?php if(isset($data['status']) && $data['status'] == 'true') : ?>
-    <!--begin::Alert-->
-<div class="alert alert-success d-flex align-items-center p-5">
-    <!--begin::Icon-->
-    <i class="ki-duotone ki-shield-tick fs-2hx text-success me-4"><span class="path1"></span><span class="path2"></span></i>
-    <!--end::Icon-->
+<!--*****************************************************  END OF LOAN CARD HEADER  ****************************************************** -->
 
-    <!--begin::Wrapper-->
-    <div class="d-flex flex-column">
+<div class="card ">
+    <!--begin::Header-->
+    <div class="card-header card-header-stretch">
         <!--begin::Title-->
-        <h4 class="mb-1 text-success">Request was successfully!</h4>
-        <!--end::Title-->
-
-        <!--begin::Content-->
-        <span>Company Profile has been created successfully and submitted for review.</span>
-        <!--end::Content-->
-    </div>
-    <!--end::Wrapper-->
-</div>
-<!--end::Alert-->
-<br><br>
-   <?php endif; ?>
-
-   <?php if(isset($data['notFound']) && $data['notFound'] == 'exist') : ?>
-        <!--begin::Alert-->
-        <div class="alert alert-dismissible bg-light-danger d-flex flex-column flex-sm-row p-5 mb-10">
-            <!--begin::Icon-->
-            <i class="ki-duotone ki-cross-square fs-2hx text-danger me-4 mb-5 mb-sm-0">
-            <span class="path1"></span>
-            <span class="path2"></span>
-            </i>
-            <!--end::Icon-->
-
-            <!--begin::Wrapper-->
-    <div class="d-flex flex-column">
-        <!--begin::Title-->
-        <h4 class="mb-1 text-danger">Unable to process your request!</h4>
-        <!--end::Title-->
-
-        <!--begin::Content-->
-        <span>A duplicate Fund name and type found!.</span>
-        <!--end::Content-->
-    </div>
-    <!--end::Wrapper-->
+        <div class="card-title">
+            <h3>Amortized Repayment Schedule</h3>
         </div>
-        <!--end::Alert-->  
-        <br><br>
-    <?php endif; ?>
-
-   <?php if(!empty($data['fieldError']) && $data['fieldError'] != '') : ?>
-        <!--begin::Alert-->
-        <div class="alert alert-dismissible bg-light-danger d-flex flex-column flex-sm-row p-5 mb-10">
-            <!--begin::Icon-->
-            <i class="ki-duotone ki-notification-bing fs-2hx text-danger me-4 mb-5 mb-sm-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
-            <!--end::Icon-->
-
-            <!--begin::Wrapper-->
-            <div class="d-flex flex-column pe-0 pe-sm-10">
-                <!--begin::Title-->
-                <h6 style="padding-top:8px;"><?php echo $data['fieldError']; ?></h6>
-                <!--end::Title-->
-            </div>
-            <!--end::Wrapper-->
-        </div>
-        <!--end::Alert-->  
-        <br><br>
-    <?php endif; ?>
-
-	<div style="margin-bottom:20px;">
-    <span class="badge badge-light-danger">Employer/Company Details</span>
-    </div>
-
-
-    <div class="mb-10">
-        <label for="exampleFormControlInput1" class="required form-label">Employer/Company Name</label>
-        <input type="text" name="employerName" id="employerName" class="form-control"/>
-    </div>
-
-
-    <div class="mb-10">
-        <label for="exampleFormControlInput1" class="required form-label">Address</label>
-        <input type="text" name="empAddress" id="empAddress" class="form-control"/>
-    </div>
-
-
-    <div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Area / Locality</label>
-        <input type="text" name="employerArea" id="employerArea" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">State</label>
-        <select name="employerState" id="employerState" class="form-select" aria-label="Select example">
-        <option default value="">Select here</option>
-                    <?php foreach($data['states'] as $state): ?>
-                        <option value="<?php echo $state->STATE_NAME; ?>"><?php echo $state->STATE_NAME; ?></option>
-                    <?php endforeach; ?>
-        </select>
-     </div>
-    </div>
-
-	<div style="margin-bottom:20px;">
-    <span class="badge badge-light-danger">Contact Details</span>
-    </div>
-
-	<div class="mb-10">
-        <label for="exampleFormControlInput1" class="required form-label">Contact's Full Name</label>
-        <input type="text" name="clientFullname" id="clientFullname" class="form-control"/>
-    </div>
-
-	<div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Phone Number</label>
-        <input type="text" name="phonenumber" id="phonenumber" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Email Address</label>
-        <input type="text" name="emailaddress"  id="emailaddress" class="form-control"/>
-     </div>
-    </div>
-
-	<div style="margin-bottom:20px;">
-    <span class="badge badge-light-danger">Scheme Setup</span>
-    </div>
-
-	<div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Number of Staff</label>
-        <input type="number" value="1" name="no_staff" id="no_staff" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Percent Loan Limited (%)</label>
-        <input type="number" name="loan_percent"  id="loan_percent" class="form-control"/>
-     </div>
-    </div>
-
-	<div class="row mb-10">
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Loan interest Rate</label>
-        <input type="number" value="1" name="loanInterest" id="loanInterest" class="form-control"/>
-     </div>
-     <div class="col-md-6 fv-row fv-plugins-icon-container">
-        <label for="exampleFormControlInput1" class="required form-label">Approved Maximum Loan Tenor (Month)</label>
-        <input type="number" value="1" name="loanTenor"  id="loanTenor" class="form-control"/>
-     </div>
-    </div>
-
-	<div class="mb-10">
-        <label for="exampleFormControlInput1" class="required form-label">Repayment Structure</label>
-		<select name="repayStructure" id="repayStructure" class="form-select" aria-label="Select example">
-        <option default value="">Select here</option>
-            <option value="001">Amortized Principle on Reducing Balance</option>
-			<option value="002">Interest Monthly Repayment with Bullet Principle Repayment</option>
-			<option value="003">bullet repayment of principal with Accumulated Interest</option>
-        </select>
-    </div>
-
-
-   
-	<br>
-    <button type="button" class="btn btn-primary" id="btnCoyProfile">
+        <!--end::Title-->
         
-<!--begin::Indicator label-->
-<span class="indicator-label">
-    Create Company Profile</span>
-<!--end::Indicator label-->
+        <!--begin::Toolbar-->
+        <div class="card-toolbar">
+            <!--begin::Tab nav-->
+            <ul class="nav nav-stretch fs-5 fw-semibold nav-line-tabs border-transparent" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a id="kt_referrals_tab_1" class="nav-link text-active-gray-800 me-4 active" data-bs-toggle="tab" role="tab" href="#kt_referrals_1" aria-selected="true">
+                        2024
+                    </a>
+                </li>
+            </ul>
+            <!--end::Tab nav-->
+        </div>
+        <!--end::Toolbar-->
+    </div>
+    <!--end::Header-->
 
-<i class="ki-duotone ki-send fs-2">
- <span class="path1"></span>
- <span class="path2"></span>
-</i>
+    <!--begin::Tab content-->
+    <div id="kt_referred_users_tab_content" class="tab-content">
+                    
+            <!--begin::Tab panel-->
+            <div id="kt_referrals_1" class="card-body p-0 tab-pane fade show active" role="tabpanel" aria-labelledby="kt_referrals_tab_1">
 
-</button>
-
-   </div>
-
-   </form>
-   
-   </div>
-</div>										
-<!-- ****************************** Create New Fund Form ends here *********************************** -->
-								
-							</div>
-							<!--end::Container-->
+			<?php if(!$data['repaymentDetails']) : ?>
+				<div class="py-5" style="width:50%; margin-left:30px; margin-top:10px; margin-bottom:20px;">
+					<div class="d-flex align-items-center rounded py-5 px-5 bg-light-primary ">
+						<i class="ki-duotone ki-information-5 fs-3x text-primary me-5">
+								<span class="path1"></span>
+								<span class="path2"></span>
+								<span class="path3"></span>
+						</i>
+						<div class="text-gray-700 fw-bold fs-6">
+							No customer loan history found!
 						</div>
-						<!--end::Post-->
 					</div>
-					<!--end::Content-->
+				</div>
+			<?php endif; ?>
+
+                <div class="table-responsive">
+                    <!--begin::Table-->
+                    <table class="table table-row-bordered align-middle gy-6">
+                        <!--begin::Thead-->
+                        <thead class="border-bottom border-gray-200 fs-6 fw-bold bg-lighten">
+                            <tr>
+                                <th class="min-w-50px ps-9">#</th>
+                                <th class="min-w-125px px-9">Month</th>
+								<th class="min-w-125px">Monthly Repayment</th>
+                                <th class="min-w-125px">Principal</th>
+								<th class="min-w-125px">Interest</th>
+								<th class="min-w-125px">Balance</th>
+                                
+                            </tr>
+                        </thead>
+                        <!--end::Thead-->
+
+                        <!--begin::Tbody-->
+                        <tbody class="fs-6 fw-semibold text-gray-600">
+						<?php $x=1; ?>
+						<?php foreach($data['repaymentDetails'] as $schedule): ?>
+                                <tr>
+									<td class="ps-9"><?php echo $x; ?></td>
+                                    <td class="ps-9"><?php echo 'Month '.$schedule['Payment']; ?></td>
+									<td class="text-success"><?php echo '₦'.$schedule['Repayment']; ?></td>
+									<td class="text-primary"><?php echo '₦'.$schedule['Principal']; ?></td>
+                                    <td class="text-primary"><?php echo '₦'.$schedule['Interest']; ?></td>
+									<td class="text-primary"><?php echo '₦'.$schedule['Balance']; ?></td>
+                                </tr>
+						<?php $x++; ?>
+						<?php endforeach; ?>
+                        </tbody>
+                        <!--end::Tbody-->
+                    </table>
+                    <!--end::Table-->
+                </div>
+            </div>
+            <!--end::Tab panel-->     
+    </div>
+    <!--end::Tab content-->
+</div>
+  
+<!--end::Container-->                	</div>
+                    <!--end::Post-->
+				</div>
+
+<!-- ****************************** END OF NEW CONTENT STARTS HERE ********************************* -->
+				
+				
 					<!--begin::Footer-->
 					<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
 						<!--begin::Container-->

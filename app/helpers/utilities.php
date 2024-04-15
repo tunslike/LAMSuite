@@ -37,6 +37,12 @@
         return date_format($date,"d-M-Y");
     }
 
+
+    function formatDatewithHours($date) {
+        $date=date_create($date);
+        return date_format($date,"d-M-Y h:m:a");
+    }
+
     function formatFeaturedEventDate($date) {
         $date=date_create($date);
         return date_format($date,"j M");

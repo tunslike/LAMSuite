@@ -43,7 +43,7 @@
                                 break;
                                 case 2: 
                                     
-                                    echo '<span class="badge badge-light-light me-auto">Awaiting Disbursement</span>';
+                                    echo '<span class="badge badge-light-warning me-auto">Awaiting Disbursement</span>';
                                 break;
                                 case 3: 
                                     echo '<span class="badge badge-light-success me-auto">Loan is active</span>';
@@ -63,11 +63,27 @@
                     <div class="d-flex flex-column flex-grow-1 pe-8">
                         <!--begin::Stats-->
                         <div class="d-flex flex-wrap">
+
+                        <?php if($data['loanDetails'][0]->LOAN_STATUS == 3) : ?>
+                                    <!--begin::Stat-->
+                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                <!--begin::Number-->
+                                <div class="d-flex align-items-center">
+                                    <div class="fs-2 fw-bold counted" style="color:red;" data-kt-countup="true" data-kt-countup-value="<?php echo $data['loanDetails'][0]->TOTAL_LOAN_REPAYMENT; ?>" data-kt-countup-prefix="$" data-kt-initialized="1">₦ <?php echo number_format(($data['loanDetails'][0]->TOTAL_REPAYMENT - $data['loanDetails'][0]->TOTAL_LOAN_REPAYMENT),2); ?></div>
+                                </div>
+                                <!--end::Number-->
+
+                                <!--begin::Label-->
+                                <div class="fw-semibold fs-6 text-red-500" style="color:red;">Loan Balance</div>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Stat-->
+                        <?php endif; ?>
+
                             <!--begin::Stat-->
                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                 <!--begin::Number-->
                                 <div class="d-flex align-items-center">
-                                    <i class="ki-duotone ki-arrow-up fs-3 text-success me-2"><span class="path1"></span><span class="path2"></span></i>
                                     <div class="fs-2 fw-bold counted" data-kt-countup="true" data-kt-countup-value="<?php echo $data['loanDetails'][0]->LOAN_AMOUNT; ?>" data-kt-countup-prefix="$" data-kt-initialized="1">₦ <?php echo number_format($data['loanDetails'][0]->LOAN_AMOUNT,2); ?></div>
                                 </div>
                                 <!--end::Number-->
@@ -82,7 +98,6 @@
                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                 <!--begin::Number-->
                                 <div class="d-flex align-items-center">
-                                    <i class="ki-duotone ki-arrow-down fs-3 text-danger me-2"><span class="path1"></span><span class="path2"></span></i>
                                     <div class="fs-2 fw-bold counted" data-kt-countup="true" data-kt-countup-value="<?php echo $data['loanDetails'][0]->TOTAL_REPAYMENT; ?>" data-kt-initialized="1">₦ <?php echo number_format($data['loanDetails'][0]->TOTAL_REPAYMENT,2); ?></div>
                                 </div>
                                 <!--end::Number-->
@@ -97,7 +112,7 @@
                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                 <!--begin::Number-->
                                 <div class="d-flex align-items-center">
-                                    <i class="ki-duotone ki-arrow-up fs-3 text-success me-2"><span class="path1"></span><span class="path2"></span></i><div class="fs-2 fw-bold counted" data-kt-countup="true" data-kt-countup-value="<?php echo $data['loanDetails'][0]->MONTHLY_REPAYMENT; ?>" data-kt-countup-prefix="%" data-kt-initialized="1">₦ <?php echo number_format($data['loanDetails'][0]->MONTHLY_REPAYMENT,2); ?></div>
+                                    <div class="fs-2 fw-bold counted" data-kt-countup="true" data-kt-countup-value="<?php echo $data['loanDetails'][0]->MONTHLY_REPAYMENT; ?>" data-kt-countup-prefix="%" data-kt-initialized="1">₦ <?php echo number_format($data['loanDetails'][0]->MONTHLY_REPAYMENT,2); ?></div>
                                 </div>
                                 <!--end::Number-->                                
 
@@ -111,7 +126,7 @@
                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                 <!--begin::Number-->
                                 <div class="d-flex align-items-center">
-                                    <i class="ki-duotone ki-arrow-up fs-3 text-success me-2"><span class="path1"></span><span class="path2"></span></i>
+
                                     <div class="fs-2 fw-bold counted" data-kt-countup="true" data-kt-countup-value="60" data-kt-countup-prefix="%" data-kt-initialized="1"><?php echo $data['loanDetails'][0]->LOAN_TENOR; ?> Months</div>
                                 </div>
                                 <!--end::Number-->                                
@@ -138,6 +153,12 @@
                 <li class="nav-item mt-2">
                     <a class="nav-link text-active-primary ms-0 me-10 py-5 <?php if($data['activeTab'] == 'manage') {echo 'active';} ?>" href="<?php echo URLROOT ?>/loan/manageCard?loan_id=<?php echo $data['loanDetails'][0]->LOAN_ID; ?>">
                         Loan Details</a>
+                </li>
+                <!--end::Nav item-->
+                <!--begin::Nav item-->
+                <li class="nav-item mt-2">
+                    <a class="nav-link text-active-primary ms-0 me-10 py-5 <?php if($data['activeTab'] == 'schedule') {echo 'active';} ?>" href="<?php echo URLROOT ?>/loan/repaymentSchedule?loan_id=<?php echo $data['loanDetails'][0]->LOAN_ID; ?>">
+                        Repayment Schedule</a>
                 </li>
                 <!--end::Nav item-->
                             <!--begin::Nav item-->

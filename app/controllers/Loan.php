@@ -76,7 +76,7 @@ public function employerLoanValidation() {
                 'authorized' => 'false'
             ];
 
-            $this->view('employer/employerVerification', $data);
+            $this->view('employer/notValidemployerVerification', $data);
         }
 
         exit();
@@ -102,6 +102,7 @@ public function sendOTPEmployerVerification() {
 
         $data = [
             'title' => 'Loan Dashboard Page',
+            'validate' => 'true',
             'parent' => 'loan',
             'active' => 'manageLoan',
             'otp' => 'sent',
@@ -122,9 +123,6 @@ public function validateAuthoriseOTP() {
 
             $tokenOtp = $_SESSION['otpToken'];
         }
-
-        //Sanitize post data
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         
         $data = [
             'otpValue' => trim($_POST['otpValue']),
@@ -351,7 +349,7 @@ public function validateAuthoriseOTP() {
 
             $loanDetails = $this->userModel->loadCustomerLoanRequest($loanid);
             $bankDetails = $this->userModel->loadCustomerAccountDetails($loanid);
-            
+        
             $data = [
                 'title' => 'Loan Dashboard Page',
                 'parent' => 'loan',
@@ -412,11 +410,13 @@ public function validateAuthoriseOTP() {
         }
 
         $loanDetails = $this->userModel->loadCustomerLoanRequest($loanid);
+        $loanHistory = $this->userModel->fetchLoanHistory($loanid);
 
         $data = [
             'title' => 'Loan Dashboard Page',
             'parent' => 'loan',
             'active' => 'manageLoan',
+            'history' => $loanHistory,
             'loanDetails' => $loanDetails,
             'activeTab' => 'history'
         ];
@@ -458,6 +458,45 @@ public function validateAuthoriseOTP() {
         // ************* END OF FUNCTION ****************** //
 
 
+             // ************** manage loan page ******************* //
+             public function repaymentSchedule() {
+
+                if(isLoggedIn()){
+                    
+                    $customerid = $_SESSION['user_id'];
+                    
+                }else{
+        
+                    header("Location: " . URLROOT . "?isLogged=0");
+                }
+        
+                if(isset($_GET['loan_id'])) {
+                    $loanid = $_GET['loan_id'];
+                }
+        
+                $loanDetails = $this->userModel->loadCustomerLoanRequest($loanid);
+            
+                // get breakdowns
+                $loanAmount = $loanDetails[0]->LOAN_AMOUNT;
+                $interestRate = $loanDetails[0]->INTEREST_RATE;
+                $loanTenor = $loanDetails[0]->LOAN_TENOR;
+
+                $repaymentDetails = $this->userModel->calculateAmortizedRepaymentSchedule($loanAmount, $interestRate, $loanTenor);
+
+                $data = [
+                    'title' => 'Loan Dashboard Page',
+                    'parent' => 'loan',
+                    'active' => 'manageLoan',
+                    'loanDetails' => $loanDetails,
+                    'repaymentDetails' => $repaymentDetails,
+                    'activeTab' => 'schedule'
+                ];
+        
+                $this->view('loans/repaymentSchedule', $data);
+            }
+            // ************* END OF FUNCTION ****************** //
+    
+
 
      // ************** manage loan page ******************* //
      public function Approvals() {
@@ -476,12 +515,14 @@ public function validateAuthoriseOTP() {
         }
 
         $loanDetails = $this->userModel->loadCustomerLoanRequest($loanid);
+        $employerAuth = $this->userModel->loadEmployerDetailsAuthorization($loanid);
 
         $data = [
             'title' => 'Loan Dashboard Page',
             'parent' => 'loan',
             'active' => 'manageLoan',
             'loanDetails' => $loanDetails,
+            'employerAuth' => $employerAuth,
             'activeTab' => 'approvals'
         ];
 
@@ -533,8 +574,6 @@ public function validateAuthoriseOTP() {
 
         $loanProfiles = $this->userModel->loanLoanRequestForApproval();
 
-
-
         $data = [
             'title' => 'Loan Dashboard Page',
             'parent' => 'loan',
@@ -559,7 +598,7 @@ public function validateAuthoriseOTP() {
         }
 
         $loanProfiles = $this->userModel->loanLoanRequestForRepayment();
-
+        
         $data = [
             'title' => 'Loan Dashboard Page',
             'parent' => 'loan',

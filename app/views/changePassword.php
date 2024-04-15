@@ -47,50 +47,44 @@
 						<!--begin::Wrapper-->
 						<div class="d-flex flex-center flex-column flex-column-fluid px-lg-10 pb-15 pb-lg-20">
 							<!--begin::Form-->
-							<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="index.html" method ="POST" action="<?php echo URLROOT; ?>/pages/index">
+							<form class="form w-100" novalidate="novalidate" id="changePasswordForm" method ="POST" action="<?php echo URLROOT; ?>/pages/changePassword">
 								<!--begin::Heading-->
 								<div class="text-center mb-11">
 									<!--begin::Title-->
-									<h1 class="text-gray-900 fw-bolder mb-3"><span style="color: #160b53;">Sign In</span></h1>
+									<h1 class="text-gray-900 fw-bolder mb-3"><span style="color: #160b53;">Change Password</span></h1>
 									<!--end::Title-->
 								</div>
 								<!--begin::Heading-->
-								<?php if(isset($_SESSION['pwd_change_status'])) : ?>
-								<div class="errorMsgBox" style="background-color:#d4edda; padding: 15px; color:#155723; border-radius:10px; margin-bottom:15px;">
-									<i class="fas fa-info-circle" style="margin-right:5px; color:#155723; font-weight:bold; font-size:16px;"></i> Your password was changed successfully!
-								</div>
-    							<?php endif; ?>
-								<?php if(!empty($data['fieldError']) && $data['fieldError'] != '') : ?>
+								<?php if(!empty($data['change_fieldError']) && $data['change_fieldError'] != '') : ?>
 								<div class="errorMsgBox" style="background-color:#ffeef3; padding: 15px; font-weight:bold; color:#25304a; border-radius:10px; margin-bottom:15px;">
 									<i class="fas fa-times" style="margin-right:5px; color:#f8285b; font-size:16px;"></i> <?php echo $data['fieldError']; ?>
 								</div>
     							<?php endif; ?>
+
+								<?php if(isset($_SESSION['ENTRY_ID_CHANGED'])) : ?>
+								<div class="errorMsgBox" style="background-color:#d1ecf1; padding: 15px; font-weight:bold; color:#155460; border-radius:10px; margin-bottom:15px;">
+									<i class="fas fa-info-circle" style="margin-right:5px; color:#155460; font-size:16px;"></i> <?php echo 'Hello '.$_SESSION['FIRSTNAME_CHANGED'].', Please change your password to proceed!'; ?>
+								</div>
+    							<?php endif; ?>
+
 								<!--begin::Input group=-->
 								<div class="fv-row mb-8">
 									<!--begin::Email-->
-									<input type="text" placeholder="Enter Email Address" required name="username" autocomplete="off" class="form-control bg-transparent" />
+									<input type="text" placeholder="Enter New Password" required name="new_access_code" autocomplete="off" class="form-control bg-transparent" />
 									<!--end::Email-->
 								</div>
-								<!--end::Input group=-->
-								<div class="fv-row mb-3">
-									<!--begin::Password-->
-									<input type="password" placeholder="Enter Password" required name="entry" autocomplete="off" class="form-control bg-transparent" />
-									<!--end::Password-->
+								<div class="fv-row mb-8">
+									<!--begin::Email-->
+									<input type="text" placeholder="Confirm New Password" required name="confirm_pwd" autocomplete="off" class="form-control bg-transparent" />
+									<!--end::Email-->
 								</div>
-								<!--end::Input group=-->
-								<!--begin::Wrapper-->
-								<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
-									<div></div>
-									<!--begin::Link-->
-									<a href="<?php echo URLROOT ?>/pages/forgotPassword" class="link-primary"><span style="color: #9c0101;">Forgot Password ?</span></a>
-									<!--end::Link-->
-								</div>
-								<!--end::Wrapper-->
+	
+			
 								<!--begin::Submit button-->
 								<div class="d-grid mb-10">
 									<button type="submit" id="kt_sign_in_submit" style="  background-color: #9c0101; color: #fff;" class="btn btn-primary ">
 										<!--begin::Indicator label-->
-										<span class="indicator-label">Sign In</span>
+										<span class="indicator-label">Change Password</span>
 										<!--end::Indicator label-->
 										<!--begin::Indicator progress-->
 										<span class="indicator-progress">Please wait... 
@@ -100,18 +94,19 @@
 								</div>
 							</form>
 							<!--end::Form-->
+							<a style="border-radius: 7px; display:none; border-color: #66a1e6; border-width: 1px; border-style: solid; padding: 10px 35%;" href="<?php echo URLROOT; ?>/signin">Login In here</a>
 						</div>
 						<!--end::Wrapper-->
 						<!--begin::Footer-->
 						<div class="d-flex flex-stack px-lg-10">
 							<!--begin::Languages-->
 							<div class="me-0">
-								<a href="#"><span>© <?php echo date("Y"); ?> Finserve Investment Limited</span></a>
+								<a href="#"><span style="color: #9c0101;">© <?php echo date("Y"); ?> Finserve Investment Limited</span></a>
 							</div>
 							<!--end::Languages-->
 							<!--begin::Links-->
 							<div class="d-flex fw-semibold text-primary fs-base gap-5">
-								<a href="pages/contact.html" target="_blank"><span>Contact Support</span></a>
+								<a href="pages/contact.html" target="_blank"><span style="color: #9c0101;">Contact Support</span></a>
 							</div>
 							<!--end::Links-->
 						</div>
